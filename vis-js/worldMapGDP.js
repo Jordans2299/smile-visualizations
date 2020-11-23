@@ -27,6 +27,7 @@ WorldMapGDP.prototype.initVis = function() {
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
     .domain(domain).range(range);
 
+
         
 
 

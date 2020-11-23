@@ -33,8 +33,8 @@ Promise.all(promises).then(function(values) {
 
 function createVis() {
     OverviewMap = new OverviewMap("world-map-color-coded", overviewMapData) 
-    HappyGDP = new WorldMapGDP("happy-gdp", happyDataGDP )
-    SadGDP=new WorldMapGDP("not-happy-gdp", sadDataGDP)
+    HappyGDP = new WorldMapGDP("all-gdp", allDataGDP)
+    // SadGDP=new WorldMapGDP("not-happy-gdp", sadDataGDP)
     CompareGDP= new WorldMapGDP("compare-gdp", compareDataGDP )
 
     
