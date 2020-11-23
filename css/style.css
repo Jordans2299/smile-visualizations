@@ -1,0 +1,39 @@
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 48px;
+  margin-top: 0.5em;
+  text-align: center;
+  font-family: 'Poiret One', cursive;
+  
+}
+.center{
+  text-align: center;
+}
+
+h1 .divider {
+	margin: 0 8px;
+}
+
+h1 .sub-headline {
+	color: #888;
+	font-weight: 300;
+}
+
+.introduction {
+  font-size: 30px;
+  font-family: 'Poiret One', cursive;
+  text-align: center;
+}
+#world-map-color-coded{
+text-align: center;
+
+}
+#jordansVis{
+  margin-left: 20px;
+}
