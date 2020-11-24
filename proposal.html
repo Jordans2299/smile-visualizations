@@ -367,7 +367,7 @@ will reveal the most pertinent trends in happiness across the world. The "Explor
  from the original.
 Finally, we have a page specially built for the 15 happiest and 15 least happiest countries that focuses
 special attention on the happiest and least happiest among us.</p>
-<img src="img/rework-1.png" alt="rework of original design">
+<img src="img/rework-1.png" alt="rework of original design" width=1000 height=1000>
 <h3>Data Changes</h3>
 <p>All data for our visualizations is ready to go inside CSV files. These particular CSV files are listed 
   on the "Explore Our World" page that talks about what we are going to graph. The datasets will require
@@ -380,12 +380,27 @@ special attention on the happiest and least happiest among us.</p>
   data in less-developed countries, or are depressed people outliers from the happiness metric of the original population?
   An interesting analysis point that could be added to our overview in the future.</p>
 
-<h3>Proposal Calendar Changes and Added Goals</h3>
+<h3>Implementation</h3>
+<p>Implementation for now has been done using very simple methods. Like most other assignments,
+  we have a main.js file as a controller, with object files as the inputs to the main.js implementation.
+  Upon selecting a visualization from the breakdown, the createVis re-updates the given parent element
+  with the new visualization object that has been selected. It all essentially follows the bog-standard pipeline
+  well-known to studios.
+</p>
+<p>
+  Unfortunately, this means that a large amount of code is being reused, and certain data cleaning aspects
+  may tank performance in the long run. This necessitates the creation of a new abstract scatterplot object by next
+  iteration that can handle any dataset, destroying the need for multiple objects. If we can implement this, we can also explore
+  the possibilities of other types of charts and additional data from our dataset, as we'll have to spend much less time
+  implementing different scatterplots.
+</p>
+
+<h3>Proposal Calendar Changes and Code Refactoring Ahead</h3>
 <p>
   Proposal calendar changes to be adjusted on Tuesday, November 24, 2020, in light of difficulties
   with original design and implementation. Major code refactoring will become part of the proposal so that we may convert data
   ahead of time and create a "generic" and highly abstract scatterplot class that can be applied to both the
-  base happiness data and any auxiliary data. The team will also more greatly scrutinize design choices.
+  base happiness data and any auxiliary data. This will help us to create more high-performing, reusable code. The team will also more greatly scrutinize design choices.
 </p>
 
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
