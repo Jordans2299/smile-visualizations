@@ -24,6 +24,11 @@ OverviewMap.prototype.initVis = function () {
 
     vis.wrangleData();
     vis.svg = d3.select("#" + vis.parentElement)
+  
+
+    vis.svg.append("g")
+        .attr("class", "legendQuantile")
+        .call(legendQuantile)
 
 
 }
