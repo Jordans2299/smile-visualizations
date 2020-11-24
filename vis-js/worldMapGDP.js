@@ -9,7 +9,7 @@ WorldMapGDP = function(_parentElement, _data) {
     this.parentElement = _parentElement;
     this.data = _data;
     this.width = 700,
-    this.height = 500;
+        this.height = 500;
     this.initVis();
 }
 
@@ -20,15 +20,16 @@ WorldMapGDP = function(_parentElement, _data) {
 
 WorldMapGDP.prototype.initVis = function() {
     var vis = this;
-    var domain=["Western Europe","Central and Eastern Europe", "North America", "Latin America and Caribbean",
-    "Australia and New Zealand", "Middle East and Northern Africa", "Sub-Saharan Africa", "Southeastern Asia", "Eastern Asia", 
-    "Southern Asia"]
-    var range=["#dfabf5","#9d98fa","#6094e0", "#6fd6c7", "#6fd689", "#a8d66f", "#e0c975", "#eba063", "#db564f", "#db4f9e"]
+    var domain = ["Western Europe", "Central and Eastern Europe", "North America", "Latin America and Caribbean",
+        "Australia and New Zealand", "Middle East and Northern Africa", "Sub-Saharan Africa", "Southeastern Asia", "Eastern Asia",
+        "Southern Asia"
+    ]
+    var range = ["#dfabf5", "#9d98fa", "#6094e0", "#6fd6c7", "#6fd689", "#a8d66f", "#e0c975", "#eba063", "#db564f", "#db4f9e"]
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
-    .domain(domain).range(range);
-    vis.svg=d3.select("#"+vis.parentElement);
-    
-        
+        .domain(domain).range(range);
+    vis.svg = d3.select("#" + vis.parentElement);
+
+
 
 
     vis.wrangleData();
@@ -58,7 +59,7 @@ WorldMapGDP.prototype.wrangleData = function() {
 WorldMapGDP.prototype.updateVis = function() {
     var vis = this;
     // Analyze the dataset in the web console
-    svg=vis.svg
+    svg = vis.svg
 
     svg.selectAll("*").remove()
 
@@ -103,11 +104,14 @@ WorldMapGDP.prototype.updateVis = function() {
         .data(vis.data) // parse through our data
         .enter()
         .append("circle") // create place holder each data item and replace with rect
-        .style("fill", function(d) { return vis.colorPalette(d.Region);})
+        .style("fill", function(d) { return vis.colorPalette(d.Region); })
         .style("stroke", "steelblue")
         .attr("cx", function(d) { return xScale(d["Economy (GDP per Capita)"]) * 10; }) // use xScale to find x position 
         .attr("cy", function(d) { return yScale(d["Happiness_Score"]); }) // use yScale to find y position
-        .attr("r", 3);
+        .attr("r", 3)
+        .on("click", function(d) {
+            console.log(d);
+        });
 
 
     // Create an axis function specifying orientation (top, bottom, left, right)

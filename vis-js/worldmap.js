@@ -1,9 +1,9 @@
-OverviewMap = function (_parentElement, _data) {
+OverviewMap = function(_parentElement, _data) {
 
     this.parentElement = _parentElement;
     this.data = _data;
     this.width = 1000,
-     this.height = 600;
+        this.height = 600;
 
     this.initVis();
 }
@@ -13,7 +13,7 @@ OverviewMap = function (_parentElement, _data) {
  *  Initialize station map
  */
 
-OverviewMap.prototype.initVis = function () {
+OverviewMap.prototype.initVis = function() {
     var vis = this;
     var domain = [2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8];
     //Color range for global color scale
@@ -24,12 +24,12 @@ OverviewMap.prototype.initVis = function () {
 
     vis.wrangleData();
     vis.svg = d3.select("#" + vis.parentElement)
-  
-/*
-    vis.svg.append("g")
-        .attr("class", "legendQuantile")
-        .call(legendQuantile)
-*/
+
+    /*
+        vis.svg.append("g")
+            .attr("class", "legendQuantile")
+            .call(legendQuantile)
+    */
 
 }
 
@@ -38,7 +38,7 @@ OverviewMap.prototype.initVis = function () {
  *  Data wrangling
  */
 
-OverviewMap.prototype.wrangleData = function () {
+OverviewMap.prototype.wrangleData = function() {
     var vis = this;
     vis.displayData = vis.data;
 
@@ -53,10 +53,10 @@ OverviewMap.prototype.wrangleData = function () {
  *  The drawing function
  */
 
-OverviewMap.prototype.updateVis = function () {
+OverviewMap.prototype.updateVis = function() {
     var vis = this;
 
-    vis.data.forEach(function (d) {
+    vis.data.forEach(function(d) {
         //d["LifeExpectancy"] = +d["LifeExpectancy"]; // transform each d.value from str to int
         //d["Income"] = +d["Income"];
         //d["Population"] = +d["Population"];
@@ -79,7 +79,7 @@ OverviewMap.prototype.updateVis = function () {
         .projection(projection);
 
 
-    d3.json("data/world-countries.json").then(function(world) { 
+    d3.json("data/world-countries.json").then(function(world) {
         console.log(vis.data[0])
         vis.svg.append("g")
             .attr("class", "counties")
@@ -91,13 +91,16 @@ OverviewMap.prototype.updateVis = function () {
                 let countryName = d.properties.name;
                 var result = vis.data.filter(country => {
                     return country.Country == countryName
-                  })
-                  if(result.length==1){
-                    return vis.colorScale(result[0].Happiness_Score); 
-                  }// get rate value for property matching data ID
-                  return "#808080";
+                })
+                if (result.length == 1) {
+                    return vis.colorScale(result[0].Happiness_Score);
+                } // get rate value for property matching data ID
+                return "#808080";
                 // pass rate value to color function, return color based on domain and range
             })
-     });
+            .on("click", function(d) {
+                console.log(d);
+            })
+    });
 
 }

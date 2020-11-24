@@ -1,4 +1,4 @@
-LifeExpectancyChart = function (_parentElement, _happinessData, _auxiliaryData) {
+LifeExpectancyChart = function(_parentElement, _happinessData, _auxiliaryData) {
 
     this.parentElement = _parentElement;
     this.happinessData = _happinessData;
@@ -13,11 +13,12 @@ LifeExpectancyChart = function (_parentElement, _happinessData, _auxiliaryData) 
  *  Initialize station map
  */
 
-LifeExpectancyChart.prototype.initVis = function () {
+LifeExpectancyChart.prototype.initVis = function() {
     var vis = this;
     var domain = ["Western Europe", "Central and Eastern Europe", "North America", "Latin America and Caribbean",
         "Australia and New Zealand", "Middle East and Northern Africa", "Sub-Saharan Africa", "Southeastern Asia", "Eastern Asia",
-        "Southern Asia"]
+        "Southern Asia"
+    ]
     var range = ["#dfabf5", "#9d98fa", "#6094e0", "#6fd6c7", "#6fd689", "#a8d66f", "#e0c975", "#eba063", "#db564f", "#db4f9e"]
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
         .domain(domain).range(range);
@@ -28,15 +29,33 @@ LifeExpectancyChart.prototype.initVis = function () {
 }
 
 
+/**
+ * Renders the HTML content for tool tip
+ *
+ * @param tooltip_data information that needs to be populated in the tool tip
+ * @return text HTML content for toop tip
+ */
+LifeExpectancyChart.prototype.tooltip_render = function(tooltip_data) {
+    var self = this;
+    var text = "<ul>";
+    //tooltip_data.forEach(function(row) {
+    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + " Life expectancy" + ":\t\t" + tooltip_data.Life_expectancy + "</li><li> Family Number: " + "\t\t" + tooltip_data.Family + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
+        //});
+
+    return text;
+}
+
+
+
 /*
  *  Data wrangling
  */
 
-LifeExpectancyChart.prototype.wrangleData = function () {
+LifeExpectancyChart.prototype.wrangleData = function() {
     var vis = this;
 
 
-    vis.happinessData.forEach(function (d) {
+    vis.happinessData.forEach(function(d) {
         //d["LifeExpectancy"] = +d["LifeExpectancy"]; // transform each d.value from str to int
         //d["Income"] = +d["Income"];
         //d["Population"] = +d["Population"];
@@ -51,11 +70,12 @@ LifeExpectancyChart.prototype.wrangleData = function () {
         d["Generosity"] = +d["Generosity"];
         d["Dystopia Residual"] = +d["Dystopia Residual"];
     });
+
     function matchCountry(dataPoint, name) {
         return dataPoint.Country === name;
     }
     // Currently no data wrangling/filtering needed
-    vis.auxiliaryData.forEach(function (d) {
+    vis.auxiliaryData.forEach(function(d) {
         d["Life_expectancy "] = +d["Life_expectancy "]
     })
 
@@ -75,12 +95,12 @@ LifeExpectancyChart.prototype.wrangleData = function () {
     console.log(vis.data)
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.data, function (d) { return d.Life_expectancy; })-5, d3.max(vis.data, function (d) { return d.Life_expectancy; }) + 5]) // input
+        .domain([d3.min(vis.data, function(d) { return d.Life_expectancy; }) - 5, d3.max(vis.data, function(d) { return d.Life_expectancy; }) + 5]) // input
         .range([vis.padding / 2, vis.width]); // output
 
 
     vis.yScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.data, function (d) { return d["Happiness_Score"]; }) - 3, d3.max(vis.data, function (d) { return d["Happiness_Score"]; }) + 3]) // input
+        .domain([d3.min(vis.data, function(d) { return d["Happiness_Score"]; }) - 3, d3.max(vis.data, function(d) { return d["Happiness_Score"]; }) + 3]) // input
         .range([vis.height - vis.padding / 2, vis.padding / 2]); // output
     // Update the visualization
     vis.updateVis();
@@ -92,7 +112,7 @@ LifeExpectancyChart.prototype.wrangleData = function () {
  *  The drawing function
  */
 
-LifeExpectancyChart.prototype.updateVis = function () {
+LifeExpectancyChart.prototype.updateVis = function() {
 
     var vis = this;
     // Analyze the dataset in the web console
@@ -101,31 +121,62 @@ LifeExpectancyChart.prototype.updateVis = function () {
 
     //Convert numerical values to numbers
 
+    //vis.tooltip_render(vis.happinessData);
+
     let padding = 20;
     svg = vis.svg
 
+    tip_1 = d3.tip().attr('class', 'd3-tip')
+        .direction('se')
+        .offset(function() {
+            return [0, 0];
+        }).html(function(event, d, state) {
+
+
+            console.log("LLLLL");
+            //console.log(tooltip_data.result);
+            /*
+            if (tooltip_data.result[0].nominee === "") {
+                tooltip_data.result.splice(0, 1);
+            }
+            console.log("LLLLL");
+            */
+            return vis.tooltip_render(d);
+        });
+
     svg.selectAll("*").remove();
+
+
+    self.svg.call(tip_1);
+
 
 
     svg.selectAll("circle")
         .data(vis.data) // parse through our data
         .enter()
         .append("circle") // create place holder each data item and replace with rect
-        .style("fill", function (d) { return vis.colorPalette(d.Region); })
+        .style("fill", function(d) { return vis.colorPalette(d.Region); })
         .attr("r", 3)
-        .attr("cx", function (d) {
+        .attr("cx", function(d) {
             if (d.Life_expectancy != null) {
                 console.log(d.Country + " " + d.Life_expectancy + " " + vis.xScale(d.Life_expectancy))
                 return vis.xScale(d.Life_expectancy);
             }
             return;
         }) // use xScale to find x position 
-        .attr("cy", function (d) {
+        .attr("cy", function(d) {
             if (d.Life_expectancy != null) {
                 return vis.yScale(d["Happiness_Score"]);
             }
             return;
-        }) // use yScale to find y position
+        }).on('mouseover',
+            (event, d) => tip_1.show(event, d))
+        .on('mouseout', function(event, d) {
+            tip_1.hide();
+        }); // use yScale to find y position
+
+
+
 
 
     // Create an axis function specifying orientation (top, bottom, left, right)
@@ -139,9 +190,9 @@ LifeExpectancyChart.prototype.updateVis = function () {
         .attr("class", "axis x-axis")
         .attr("transform", "translate(0," + (vis.height - 1.5 * vis.padding) + ")")
 
-        .call(xAxis)
+    .call(xAxis)
 
-        .append('text')
+    .append('text')
         .attr("fill", "black")
         .text('Life Expectancy (years)')
         .attr("x", 630)
@@ -159,10 +210,9 @@ LifeExpectancyChart.prototype.updateVis = function () {
         .attr("transform", "translate(" + (vis.padding) + ",0)")
         .call(yAxis)
 
-        .append('text')
+    .append('text')
         .attr("fill", "black")
         .text('Happiness Score')
         .attr("x", 80)
         .attr("y", 48);
 }
-
