@@ -14,7 +14,7 @@ loadData();
 
 function loadData() {
     
-var files = ["./../data/world-happiness-report-2015.csv", "./../data/Life Expectancy Data.csv"];
+var files = ["data/world-happiness-report-2015.csv", "data/Life Expectancy Data.csv"];
 var promises = [];
 
 files.forEach(function(url) {
