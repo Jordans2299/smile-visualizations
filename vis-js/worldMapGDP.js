@@ -26,8 +26,8 @@ WorldMapGDP.prototype.initVis = function() {
     var range=["#dfabf5","#9d98fa","#6094e0", "#6fd6c7", "#6fd689", "#a8d66f", "#e0c975", "#eba063", "#db564f", "#db4f9e"]
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
     .domain(domain).range(range);
-
-
+    vis.svg=d3.select("#"+vis.parentElement);
+    
         
 
 
@@ -58,12 +58,12 @@ WorldMapGDP.prototype.wrangleData = function() {
 WorldMapGDP.prototype.updateVis = function() {
     var vis = this;
     // Analyze the dataset in the web console
+    svg=vis.svg
+
+    svg.selectAll("*").remove()
 
     //this is where I should deal with all stuff.
-
     //Convert numerical values to numbers
-
-
     vis.data.forEach(function(d) {
         //d["LifeExpectancy"] = +d["LifeExpectancy"]; // transform each d.value from str to int
         //d["Income"] = +d["Income"];
@@ -107,9 +107,7 @@ WorldMapGDP.prototype.updateVis = function() {
         .style("stroke", "steelblue")
         .attr("cx", function(d) { return xScale(d["Economy (GDP per Capita)"]) * 10; }) // use xScale to find x position 
         .attr("cy", function(d) { return yScale(d["Happiness_Score"]); }) // use yScale to find y position
-        .attr("r", function(d) {
-            return d["Happiness_Score"] * 2;
-        });
+        .attr("r", 3);
 
 
     // Create an axis function specifying orientation (top, bottom, left, right)

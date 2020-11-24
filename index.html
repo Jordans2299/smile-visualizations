@@ -25,104 +25,200 @@
             <a class="nav-link" data-toggle="tab" href="#explore" role="tab">Explore Our World</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#least-happy" role="tab"></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#correlations" role="tab">Learn from the Happiest and the Not</a>
+            <a class="nav-link" data-toggle="tab" href="#correlations" role="tab">Learn from the Happiest and the
+                Not</a>
         </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
+        <div class="tab-pane" id="proposal" role="tabpanel">
+            
+        </div>
         <div class="tab-pane active" id="overview" role="tabpanel">
-            <script>
-                $("#smile_title").fadeIn("slow", function () {
-                    $("#world-map-color-coded").fadeIn("slow", function () {
-                        // etc.
-                    });
-                });
-            </script>
-            <div class="title" id ="smile_title">
+            <div class="title" id="smile_title">
                 <h1>SMILE.</h1>
             </div>
             <div class="introduction ">
-                An exploration of the World Happiness Index
+                <p>An exploration of the World Happiness Index</p>
             </div>
-           
-            <div id="world-map-color-coded">
+            <div id="compare-factors">
+                <p>
+                    The first section goes here, and may require scrolling. It will perform
+                    statistical analysis on the factors of happiness. It will do the following:
+                </p>
+                <ul>
+                    <li>Examine the factors that the most happy and least happy countries say are the biggest
+                        contributors to their happiness--this is self reported information on the Gallup World Poll
+                    </li>
+                    <li>It will then examine the real correlation between happiness scores and
+                        metrics we studied using statistical analysis. This will allow us to see what factors
+                        are objectively most important--the most common markers--and will allow us to
+                        see whether or not self-reported happiness contributors seem to reflect what is actually
+                        making people happy.
+                    </li>
+                </ul>
+
+
+
 
             </div>
-            <div class="introduction ">
-                The world overall is happier than in the past...
-            </div>
-            <!--Average happiness with world, choices by region--may require new dataset to reduce computation time-->
-            <div class="introduction ">
-                Healthier than in the past...
-            </div>
-            <!--Some kind of overall healthcare chart??-->
-            <div class="introduction">
-                And richer than in the past...
-            </div>
-            <!--gdp over time average for all countries-->
-            <div class="introduction">
-                And richer than in the past...
-            </div>
-            <!--Yet the -->
+
+
+
         </div>
-    
 
 
 
 
         <div class="tab-pane" id="explore" role="tabpanel">
             <h1>Explore Our World's Happiness</h1>
-            
-            <div id="all-gdp" class="center">
-
+            <div id="world-map-container" class="center">
+                <svg id="world-map-color-coded" class="center" width="1000" height="600"></svg>
             </div>
+          
+            <p>This div will feature an interactive map that will allow people to
+                select continents they want to look at. The map is color-coded by happiness. </p>
+                <label for="metrics-explore">Choose what to Look At</label>
+
+                <select name="metrics-explore" id="metrics-explore" onchange="loadData()">
+                  <option value="life-expectancy">Life Expectancy versus Happiness</option>
+                  <option value="GDP">GDP versus Happiness</option>
+                </select> 
+            This selector allows people to choose what metric they want to look at. These metrics are
+            detailed below.
+
+            <div id="chart-container" class="center">
+                <svg id="chart" class="center" height="500" width="700">
+
+                </svg>
+            </div>
+            <select>
+
+            </select>
+            <p>
+                This section will allow people to explore different common metrics of happiness
+                and quality of life to their heart's content. It is similar to the original design, but
+                does have a few differences in what charts will be present, allowing us to explore a wider variety
+                of
+                metrics. The metrics are as follows:
+            </p>
+            <strong>ECONOMY</strong>
+            <h5>Datasets:poverty-data.csv, world-happiness-report-2015.csv, economic-data-per-country.csv</h5>
+            <ul>
+                <li>
+                    <p>GDP per capita vs Happiness</p>
+                </li>
+                <li>
+                    <p>Poverty Rate (%) versus Happiness</p>
+                </li>
+                <li>
+                    <p>Economic Growth Rate in Percent vs Happiness</p>
+                </li>
+            </ul>
+            <strong>HEALTHCARE AND PHYSICAL HEALTH</strong>
+            <h5>
+                Datasets: Life Expectancy Data, life-expectancy-2015.csv, dalys-rate-from-all-causes.csv,
+                healthcare-access-per-country, child-mortality-rate.csv, health-nutrition-population.csv
+            </h5>
+            <ul>
+                <li>
+                    <p>Life Expectancy vs. Happiness</p>
+                </li>
+                <li>
+                    <p>Burden of Disease vs. Happiness</p>
+                </li>
+                <li>
+                    <p>Doctor and Nurse Availability vs. Happiness </p>
+                </li>
+                <li>
+                    <p>Child Mortality vs. Happiness </p>
+                </li>
+                <li>
+                    <p>Malnutrition Rate vs. Happiness</p>
+                </li>
+            </ul>
+            <strong>SOCIAL AND FAMILY</strong>
+            <h5>
+                Datasets: labor-world-bank.csv, basic-data folder, GDL-Average-Household-Data.csv, avg-household-size-appended.csv,
+                crude-suicide-rate-by-country
+            </h5>
+            <ul>
+                <li>
+                    <p>Average Number of people per household</p>
+                </li>
+                <li>
+                    <p>Labor force participation vs. Happiness</p>
+                </li>
+                <li>
+                    <p> Children in Employment vs. Happiness, Total %</p>
+                </li>
+                <li>
+                    <p> Adolescent Fertility Rate vs. Happiness</p>
+                </li>
+                <li>
+                    <p>
+                        Suicide Rate vs. Happiness
+                    </p>
+                </li>
+            </ul>
+            <strong>ENVIRONMENT</strong>
+            <h4>Dataset: environment-data.csv
+            </h4>
+            <p>Mortality Rate Attributed to Unsafe Water</p>
+            <ul>
+                <li><p>
+                    People with Access to Safe Water (%) versus Happiness
+                </p></li>
+                <li>
+                    <p>
+                        People Using At Least Basic Sanitation (%) versus Happiness
+                    </p>
+                </li>
+                <li>
+                    <p>Mortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)</p>
+                </li>
+            </ul>
 
         </div>
 
-        <div class="tab-pane" id="least-happy" role="tabpanel">
-            <h1>The Most Unhappy</h1>
-            <div id="not-happy-gdp" class="center">
+    <div class="tab-pane" id="correlations" role="tabpanel">
+        <h1>Learn from the Happiest and the Not Happiest</h1>
+        <div>
+            <p> This page features two different parts--the first reuses code from "explore"
+                to allow people to compare certain commonly cited metrics between the top 15 most Happiest
+                countries and the top 15 least happiest countries.
+            </p>
+            <label for="metrics-compare">Choose what to Look At</label>
 
-            </div>
-
+            <select name="metrics-compare" id="metrics-compare" onchange="loadData()">
+              <option value="life-expectancy">Life Expectancy versus Happiness</option>
+              <option value="GDP">GDP versus Happiness</option>
+            </select> 
         </div>
-        <div class="tab-pane" id="correlations" role="tabpanel">
-            <h1>Correlations and Comparisons</h1>
-            <div class="introduction">
-                <p>
-                    Richer countries are happier overall...
-                </p>
-            </div>
-            <div id="compare-gdp" class="center">
+        <div id="chart-compare-container" class="center">
+        <svg id="chart-compare" class="center" height="500" width="700">
 
-            </div>
-            <!--Dashboard, single col, -->
-            <!--Compare burden of disease-->
-            <!--Compare access to psychiatry-->
-            <!--Compare Trust in government -->
-            <!--Compare   -->
-
-
+        </svg>
         </div>
+
 
     </div>
+</div>
+
+
 
 
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="js/topojson.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-   
+
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-
+    <script src="vis-js/lifeExpectancy.js"></script>
     <script src="vis-js/worldMapGDP.js"></script>
     <script src="vis-js/worldmap.js"></script>
     <script src="vis-js/main.js"></script>
 </body>
 
 </html>
-
