@@ -148,6 +148,4 @@ WorldMapGDP.prototype.updateVis = function() {
         .text('Happiness Score')
         .attr("x", 80)
         .attr("y", 48);
-
-
 }
