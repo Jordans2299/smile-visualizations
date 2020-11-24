@@ -24,10 +24,7 @@ OverviewMap.prototype.initVis = function () {
 
     vis.wrangleData();
     vis.svg = d3.select("#" + vis.parentElement)
-    .append("svg")
-    .attr("id","world-map-svg")
-    .attr("width", vis.width)
-    .attr("height", vis.height);
+
 
 }
 
