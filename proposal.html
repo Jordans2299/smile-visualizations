@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/proposal-style.css">
 <title> AJJAX'S Proposal</title>
 </head>
 <body>
@@ -354,10 +354,27 @@ we will discuss with each other and with the course staff.
 
 <h1>Milestone 1 Process Book</h1>
 <h3>Design Changes</h3>
-We received feedback from 
+We received feedback from our professors that our original dashboard design didn't really answer our questions
+about common markers of happiness, what we could learn from the most happy countries, least happy countries, etc.
+We altered our design into a paginated one as the sketch below indicates. Instead of having a single dashboard,
+we have an overview, which will include statistical analysis of self-reported happiness contributors and the real
+correlation between different data metrics and happiness (overall). The "Explore" page has essentially unaltered functionality from the basic design, but graphs are now chosen from a drop-down--they are not displayed at once.
+Finally, we have a page specially built for the 15 happiest and 15 least happiest countries that focuses
+special attention on the happiest and least happiest among us.
+<img src="rework-1" alt="rework of original design">
 <h3>Data Changes</h3>
+All data for our visualizations is ready to go inside CSV files. These particular CSV files are listed 
+on the "Explore Our World" page that talks about what we are going to graph. The datasets will require
+some JS-side filtering, as they often include more data than we are graphing, but they are otherwise 
+complete to the best data-gathering ability.
 
-<h3>Proposal Calendar Changes</h3>
+<h3>Proposal Calendar Changes and Added Goals</h3>
+<p>
+  Proposal calendar changes to be adjusted on Tuesday, November 24, 2020, in light of difficulties
+  with original design and implementation. Major code refactoring will become part of the proposal so that we may convert data
+  ahead of time and create a "generic" and highly abstract scatterplot class that can be applied to both the
+  base happiness data and any auxiliary data. The team will also more greatly scrutinize design choices.
+</p>
 
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
