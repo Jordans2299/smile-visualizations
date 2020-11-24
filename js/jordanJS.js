@@ -111,14 +111,14 @@ loadData();
 
 
 function loadData() {
-    let url = "../data/world-happiness-report-2019.csv"; 
+    let url = "../data/world-happiness-report-2015.csv"; 
 
     // TO-DO: LOAD DATA
     d3.csv(url)
         .then(function(data) {
             happinessData = data
             for(let i=0;i<data.length;i++){
-                countryHappinessDict[data[i]["Country or region"]] = data[i]["Score"]
+                countryHappinessDict[data[i]["Country"]] = data[i]["Happiness_Score"]
             }
             console.log("happiness data")
             console.log(happinessData)
@@ -181,7 +181,6 @@ function wrangleSuicideData(data){
             mySet.add(data[i].country)
             newData.push(country)
         }
-        //mySet.add(data[i].country)
     }
     console.log("My new data")
     console.log(newData)
