@@ -1,4 +1,4 @@
-OverviewMap = function(_parentElement, _data) {
+ContinentMap = function(_parentElement, _data) {
 
     this.parentElement = _parentElement;
     this.data = _data;
@@ -13,7 +13,7 @@ OverviewMap = function(_parentElement, _data) {
  *  Initialize station map
  */
 
-OverviewMap.prototype.initVis = function() {
+ContinentMap.prototype.initVis = function() {
     var vis = this;
     var domain = [2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8];
     //Color range for global color scale
@@ -38,7 +38,7 @@ OverviewMap.prototype.initVis = function() {
  *  Data wrangling
  */
 
-OverviewMap.prototype.wrangleData = function() {
+ContinentMap.prototype.wrangleData = function() {
     var vis = this;
     vis.displayData = vis.data;
 
@@ -53,24 +53,9 @@ OverviewMap.prototype.wrangleData = function() {
  *  The drawing function
  */
 
-OverviewMap.prototype.updateVis = function() {
+ContinentMap.prototype.updateVis = function() {
     var vis = this;
 
-    vis.data.forEach(function(d) {
-        //d["LifeExpectancy"] = +d["LifeExpectancy"]; // transform each d.value from str to int
-        //d["Income"] = +d["Income"];
-        //d["Population"] = +d["Population"];
-        d["Happiness Rank"] = +d["Happiness Rank"];
-        d["Happiness_Score"] = +d["Happiness_Score"];
-        d["Standard Error"] = +d["Standard Error"];
-        d["Economy (GDP per Capita)"] = +d["Economy (GDP per Capita)"];
-        d["Family"] = +d["Family"];
-        d["Health (Life Expectancy)"] = +d["Health (Life Expectancy)"];
-        d["Freedom"] = +d["Freedom"];
-        d["Trust (Government Corruption)"] = +d["Trust (Government Corruption)"];
-        d["Generosity"] = +d["Generosity"];
-        d["Dystopia Residual"] = +d["Dystopia Residual"];
-    });
 
     var projection = d3.geoMercator()
         .translate([vis.width / 2.2, vis.height / 1.5]);
@@ -78,16 +63,20 @@ OverviewMap.prototype.updateVis = function() {
     var path = d3.geoPath()
         .projection(projection);
 
-
     d3.json("data/world-countries.json").then(function(world) {
-        console.log(vis.data[0])
-        vis.svg.append("g")
-            .attr("class", "counties")
+        console.log(world);
+    });
+
+    d3.json("data/continents.json").then(function(world) {
+
+        console.log(world);
+        vis.svg
             .selectAll("path")
-            .data(topojson.feature(world, world.objects.countries1).features)
+            .data(world.features)
             .enter().append("path")
             .attr("d", path)
             .style("fill", function(d) {
+                /*
                 let countryName = d.properties.name;
                 var result = vis.data.filter(country => {
                     return country.Country == countryName
@@ -97,10 +86,30 @@ OverviewMap.prototype.updateVis = function() {
                 } // get rate value for property matching data ID
                 return "#808080";
                 // pass rate value to color function, return color based on domain and range
+                */
+                console.log("aaaaa");
+                return "lightgreen";
             })
             .on("click", function(event, d) {
-                console.log(d);
+
+                d3.selectAll("path")
+                    .style("fill", function(d) {
+
+                        return "lightgreen";
+                        // }
+                    });
+
+                //svg.selectAll("#selected").text(d.properties.name);
+                d3.select(event.currentTarget)
+                    .style("fill", "darkred");
+                //if(set_of_nations.has(d.properties.name)){
+                //setUpCountries(d.properties.name);
+                //}
+                //console.log(d);
             })
+
+
     });
+
 
 }

@@ -83,7 +83,7 @@ LifeExpectancyChart.prototype.wrangleData = function() {
         countryName = vis.happinessData[i].Country
         let obj = vis.auxiliaryData.find(country => country.Country === countryName);
         if (obj != null) {
-            console.log("Final result" + obj["Life_expectancy "])
+            //console.log("Final result" + obj["Life_expectancy "])
             vis.happinessData[i].Life_expectancy = obj["Life_expectancy "]
         }
 
@@ -92,7 +92,7 @@ LifeExpectancyChart.prototype.wrangleData = function() {
 
     }
     vis.data = vis.happinessData
-    console.log(vis.data)
+        //console.log(vis.data)
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
         .domain([d3.min(vis.data, function(d) { return d.Life_expectancy; }) - 5, d3.max(vis.data, function(d) { return d.Life_expectancy; }) + 5]) // input
@@ -133,13 +133,13 @@ LifeExpectancyChart.prototype.updateVis = function() {
         }).html(function(event, d, state) {
 
 
-            console.log("LLLLL");
-            //console.log(tooltip_data.result);
+            //console.log("LLLLL");
+            ////console.log(tooltip_data.result);
             /*
             if (tooltip_data.result[0].nominee === "") {
                 tooltip_data.result.splice(0, 1);
             }
-            console.log("LLLLL");
+            //console.log("LLLLL");
             */
             return vis.tooltip_render(d);
         });
@@ -159,7 +159,7 @@ LifeExpectancyChart.prototype.updateVis = function() {
         .attr("r", 3)
         .attr("cx", function(d) {
             if (d.Life_expectancy != null) {
-                console.log(d.Country + " " + d.Life_expectancy + " " + vis.xScale(d.Life_expectancy))
+                //console.log(d.Country + " " + d.Life_expectancy + " " + vis.xScale(d.Life_expectancy))
                 return vis.xScale(d.Life_expectancy);
             }
             return;

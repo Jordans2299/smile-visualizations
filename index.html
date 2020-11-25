@@ -80,6 +80,18 @@
 
         <div class="tab-pane" id="explore" role="tabpanel">
             <h1>Explore Our World's Happiness</h1>
+            Here is a map of the world, shown by country/region:
+            
+            
+            <label for="world-explore">Choose what to Look At</label>
+
+                <select name="world-explore" id="world-explore" onchange="loadData()">
+                  <option value="data-country-or-region">Data by Country/Region</option>
+                  <option value="data-continent">Data by continent</option>
+                </select> 
+
+
+
             <div id="world-map-container" class="center">
                 <svg id="world-map-color-coded" class="center" width="1000" height="600"></svg>
             </div>
@@ -225,6 +237,7 @@
     <script src="vis-js/lifeExpectancy.js"></script>
     <script src="vis-js/worldMapGDP.js"></script>
     <script src="vis-js/worldmap.js"></script>
+    <script src="vis-js/continentmap.js"></script>
     <script src="vis-js/suicideRate.js"></script>
     <script src="vis-js/main.js"></script>
 </body>
