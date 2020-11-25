@@ -4,7 +4,7 @@ https://washuvis.github.io/smile/
 
 Andy's Citations
 
-Used code from Studio 4 and Assignment 2.
+Used code from Studio 4 & 7 and Assignment 2 & 3.
 
 
 
