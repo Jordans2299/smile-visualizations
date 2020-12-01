@@ -8,6 +8,7 @@ var happyOverTimeData = [];
 var compareDataGDP = [];
 var longeVityData = [];
 var suicideData = [];
+var freedomData = []
 
 // Variable for the visualization instance
 // Start application by loading the data
@@ -16,7 +17,8 @@ loadData();
 
 function loadData() {
 
-    var files = ["data/world-happiness-report-2015.csv", "data/Life Expectancy Data.csv", "data/suicideStats1985-2016.csv", "data/continents.json"];
+    var files = ["data/world-happiness-report-2015.csv", "data/Life Expectancy Data.csv", "data/suicideStats1985-2016.csv", "data/continents.json",
+"data/freedomIndex_2018.csv"];
     var promises = [];
 
     files.forEach(function(url) {
@@ -33,6 +35,7 @@ function loadData() {
         overviewMapData = values[0];
         suicideData = values[2];
         overviewContinentData = values[3];
+        freedomData = values[4];
         //console.log(allDataGDP)
         createVis();
     });
@@ -49,8 +52,6 @@ function createVis() {
     //console.log(selectionOfWorldMap);
 
 
-
-
     if (selectionOfWorldMap == "data-country-or-region") {
         document.getElementById("world-map-color-coded").innerHTML = "";
         overviewmap = new OverviewMap("world-map-color-coded", overviewMapData)
@@ -64,6 +65,10 @@ function createVis() {
     } else if (selectionCompare == "life-expectancy") {
         chart = new LifeExpectancyChart("chart-compare", compareDataGDP, longeVityData)
     }
+    else if(selectionAll=="suicide-rate"){
+        chart = new SuicideRateChart("chart", allDataGDP, suicideData)
+    }
+
 
 
     if (selectionAll == "GDP") {
@@ -73,10 +78,8 @@ function createVis() {
     } else if (selectionAll == "suicide-rate") {
         chart = new SuicideRateChart("chart", allDataGDP, suicideData)
     }
-
-
-
-
-
+    else if(selectionAll=="freedom-index"){
+        chart = new FreedomIndexChart("chart", allDataGDP, freedomData)
+    }
 
 }
