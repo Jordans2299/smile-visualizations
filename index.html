@@ -100,10 +100,10 @@
                 select continents they want to look at. The map is color-coded by happiness. </p>
                 <label for="metrics-explore">Choose what to Look At</label>
 
-                <select name="metrics-explore" id="metrics-explore" onchange="loadData()">
-                  <option value="life-expectancy">Life Expectancy versus Happiness</option>
-                  <option value="GDP">GDP versus Happiness</option>
-                  <option value="suicide-rate">Suicide Rate</option>
+                <select name="metrics-explore" id="metrics-explore" onchange="onSelectionChangeExplore()">
+                  <option value="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus Happiness</option>
+                  <option value="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus Happiness</option>
+                  <option value="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>
                 </select> 
             This selector allows people to choose what metric they want to look at. These metrics are
             detailed below.
