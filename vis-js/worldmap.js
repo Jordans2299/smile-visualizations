@@ -120,7 +120,21 @@ OverviewMap.prototype.updateVis = function() {
                 //setUpCountries(d.properties.name);
                 //}
                 //console.log(d);
-            })
+            }).on("dblclick",
+                function(d) {
+                    vis.svg.selectAll("path")
+                        .style("fill", function(d) {
+                            let countryName = d.properties.name;
+                            var result = vis.data.filter(country => {
+                                return country.Country == countryName
+                            })
+                            if (result.length == 1) {
+                                return vis.colorScale(result[0].Happiness_Score);
+                            } // get rate value for property matching data ID
+                            return "#808080";
+                            // pass rate value to color function, return color based on domain and range
+                        })
+                });
 
     });
 
