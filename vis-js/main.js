@@ -13,6 +13,7 @@ let overviewmap;
 
 // Variable for the visualization instance
 // Start application by loading the data
+
 loadData();
 
 
@@ -39,9 +40,11 @@ function loadData() {
 }
 
 function onSelectionChangeExplore() {
+    console.log("Hello????")
     let selectionAll = document.getElementById("metrics-explore").value;
-    let yLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1];
-    //chart.onSelectionChange()
+    let yLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].textContent;
+    console.log(yLabel)
+    chart.onSelectionChange(selectionAll, yLabel)
 
 }
 

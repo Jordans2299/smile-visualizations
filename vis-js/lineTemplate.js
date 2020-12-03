@@ -123,15 +123,15 @@ LineGraphTemplate.prototype.updateVis = function() {
         .style("fill", function(d) { return vis.colorPalette(d.Region); })
         .attr("r", 3)
         .attr("cx", function(d) {
-            if (d[vis.y] != null) {
-                //console.log(d.Country + " " + d.Life_expectancy + " " + vis.xScale(d.Life_expectancy))
-                return vis.xScale(d[vis.y]);
+            if (d[vis.x] != null) {
+                console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]))
+                return vis.xScale(d[vis.x]);
             }
             return;
         }) // use xScale to find x position 
         .attr("cy", function(d) {
             if (d[vis.y] != null) {
-                return vis.yScale(d[vis.x]);
+                return vis.yScale(d[vis.y]);
             }
             return;
         }).on('mouseover',
@@ -180,4 +180,12 @@ LineGraphTemplate.prototype.updateVis = function() {
         .text('Happiness Score')
         .attr("x", 80)
         .attr("y", 48);
+}
+
+LineGraphTemplate.prototype.onSelectionChange= function(selection, y_label) {
+    let vis = this
+    vis.y=selection
+    vis.ylabel = y_label
+    vis.updateVis();
+
 }
