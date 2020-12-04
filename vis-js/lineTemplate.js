@@ -28,8 +28,8 @@ LineGraphTemplate.prototype.initVis = function() {
         .domain(domain).range(range);
 
     vis.svg = d3.select("#" + vis.parentElement)
-    vis.padding = 20;
-    vis.wrangleData();
+    vis.padding = 40;
+    vis.makeDataReadable();
 }
 
 
@@ -50,24 +50,46 @@ LineGraphTemplate.prototype.tooltip_render = function(tooltip_data) {
 }
 
 
+LineGraphTemplate.prototype.makeDataReadable=function() {
+    var vis = this;
+    vis.data.forEach(function(d){
+        // Update the visualization
+        d["Happiness Rank"] = +d["Happiness Rank"];
+        d["Happiness_Score"] = +d["Happiness_Score"];
+        d["Standard Error"] = +d["Standard Error"];
+        d["Economy (GDP per Capita)"] = +d["Economy (GDP per Capita)"];
+        d["Family"] = +d["Family"];
+        d["Health (Life Expectancy)"] = +d["Health (Life Expectancy)"];
+        d["Freedom"] = +d["Freedom"];
+        d["Trust (Government Corruption)"] = +d["Trust (Government Corruption)"];
+        d["Generosity"] = +d["Generosity"];
+        d["Dystopia Residual"] = +d["Dystopia Residual"];
+        d["Life_expectancy "] = +d["Life_expectancy "]
+    });
+    vis.wrangleData();
+
+}
 
 /*
  *  Data wrangling
  */
 
 LineGraphTemplate.prototype.wrangleData = function() {
-    var vis = this;
+    var vis= this;
+    let finalData = vis.data.filter(d=>d[vis.x]!=0)
+    console.log(finalData)
+    vis.displayData= finalData
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.data, function(d) { return d[vis.y]; }) - 5, d3.max(vis.data, function(d) { return d[vis.y]; }) + 5]) // input
-        .range([vis.padding / 2, vis.width]); // output
+        .domain([d3.min(vis.displayData, function(d) { return d[vis.x]; }), d3.max(vis.displayData, function(d) { return d[vis.x]; })]) // input
+        .range([vis.padding, vis.width]); // output
 
 
     vis.yScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.data, function(d) { return d[vis.x]; }) - 3, d3.max(vis.data, function(d) { return d[vis.x]; }) + 3]) // input
-        .range([vis.height - vis.padding / 2, vis.padding / 2]); // output
-    // Update the visualization
-    vis.displayData= vis.data
+        .domain([d3.min(vis.displayData, function(d) { return d[vis.y]; }), d3.max(vis.displayData, function(d) { return d[vis.y]; })]) // input
+        .range([vis.height - vis.padding / 2, vis.padding]); // output
+
+
     vis.updateVis();
 
 }
@@ -117,14 +139,14 @@ LineGraphTemplate.prototype.updateVis = function() {
 
 
     svg.selectAll("circle")
-        .data(vis.data) // parse through our data
+        .data(vis.displayData) // parse through our data
         .enter()
         .append("circle") // create place holder each data item and replace with rect
         .style("fill", function(d) { return vis.colorPalette(d.Region); })
         .attr("r", 3)
         .attr("cx", function(d) {
             if (d[vis.x] != null) {
-                console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]))
+                console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x])+ " " + vis.x)
                 return vis.xScale(d[vis.x]);
             }
             return;
@@ -153,13 +175,13 @@ LineGraphTemplate.prototype.updateVis = function() {
     // Draw the axis
     svg.append("g")
         .attr("class", "axis x-axis")
-        .attr("transform", "translate(0," + (vis.height - 1.5 * vis.padding) + ")")
+        .attr("transform", "translate(0," + (vis.height - 0.8 * vis.padding) + ")")
 
     .call(xAxis)
 
     .append('text')
         .attr("fill", "black")
-        .text(vis.ylabel)
+        .text(vis.xlabel)
         .attr("x", 630)
         .attr("y", 0)
 
@@ -182,10 +204,10 @@ LineGraphTemplate.prototype.updateVis = function() {
         .attr("y", 48);
 }
 
-LineGraphTemplate.prototype.onSelectionChange= function(selection, y_label) {
+LineGraphTemplate.prototype.onSelectionChange= function(selection, x_label) {
     let vis = this
-    vis.y=selection
-    vis.ylabel = y_label
-    vis.updateVis();
+    vis.x=selection
+    vis.xlabel = x_label
+    vis.wrangleData();
 
 }

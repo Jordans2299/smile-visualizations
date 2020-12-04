@@ -19,7 +19,7 @@ loadData();
 
 function loadData() {
 
-    var files = ["data/new_data.csv", "data/continents.json"];
+    var files = ["data/new_data_cleaned.csv", "data/continents.json"];
     var promises = [];
 
     files.forEach(function(url) {
@@ -42,9 +42,10 @@ function loadData() {
 function onSelectionChangeExplore() {
     console.log("Hello????")
     let selectionAll = document.getElementById("metrics-explore").value;
-    let yLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].textContent;
-    console.log(yLabel)
-    chart.onSelectionChange(selectionAll, yLabel)
+    let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].textContent;
+    console.log(selectionAll)
+    console.log(xLabel)
+    chart.onSelectionChange(selectionAll, xLabel)
 
 }
 
@@ -55,8 +56,8 @@ function onSelectionChangeExplore() {
 
 function createVis() {
     let selectionAll = document.getElementById("metrics-explore").value;
-    let yLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
-    chart = new LineGraphTemplate("chart", allDataGDP, "Happiness_Score", selectionAll, "Happiness", yLabel)
+    let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
+    chart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
 
 
 //     let selectionOfWorldMap = document.getElementById("world-explore").value;

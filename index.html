@@ -211,8 +211,8 @@
             </p>
             <label for="metrics-compare">Choose what to Look At</label>
 
-            <select name="metrics-compare" id="metrics-compare" onchange="loadData()">
-              <option value="life-expectancy">Life Expectancy versus Happiness</option>
+            <select name="metrics-compare" id="metrics-compare" onchange="onSelectionChangeExplore()">
+              <option value="Life_expectancy " data-y-label="Life Expectancy">Life Expectancy versus Happiness</option>
               <option value="GDP">GDP versus Happiness</option>
             </select> 
         </div>
@@ -235,10 +235,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="vis-js/lineTemplate.js"></script>
-    <script src="vis-js/worldMapGDP.js"></script>
-    <script src="vis-js/worldmap.js"></script>
-    <script src="vis-js/continentmap.js"></script>
-    <script src="vis-js/suicideRate.js"></script>
     <script src="vis-js/main.js"></script>
 </body>
 
