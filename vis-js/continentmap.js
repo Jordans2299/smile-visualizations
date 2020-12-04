@@ -106,7 +106,15 @@ ContinentMap.prototype.updateVis = function() {
                 //setUpCountries(d.properties.name);
                 //}
                 //console.log(d);
-            })
+            }).on("dblclick",
+                function(d) {
+                    d3.selectAll("path")
+                        .style("fill", function(d) {
+
+                            return "lightgreen";
+                            // }
+                        });
+                });
 
 
     });
