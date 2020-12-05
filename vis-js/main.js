@@ -19,7 +19,7 @@ loadData();
 
 
 function loadData() {
-  
+
     var files = ["data/new_data_cleaned.csv", "data/continents.json"];
     //var files = ["data/world-happiness-report-2015.csv", "data/Life Expectancy Data.csv", "data/suicideStats1985-2016.csv", "data/continents.json",
     //"data/freedomIndex_2018.csv"];
@@ -55,7 +55,7 @@ function onSelectionChangeExplore() {
 
 // function onSelectionChangeCompare() {
 //     let selectionCompare = document.getElementById("metrics-compare").value;
-    
+
 // }
 
 function createVis() {
@@ -64,35 +64,33 @@ function createVis() {
     chart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
 
 
-//     let selectionOfWorldMap = document.getElementById("world-explore").value;
-   
-
-//     //console.log(selectionOfWorldMap);
+    let selectionOfWorldMap = document.getElementById("world-explore").value;
 
 
-//     if (selectionOfWorldMap == "data-country-or-region") {
-//         document.getElementById("world-map-color-coded").innerHTML = "";
-//         overviewmap = new OverviewMap("world-map-color-coded", overviewMapData)
-//     } else if (selectionOfWorldMap == "data-continent") {
-//         document.getElementById("world-map-color-coded").innerHTML = "";
-//         overviewmap = new ContinentMap("world-map-color-coded", overviewContinentData)
-//     }
-//     if (selectionCompare == "GDP") {
-//         chart = new WorldMapGDP("chart-compare", compareDataGDP)
-//     } else if (selectionCompare == "life-expectancy") {
-//         chart = new LifeExpectancyChart("chart-compare", compareDataGDP, longeVityData)
-//     }
+    //     //console.log(selectionOfWorldMap);
 
 
-//     if (selectionAll == "GDP") {
-//         chart = new WorldMapGDP("chart", allDataGDP)
-//     } else if (selectionAll == "life-expectancy") {
-//         chart = new LifeExpectancyChart("chart", allDataGDP, longeVityData)
-//     } else if (selectionAll == "suicide-rate") {
-//         chart = new SuicideRateChart("chart", allDataGDP, suicideData)
-//     }
+    if (selectionOfWorldMap == "data-country-or-region") {
+        document.getElementById("world-map-color-coded").innerHTML = "";
+        overviewmap = new OverviewMap("world-map-color-coded", overviewMapData)
+    } else if (selectionOfWorldMap == "data-continent") {
+        document.getElementById("world-map-color-coded").innerHTML = "";
+        overviewmap = new ContinentMap("world-map-color-coded", overviewContinentData)
+    }
+    //     if (selectionCompare == "GDP") {
+    //         chart = new WorldMapGDP("chart-compare", compareDataGDP)
+    //     } else if (selectionCompare == "life-expectancy") {
+    //         chart = new LifeExpectancyChart("chart-compare", compareDataGDP, longeVityData)
+    //     }
+
+
+    //     if (selectionAll == "GDP") {
+    //         chart = new WorldMapGDP("chart", allDataGDP)
+    //     } else if (selectionAll == "life-expectancy") {
+    //         chart = new LifeExpectancyChart("chart", allDataGDP, longeVityData)
+    //     } else if (selectionAll == "suicide-rate") {
+    //         chart = new SuicideRateChart("chart", allDataGDP, suicideData)
+    //     }
 
 
 }
-
-
