@@ -2,12 +2,12 @@ LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel) {
 
     this.parentElement = _parentElement;
     this.data = _data;
-    this.x=_x
-    this.y=_y
-    this.xlabel=_xlabel
-    this.ylabel=_ylabel
+    this.x = _x
+    this.y = _y
+    this.xlabel = _xlabel
+    this.ylabel = _ylabel
     this.width = 700,
-    this.height = 500;
+        this.height = 500;
     this.initVis();
 }
 
@@ -50,9 +50,9 @@ LineGraphTemplate.prototype.tooltip_render = function(tooltip_data) {
 }
 
 
-LineGraphTemplate.prototype.makeDataReadable=function() {
+LineGraphTemplate.prototype.makeDataReadable = function() {
     var vis = this;
-    vis.data.forEach(function(d){
+    vis.data.forEach(function(d) {
         // Update the visualization
         d["Happiness Rank"] = +d["Happiness Rank"];
         d["Happiness_Score"] = +d["Happiness_Score"];
@@ -75,10 +75,10 @@ LineGraphTemplate.prototype.makeDataReadable=function() {
  */
 
 LineGraphTemplate.prototype.wrangleData = function() {
-    var vis= this;
-    let finalData = vis.data.filter(d=>d[vis.x]!=0)
+    var vis = this;
+    let finalData = vis.data.filter(d => d[vis.x] != 0)
     console.log(finalData)
-    vis.displayData= finalData
+    vis.displayData = finalData
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
         .domain([d3.min(vis.displayData, function(d) { return d[vis.x]; }), d3.max(vis.displayData, function(d) { return d[vis.x]; })]) // input
@@ -146,7 +146,7 @@ LineGraphTemplate.prototype.updateVis = function() {
         .attr("r", 3)
         .attr("cx", function(d) {
             if (d[vis.x] != null) {
-                console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x])+ " " + vis.x)
+                console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]) + " " + vis.x)
                 return vis.xScale(d[vis.x]);
             }
             return;
@@ -160,7 +160,29 @@ LineGraphTemplate.prototype.updateVis = function() {
             (event, d) => tip_1.show(event, d))
         .on('mouseout', function(event, d) {
             tip_1.hide();
-        }); // use yScale to find y position
+        })
+        .on("click", function(event, d) {
+
+            vis.svg.selectAll("circle")
+                .style("fill", function(d) {
+                    return vis.colorPalette(d.Region);
+                })
+
+            //svg.selectAll("#selected").text(d.properties.name);
+            d3.select(event.currentTarget)
+                .style("fill", "green");
+            //if(set_of_nations.has(d.properties.name)){
+            //setUpCountries(d.properties.name);
+            //}
+            //console.log(d);
+        }).on("dblclick",
+            function(d) {
+                vis.svg.selectAll("path")
+                    .style("fill", function(d) {
+                        return vis.colorPalette(d.Region);
+                    })
+
+            });; // use yScale to find y position
 
 
 
@@ -204,9 +226,9 @@ LineGraphTemplate.prototype.updateVis = function() {
         .attr("y", 48);
 }
 
-LineGraphTemplate.prototype.onSelectionChange= function(selection, x_label) {
+LineGraphTemplate.prototype.onSelectionChange = function(selection, x_label) {
     let vis = this
-    vis.x=selection
+    vis.x = selection
     vis.xlabel = x_label
     vis.wrangleData();
 
