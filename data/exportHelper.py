@@ -4,9 +4,9 @@ import numpy as np
 def joinFiles(basefile, secondary, merge, year):
     baseFileData = pd.read_csv(basefile)
     secondaryData = pd.read_csv(secondary)
-    is_year =  secondaryData['Year']==year
-    isYearSecondary = secondaryData[is_year]
-    inner_join_df = baseFileData.merge(isYearSecondary, how="outer", on=merge)
+    # is_year =  secondaryData['Year']==year
+    # isYearSecondary = secondaryData[is_year]
+    inner_join_df = baseFileData.merge(secondaryData, how="outer", on=merge)
     print(inner_join_df)
     inner_join_df.to_csv("new_data.csv")
 
@@ -25,7 +25,7 @@ def cleanFile(file, metricToDropEmpty):
     d.to_csv('new_data_cleaned.csv', header=True)
 
 
-joinFiles("world-happiness-report-2015.csv", "Life Expectancy Data.csv", "Country", 2015)
+joinFiles("new_data.csv", "basic-sanitation-use-data-2015-cleaned.csv", "Country", 2015)
 cleanFile("new_data.csv", "Happiness_Score")
 year_labels = []
 for i in range(1960, 2014):

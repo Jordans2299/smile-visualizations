@@ -8,7 +8,8 @@ var happyOverTimeData = [];
 var compareDataGDP = [];
 var longeVityData = [];
 var suicideData = [];
-let chart;
+let exploreChart;
+let compareChart;
 let overviewmap;
 
 // Variable for the visualization instance
@@ -38,26 +39,31 @@ function loadData() {
         createVis();
     });
 }
-
+function filterContinentExplore() {
+    let regionSelection = document.getElementById("continent-explore").value
+    exploreChart.filterRegion(regionSelection)
+    
+}
 function onSelectionChangeExplore() {
     console.log("Hello????")
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].textContent;
-    console.log(selectionAll)
-    console.log(xLabel)
-    chart.onSelectionChange(selectionAll, xLabel)
+    exploreChart.onSelectionChange(selectionAll, xLabel)
 
 }
 
-// function onSelectionChangeCompare() {
-//     let selectionCompare = document.getElementById("metrics-compare").value;
+function onSelectionChangeCompare() {
+    let selectionCompare = document.getElementById("metrics-compare").value;
+    let xLabel = document.getElementById("metrics-compare").selectedOptions[0].attributes[1].textContent;
+    compareChart.onSelectionChange(selectionCompare, xLabel)
     
-// }
+}
 
 function createVis() {
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
-    chart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
+    exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
+    compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
 
 
 //     let selectionOfWorldMap = document.getElementById("world-explore").value;
