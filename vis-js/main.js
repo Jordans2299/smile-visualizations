@@ -32,7 +32,7 @@ function loadData() {
     Promise.all(promises).then(function(values) {
 
         allDataGDP = values[0]
-            //console.log(longeVityData)
+        //console.log(longeVityData)
         happyDataGDP = values[0].slice(0, 15)
         sadDataGDP = values[0].slice(140)
         compareDataGDP = happyDataGDP.concat(sadDataGDP)
@@ -62,7 +62,12 @@ function createVis() {
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
     chart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
-
+    console.log("allDataGDP")
+    console.log(allDataGDP)
+    new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Happiness_Score", 500,250);
+    new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Happiness_Score", 500,250);
+    new CorrelationDisplay("three",allDataGDP,"Family","Happiness_Score", 500,250);
+    new CorrelationDisplay("four",allDataGDP,"Freedom","Happiness_Score", 500,250);
 
 //     let selectionOfWorldMap = document.getElementById("world-explore").value;
    

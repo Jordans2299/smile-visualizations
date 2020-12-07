@@ -19,8 +19,6 @@
 </head>
 
 <body>
-    
-
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
@@ -65,29 +63,68 @@
                         making people happy.
                     </li>
                 </ul>
-
-
-
-
+            </div>
+            <div id="histogram">
+                <h4>Happiness Distribution by continent</h4> 
+                <div id="happinessHisto"></div>
+            </div>
+            <div id="smaller-charts">
+                <div class="box">
+                    <h4>Happiness Relationship with Economic Factors</h4>
+                    <svg id="one" class="correlation-graph" width=500 height=270 >
+                    </svg>
+                    <div class="correlation-description">
+                        <p id="strength-one" class="strength "></p>
+                        <p id="correlation-one">Correlation Coefficient: </p>
+                        <p id="r-one"> R Squared: </p>
+                        <p id="equation-one">Equation: </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <h4>Happiness Relationship with Health Factors</h4>
+                    <svg id="two" class="correlation-graph" width=500 height=270>
+                    </svg>
+                    <div class="correlation-description">
+                        <p id="strength-two" class="strength "></p>
+                        <p id="correlation-two">Correlation Coefficient: </p>
+                        <p id="r-two"> R Squared: </p>
+                        <p id="equation-two">Equation: </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <h4>Happiness Relationship with Environmental Factors</h4>
+                    <svg id="three" class="correlation-graph" width=500 height=270>
+                    </svg>
+                    <div class="correlation-description">
+                        <p id="strength-three" class="strength "></p>
+                        <p id="correlation-three">Correlation Coefficient: </p>
+                        <p id="r-three"> R Squared: </p>
+                        <p id="equation-three">Equation: </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <h4>Happiness Relationship with Social Factors</h4>
+                    <svg id="four" class="correlation-graph" width=500 height=270>  
+                    </svg>
+                    <div class="correlation-description">
+                        <p id="strength-four" class="strength "></p>
+                        <p id="correlation-four">Correlation Coefficient: </p>
+                        <p id="r-four"> R Squared: </p>
+                        <p id="equation-four">Equation: </p>
+                    </div>
+                </div>
             </div>
 
-
-
         </div>
-
-
-
-
         <div class="tab-pane" id="explore" role="tabpanel">
             <h1>Explore Our World's Happiness</h1>
             Here is a map of the world, shown by country/region:
             
-            
             <label for="world-explore">Choose what to Look At</label>
 
                 <select name="world-explore" id="world-explore" onchange="loadData()">
-                  <option value="data-country-or-region">Data by Country/Region</option>
-                  <option value="data-continent">Data by continent</option>
+                  <option Squared="data-country-or-region">Data by Country/Region</option>
+                  <option Squared="data-continent">Data by continent</option>
                 </select> 
 
 
@@ -101,9 +138,9 @@
                 <label for="metrics-explore">Choose what to Look At</label>
 
                 <select name="metrics-explore" id="metrics-explore" onchange="onSelectionChangeExplore()">
-                  <option value="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus Happiness</option>
-                  <option value="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus Happiness</option>
-                  <option value="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>
+                  <option Squared="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus Happiness</option>
+                  <option Squared="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus Happiness</option>
+                  <option Squared="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>
                 </select> 
             This selector allows people to choose what metric they want to look at. These metrics are
             detailed below.
@@ -212,8 +249,8 @@
             <label for="metrics-compare">Choose what to Look At</label>
 
             <select name="metrics-compare" id="metrics-compare" onchange="onSelectionChangeExplore()">
-              <option value="Life_expectancy " data-y-label="Life Expectancy">Life Expectancy versus Happiness</option>
-              <option value="GDP">GDP versus Happiness</option>
+              <option Squared="Life_expectancy " data-y-label="Life Expectancy">Life Expectancy versus Happiness</option>
+              <option Squared="GDP">GDP versus Happiness</option>
             </select> 
         </div>
         <div id="chart-compare-container" class="center">
@@ -221,19 +258,13 @@
 
         </svg>
         </div>
-
-
     </div>
 </div>
-
-
-
-
     <script src="js/topojson.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="vis-js/correlationVis.js"></script>
     <script src="vis-js/lineTemplate.js"></script>
     <script src="vis-js/worldmap.js"></script>
     <script src="vis-js/continentmap.js"></script>

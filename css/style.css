@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
+    margin-left: 10px;
 }
 
 h1 {
@@ -247,4 +248,41 @@ h2 {
 h3 {
     text-anchor: middle;
     font-size: 32px;
+}
+
+/* Overview Section */
+#smaller-charts{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around
+}
+.box{
+    padding: 10px;
+}
+.trendline{
+    stroke: blue;
+    stroke-width: 2px;
+}
+.correlation-description{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+.box h4{
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 50px;
+}
+.strength{
+    font-weight: 700;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: green;
+}
+.strong{
+    color: green;
+}
+.weak{
+    color: red
 }

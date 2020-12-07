@@ -1,10 +1,12 @@
 
-SuicideRateChart = function (_parentElement, _happinessData, _auxiliaryData) {
+SuicideRateChart = function (_parentElement, _happinessData, _auxiliaryData, width, height) {
     this.parentElement = _parentElement;
     this.happinessData = _happinessData;
     this.auxiliaryData = _auxiliaryData;
-    this.width = 700;
-    this.height = 500;
+    // this.width = 700;
+    // this.height = 500;
+    this.width = width;
+    this.height = height;
     this.initVis();
 }
 
@@ -21,7 +23,6 @@ SuicideRateChart.prototype.initVis = function () {
     vis.padding = 20;
     vis.wrangleData();
 }
-
 SuicideRateChart.prototype.wrangleData = function () {
     let countryToRegionDict = { "Albania": "Central and Eastern Europe",
     "Antigua and Barbuda": "Latin America and Caribbean",
