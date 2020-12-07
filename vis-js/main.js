@@ -66,8 +66,8 @@ function onSelectionChangeCompare() {
 function createVis() {
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
-    exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
-    compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
+    exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
+    compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
 
 
 //     let selectionOfWorldMap = document.getElementById("world-explore").value;

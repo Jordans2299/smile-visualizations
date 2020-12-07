@@ -1,4 +1,4 @@
-LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel) {
+LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel, _region) {
 
     this.parentElement = _parentElement;
     this.data = _data;
@@ -6,6 +6,7 @@ LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel) {
     this.y=_y
     this.xlabel=_xlabel
     this.ylabel=_ylabel
+    this.region=_region
     this.width = 700,
     this.height = 500;
     this.initVis();
@@ -94,7 +95,7 @@ LineGraphTemplate.prototype.wrangleData = function() {
     let finalData = vis.data.filter(d=>d[vis.x]!=0)
     let finalDataRegion=finalData
     if(vis.region!="All"){
-        finalDataRegion=vis.data.filter(d=>d[""])
+        finalDataRegion=vis.data.filter(d=>d["Region"]==vis.region)
     }
 
    
@@ -196,7 +197,7 @@ LineGraphTemplate.prototype.updateVis = function() {
     // Draw the axis
     svg.append("g")
         .attr("class", "axis x-axis")
-        .attr("transform", "translate(0," + (vis.height - 0.8 * vis.padding) + ")")
+        .attr("transform", "translate(0," + (vis.height - 0.7*vis.padding) + ")")
 
     .call(xAxis)
 
@@ -234,15 +235,7 @@ LineGraphTemplate.prototype.onSelectionChange= function(selection, x_label) {
 }
 LineGraphTemplate.prototype.filterRegion= function(selection) {
     let vis = this
-    if (selection=="All"){
-        vis.displayData=data
-    }
-    else {
-
-    }
-
-    vis.x=selection
-    vis.xlabel = x_label
+    vis.region=selection
     vis.wrangleData();
 
 }
