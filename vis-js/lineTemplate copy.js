@@ -138,7 +138,7 @@ LineGraphTemplate.prototype.updateVis = function() {
 
 
 
-    svg.selectAll("circle")
+    let circles = svg.selectAll("circle")
         .data(vis.displayData) // parse through our data
         .enter()
         .append("circle") // create place holder each data item and replace with rect
@@ -156,7 +156,9 @@ LineGraphTemplate.prototype.updateVis = function() {
                 return vis.yScale(d[vis.y]);
             }
             return;
-        }).on('mouseover',
+        })
+        .attr("class", "non_brushed") //Brushed
+        .on('mouseover',
             (event, d) => tip_1.show(event, d))
         .on('mouseout', function(event, d) {
             tip_1.hide();
@@ -186,6 +188,55 @@ LineGraphTemplate.prototype.updateVis = function() {
 
             });; // use yScale to find y position
 
+
+    function highlightBrushedCircles(event) {
+
+        if (event.selection != null) {
+
+            // revert circles to initial style
+            circles.attr("class", "non_brushed");
+
+            var brush_coords = d3.brushSelection(this);
+
+            // style brushed circles
+            circles.filter(function() {
+
+                    var cx = d3.select(this).attr("cx"),
+                        cy = d3.select(this).attr("cy");
+
+                    return isBrushed(brush_coords, cx, cy);
+                })
+                .attr("class", "brushed");
+        }
+    }
+
+    function displayTable(event) {
+
+        // disregard brushes w/o selections  
+        // ref: http://bl.ocks.org/mbostock/6232537
+        if (!event.selection) return;
+
+        // programmed clearing of brush after mouse-up
+        // ref: https://github.com/d3/d3-brush/issues/10
+        d3.select(this).call(brush.move, null);
+
+        var d_brushed = d3.selectAll(".brushed").data();
+
+        // populate table if one or more elements is brushed
+        if (d_brushed.length > 0) {
+            clearTableRows();
+            d_brushed.forEach(d_row => populateTableRow(d_row))
+        } else {
+            clearTableRows();
+        }
+    }
+
+    var brush = d3.brush()
+        .on("brush", highlightBrushedCircles)
+        .on("end", displayTable);
+
+    svg.append("g")
+        .call(brush);
 
 
 
@@ -226,6 +277,65 @@ LineGraphTemplate.prototype.updateVis = function() {
         .text('Happiness Score')
         .attr("x", 80)
         .attr("y", 48);
+
+
+    function clearTableRows() {
+
+        hideTableColNames();
+        d3.selectAll(".row_data").remove();
+    }
+
+    function isBrushed(brush_coords, cx, cy) {
+
+        var x0 = brush_coords[0][0],
+            x1 = brush_coords[1][0],
+            y0 = brush_coords[0][1],
+            y1 = brush_coords[1][1];
+
+        return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
+    }
+
+    function hideTableColNames() {
+        d3.select("table").style("visibility", "hidden");
+    }
+
+    function showTableColNames() {
+        d3.select("table").style("visibility", "visible");
+    }
+
+    function populateTableRow(d_row) {
+
+        showTableColNames();
+        /*
+        d["Happiness Rank"] = +d["Happiness Rank"];
+                d["Happiness_Score"] = +d["Happiness_Score"];
+                d["Standard Error"] = +d["Standard Error"];
+                d["Economy (GDP per Capita)"] = +d["Economy (GDP per Capita)"];
+                d["Family"] = +d["Family"];
+                d["Health (Life Expectancy)"] = +d["Health (Life Expectancy)"];
+                d["Freedom"] = +d["Freedom"];
+                d["Trust (Government Corruption)"] = +d["Trust (Government Corruption)"];
+                d["Generosity"] = +d["Generosity"];
+                d["Dystopia Residual"] = +d["Dystopia Residual"];
+                d["Life_expectancy "] = +d["Life_expectancy "]
+        */
+        var d_row_filter = [d_row["Happiness Rank"],
+            d_row["Happiness_Score"],
+            d_row["Family"]
+        ];
+
+        d3.select("table")
+            .append("tr")
+            .attr("class", "row_data")
+            .selectAll("td")
+            .data(d_row_filter)
+            .enter()
+            .append("td")
+            .attr("align", (d, i) => i == 0 ? "left" : "right")
+            .text(d => d);
+    }
+
+
 }
 
 LineGraphTemplate.prototype.onSelectionChange = function(selection, x_label) {
