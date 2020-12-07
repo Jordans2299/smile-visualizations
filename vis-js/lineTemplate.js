@@ -1,11 +1,12 @@
-LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel) {
+LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel, _region) {
 
     this.parentElement = _parentElement;
     this.data = _data;
-    this.x = _x
-    this.y = _y
-    this.xlabel = _xlabel
-    this.ylabel = _ylabel
+    this.x=_x
+    this.y=_y
+    this.xlabel=_xlabel
+    this.ylabel=_ylabel
+    this.region=_region
     this.width = 700,
         this.height = 500;
     this.initVis();
@@ -65,6 +66,20 @@ LineGraphTemplate.prototype.makeDataReadable = function() {
         d["Generosity"] = +d["Generosity"];
         d["Dystopia Residual"] = +d["Dystopia Residual"];
         d["Life_expectancy "] = +d["Life_expectancy "]
+        d["Poverty_Rate"] = +d["Poverty_Rate"]
+        d["GDP_Growth_Annual"] = +d["GDP_Growth_Annual"]
+        d["DALYs (Disability-Adjusted Life Years)_AllCauses"] = +d["DALYs (Disability-Adjusted Life Years)_AllCauses"]
+        d["Physician_Presence"] = +d["Physician_Presence"]
+        d["Child_Mortality_Under_5"] = +d["Child_Mortality_Under_5"]
+        d["Undernourishment_Prevalence_percent"] = +d["Undernourishment_Prevalence_percent"]
+        d["Total_Avg_Household_Size"]= +d["Total_Avg_Household_Size"]
+        d["Unemployment_Total_Percent"] = +d["Unemployment_Total_Percent"]
+        d["Adolescent_Fertility_Rate"] = +d["Adolescent_Fertility_Rate"]
+        d["Hygiene_Mortality_Rate"] = +d["Hygiene_Mortality_Rate"]
+        d["Electricity_Access_Percent"]= +d["Electricity_Access_Percent"]
+        d["Air_Pollution_Mortality"] = +d["Air_Pollution_Mortality"]
+        d["Basic_Sanitation_Percent"] = +d["Basic_Sanitation_Percent"]
+
     });
     vis.wrangleData();
 
@@ -75,10 +90,15 @@ LineGraphTemplate.prototype.makeDataReadable = function() {
  */
 
 LineGraphTemplate.prototype.wrangleData = function() {
-    var vis = this;
-    let finalData = vis.data.filter(d => d[vis.x] != 0)
-    console.log(finalData)
-    vis.displayData = finalData
+    var vis= this;
+
+    let finalData = vis.data.filter(d=>d[vis.x]!=0)
+    let finalDataRegion=finalData
+    if(vis.region!="All"){
+        finalDataRegion=vis.data.filter(d=>d["Region"]==vis.region)
+    }
+
+    vis.displayData= finalDataRegion
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
         .domain([d3.min(vis.displayData, function(d) { return d[vis.x]; }), d3.max(vis.displayData, function(d) { return d[vis.x]; })]) // input
@@ -199,7 +219,7 @@ LineGraphTemplate.prototype.updateVis = function() {
     // Draw the axis
     svg.append("g")
         .attr("class", "axis x-axis")
-        .attr("transform", "translate(0," + (vis.height - 0.8 * vis.padding) + ")")
+        .attr("transform", "translate(0," + (vis.height - 0.7*vis.padding) + ")")
 
     .call(xAxis)
 
@@ -232,6 +252,12 @@ LineGraphTemplate.prototype.onSelectionChange = function(selection, x_label) {
     let vis = this
     vis.x = selection
     vis.xlabel = x_label
+    vis.wrangleData();
+
+}
+LineGraphTemplate.prototype.filterRegion= function(selection) {
+    let vis = this
+    vis.region=selection
     vis.wrangleData();
 
 }
