@@ -8,7 +8,8 @@ var happyOverTimeData = [];
 var compareDataGDP = [];
 var longeVityData = [];
 var suicideData = [];
-let chart;
+let exploreChart;
+let compareChart;
 let overviewmap;
 var freedomData = []
 
@@ -42,39 +43,31 @@ function loadData() {
         createVis();
     });
 }
-
+function filterContinentExplore() {
+    let regionSelection = document.getElementById("continent-explore").value
+    exploreChart.filterRegion(regionSelection)
+    
+}
 function onSelectionChangeExplore() {
     console.log("Hello????")
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].textContent;
-    console.log(selectionAll)
-    console.log(xLabel)
-    chart.onSelectionChange(selectionAll, xLabel)
+    exploreChart.onSelectionChange(selectionAll, xLabel)
 
 }
 
-// function onSelectionChangeCompare() {
-//     let selectionCompare = document.getElementById("metrics-compare").value;
-
-// }
+function onSelectionChangeCompare() {
+    let selectionCompare = document.getElementById("metrics-compare").value;
+    let xLabel = document.getElementById("metrics-compare").selectedOptions[0].attributes[1].textContent;
+    compareChart.onSelectionChange(selectionCompare, xLabel)
+    
+}
 
 function createVis() {
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
-    chart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
-    console.log("allDataGDP")
-    console.log(allDataGDP)
-    new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Happiness_Score", 500,250);
-    new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Happiness_Score", 500,250);
-    new CorrelationDisplay("three",allDataGDP,"Family","Happiness_Score", 500,250);
-    new CorrelationDisplay("four",allDataGDP,"Freedom","Happiness_Score", 500,250);
-
-    let selectionOfWorldMap = document.getElementById("world-explore").value;
-
-
-    //     //console.log(selectionOfWorldMap);
-
-
+    exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
+    compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
     if (selectionOfWorldMap == "data-country-or-region") {
         document.getElementById("world-map-color-coded").innerHTML = "";
         overviewmap = new OverviewMap("world-map-color-coded", overviewMapData)
@@ -82,20 +75,19 @@ function createVis() {
         document.getElementById("world-map-color-coded").innerHTML = "";
         overviewmap = new ContinentMap("world-map-color-coded", overviewContinentData)
     }
-    //     if (selectionCompare == "GDP") {
-    //         chart = new WorldMapGDP("chart-compare", compareDataGDP)
-    //     } else if (selectionCompare == "life-expectancy") {
-    //         chart = new LifeExpectancyChart("chart-compare", compareDataGDP, longeVityData)
-    //     }
-
-
-    //     if (selectionAll == "GDP") {
-    //         chart = new WorldMapGDP("chart", allDataGDP)
-    //     } else if (selectionAll == "life-expectancy") {
-    //         chart = new LifeExpectancyChart("chart", allDataGDP, longeVityData)
-    //     } else if (selectionAll == "suicide-rate") {
-    //         chart = new SuicideRateChart("chart", allDataGDP, suicideData)
-    //     }
+    chart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score")
+    new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Happiness_Score", 500,250);
+    new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Happiness_Score", 500,250);
+    new CorrelationDisplay("three",allDataGDP,"Family","Happiness_Score", 500,250);
+    new CorrelationDisplay("four",allDataGDP,"Freedom","Happiness_Score", 500,250);
+    let selectionOfWorldMap = document.getElementById("world-explore").value;
+    if (selectionOfWorldMap == "data-country-or-region") {
+        document.getElementById("world-map-color-coded").innerHTML = "";
+        overviewmap = new OverviewMap("world-map-color-coded", overviewMapData)
+    } else if (selectionOfWorldMap == "data-continent") {
+        document.getElementById("world-map-color-coded").innerHTML = "";
+        overviewmap = new ContinentMap("world-map-color-coded", overviewContinentData)
+    }
 
 
 }

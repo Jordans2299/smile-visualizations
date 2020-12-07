@@ -117,23 +117,52 @@
 
         </div>
         <div class="tab-pane" id="explore" role="tabpanel">
-            <h1>Explore Our World's Happiness</h1>
+           <h1>Explore Our World's Happiness</h1>
             Here is a map of the world, shown by country/region:
             
-            <label for="world-explore">Choose what to Look At</label>
-
+            <label for="world-explore">Choose What Part of the Map to Look At</label>
                 <select name="world-explore" id="world-explore" onchange="loadData()">
                   <option Squared="data-country-or-region">Data by Country/Region</option>
                   <option Squared="data-continent">Data by continent</option>
                 </select> 
+            <div id="world-map-color-coded">
 
-
-
-            <div id="world-map-container" class="center">
-                <svg id="world-map-color-coded" class="center" width="1000" height="600"></svg>
             </div>
-
-
+ 
+                <label for="metrics-explore">Choose what to Look At</label>
+                <select name="metrics-explore" id="metrics-explore" onchange="onSelectionChangeExplore()">
+                  <option value="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus Happiness</option>
+                  <option value="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus Happiness</option>
+                  <option value="Poverty_Rate" data-ylabel="Poverty Headcount Ratio (percent of population)"> Poverty Headcount versus Happiness</option>
+                  <option value ="GDP_Growth_Annual" data-ylabel="Annual GDP Growth (%)"> Annual GDP Growth versus Happiness</option>
+                  <option value ="DALYs (Disability-Adjusted Life Years)_AllCauses" data-ylabel="Disability Adjusted Life Years (Annual, all causes)"> DALYS (2015) versus Happiness </option>
+                  <option value="Physician_Presence" data-ylabel="Physicians per 1,000 People">Physicans per 1,000 People versus Happiness</option>
+                  <option value="Child_Mortality_Under_5" data-ylabel="Child Mortality Rate (under 5) per 1,000 Births">Child Mortality for Under-Fives (per 1,000 births)</option>
+                  <option value="Undernourishment_Prevalence_percent" data-ylabel="Undernourishment Prevalence (percent)">Undernourishment Prevalence versus Happiness</option>
+                  <option value="Total_Avg_Household_Size " data-ylabel="Average Household Size">Average Household Size versus Happiness</option>
+                  <option value="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>
+                  <option value="Unemployment_Total_Percent" data-ylabel="Total Unemployment (Percent)">Total Unemployment vs. Happiness</option>
+                  <option value="Adolescent_Fertility_Rate" data-ylabel="Number of Births per 1,000 Girls (age 15-19)">Adolescent Fertility Rate vs. Happiness</option>
+                  <option value="Hygiene_Mortality_Rate" data-ylabel="Mortality rate attributed to unsafe water, unsafe sanitation and lack of hygiene (per 100,000 population)"> Mortality Rate due to Lack of Hygiene per 100,000 People</option>
+                  <option value="Electricity_Access_Percent" data-ylabel="Access to Electricity (%)">Electricity Access vs. Happiness</option>
+                  <option value="Air_Pollution_Mortality" data-ylabel="Mortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)">Air Pollution Mortality vs. Happiness</option>
+                  <option value="Basic_Sanitation_Percent" data-ylabel="Population Using Basic Sanitation (%)">Basic Sanitation Use Rate vs. Happiness</option>
+          </select>
+                <label for="continent-explore">Filter by Region</label>
+                <select name="continent-explore" id="continent-explore" onchange= "filterContinentExplore()">
+                    <option value="All" selected>All Regions</option>
+                    <option value="Western Europe">Western Europe</option>
+                    <option value="Central and Eastern Europe">Central and Eastern Europe</option>
+                    <option value="North America">North America</option>
+                    <option value="Latin America and Caribbean">Latin American and Caribbean</option>
+                    <option value="Australia and New Zealand">Australia and New Zealand</option>
+                    <option value="Middle East and Northern Africa">Middle East and Northern Africa</option>
+                    <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+                    <option value="Southeastern Asia">Southeastern Asia</option>
+                    <option value="Eastern Asia">Eastern Asia</option>
+                    <option value="Southern Asia">Southern Asia</option>
+                </select>
+          
             <div id="table">
             <table>
             <tr>
@@ -143,17 +172,7 @@
             </tr>
             </table>
             </div>
-
           
-            <p>This div will feature an interactive map that will allow people to
-                select continents they want to look at. The map is color-coded by happiness. </p>
-                <label for="metrics-explore">Choose what to Look At</label>
-
-                <select name="metrics-explore" id="metrics-explore" onchange="onSelectionChangeExplore()">
-                  <option Squared="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus Happiness</option>
-                  <option Squared="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus Happiness</option>
-                  <option Squared="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>
-                </select> 
             This selector allows people to choose what metric they want to look at. These metrics are
             detailed below.
 
@@ -162,9 +181,6 @@
 
                 </svg>
             </div>
-            <select>
-
-            </select>
             <p>
                 This section will allow people to explore different common metrics of happiness
                 and quality of life to their heart's content. It is similar to the original design, but
@@ -176,13 +192,13 @@
             <h5>Datasets:poverty-data.csv, world-happiness-report-2015.csv, economic-data-per-country.csv</h5>
             <ul>
                 <li>
-                    <p>GDP per capita vs Happiness</p>
+                    <p> X GDP per capita vs Happiness</p>
                 </li>
                 <li>
-                    <p>Poverty Rate (%) versus Happiness</p>
+                    <p>X Poverty Rate (%) versus Happiness</p>
                 </li>
                 <li>
-                    <p>Economic Growth Rate in Percent vs Happiness</p>
+                    <p> X Economic Growth Rate in Percent vs Happiness</p>
                 </li>
             </ul>
             <strong>HEALTHCARE AND PHYSICAL HEALTH</strong>
@@ -192,19 +208,19 @@
             </h5>
             <ul>
                 <li>
-                    <p>Life Expectancy vs. Happiness</p>
+                    <p>X Life Expectancy vs. Happiness</p>
                 </li>
                 <li>
-                    <p>Burden of Disease vs. Happiness</p>
+                    <p>X Burden of Disease vs. Happiness</p>
                 </li>
                 <li>
-                    <p>Doctor and Nurse Availability vs. Happiness </p>
+                    <p>X Doctor and Nurse Availability vs. Happiness </p>
                 </li>
                 <li>
-                    <p>Child Mortality vs. Happiness </p>
+                    <p>X Child Mortality vs. Happiness </p>
                 </li>
                 <li>
-                    <p>Malnutrition Rate vs. Happiness</p>
+                    <p>XMalnutrition Rate vs. Happiness</p>
                 </li>
             </ul>
             <strong>SOCIAL AND FAMILY</strong>
@@ -214,16 +230,16 @@
             </h5>
             <ul>
                 <li>
-                    <p>Average Number of people per household</p>
+                    <p>X Average Number of people per household</p>
                 </li>
                 <li>
-                    <p>Labor force participation vs. Happiness</p>
+                    <p>X Labor force participation vs. Happiness</p>
                 </li>
                 <li>
                     <p> Children in Employment vs. Happiness, Total %</p>
                 </li>
                 <li>
-                    <p> Adolescent Fertility Rate vs. Happiness</p>
+                    <p> XAdolescent Fertility Rate vs. Happiness</p>
                 </li>
                 <li>
                     <p>
@@ -234,18 +250,18 @@
             <strong>ENVIRONMENT</strong>
             <h4>Dataset: environment-data.csv
             </h4>
-            <p>Mortality Rate Attributed to Unsafe Water</p>
+            <p>X Mortality Rate Attributed to Unsafe Water</p>
             <ul>
                 <li><p>
                     People with Access to Safe Water (%) versus Happiness
                 </p></li>
                 <li>
                     <p>
-                        People Using At Least Basic Sanitation (%) versus Happiness
+                        XPeople Using At Least Basic Sanitation (%) versus Happiness
                     </p>
                 </li>
                 <li>
-                    <p>Mortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)</p>
+                    <p>XMortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)</p>
                 </li>
             </ul>
 
@@ -259,10 +275,23 @@
                 countries and the top 15 least happiest countries.
             </p>
             <label for="metrics-compare">Choose what to Look At</label>
-
-            <select name="metrics-compare" id="metrics-compare" onchange="onSelectionChangeExplore()">
-              <option Squared="Life_expectancy " data-y-label="Life Expectancy">Life Expectancy versus Happiness</option>
-              <option Squared="GDP">GDP versus Happiness</option>
+            <select name="metrics-compare" id="metrics-compare" onchange="onSelectionChangeCompare()">
+                <option value="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus Happiness</option>
+                <option value="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus Happiness</option>
+                <option value="Poverty_Rate" data-ylabel="Poverty Headcount Ratio (percent of population)"> Poverty Headcount versus Happiness</option>
+                <option value ="GDP_Growth_Annual" data-ylabel="Annual GDP Growth (%)"> Annual GDP Growth versus Happiness</option>
+                <option value ="DALYs (Disability-Adjusted Life Years)_AllCauses" data-ylabel="Disability Adjusted Life Years (Annual, all causes)"> DALYS (2015) versus Happiness </option>
+                <option value="Physician_Presence" data-ylabel="Physicians per 1,000 People">Physicans per 1,000 People versus Happiness</option>
+                <option value="Child_Mortality_Under_5" data-ylabel="Child Mortality Rate (under 5) per 1,000 Births">Child Mortality for Under-Fives (per 1,000 births)</option>
+                <option value="Undernourishment_Prevalence_percent" data-ylabel="Undernourishment Prevalence (percent)">Undernourishment Prevalence versus Happiness</option>
+                <option value="Total_Avg_Household_Size " data-ylabel="Average Household Size">Average Household Size versus Happiness</option>
+                <option value="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>
+                <option value="Unemployment_Total_Percent" data-ylabel="Total Unemployment (Percent)">Total Unemployment vs. Happiness</option>
+                <option value="Adolescent_Fertility_Rate" data-ylabel="Number of Births per 1,000 Girls (age 15-19)">Adolescent Fertility Rate vs. Happiness</option>
+                <option value="Hygiene_Mortality_Rate" data-ylabel="Mortality rate attributed to unsafe water, unsafe sanitation and lack of hygiene (per 100,000 population)"> Mortality Rate due to Lack of Hygiene per 100,000 People</option>
+                <option value="Electricity_Access_Percent" data-ylabel="Access to Electricity (%)">Electricity Access vs. Happiness</option>
+                <option value="Air_Pollution_Mortality" data-ylabel="Mortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)">Air Pollution Mortality vs. Happiness</option>
+                <option value="Basic_Sanitation_Percent" data-ylabel="Population Using Basic Sanitation (%)">Basic Sanitation Use Rate vs. Happiness</option>
             </select> 
         </div>
         <div id="chart-compare-container" class="center">
@@ -278,7 +307,7 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="vis-js/correlationVis.js"></script>
     <script src="vis-js/lineTemplate.js"></script>
-    
+  <script src="vis-js/correlationVis.js"></script>
     <script src="vis-js/main.js"></script>
     <script src="vis-js/worldmap.js"></script>
     <script src="vis-js/continentmap.js"></script>
