@@ -161,8 +161,6 @@ SuicideRateChart.prototype.wrangleData = function () {
     vis.yScale = d3.scaleLinear() // scaleLinear is used for linear data
         .domain([d3.min(vis.data, function (d) { return d.happiness; }) - 3, d3.max(vis.data, function (d) { return d.happiness; }) + 3]) // input
         .range([vis.height - vis.padding / 2, vis.padding / 2]); // output
-    console.log("hi")
-    console.log(vis.data)
     // Update the visualization
     vis.updateVis();
 }
@@ -181,15 +179,19 @@ SuicideRateChart.prototype.updateVis = function () {
 
     svg.selectAll("*").remove();
 
+    let div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
 
     svg.selectAll("circle")
         .data(vis.data) // parse through our data
         .enter()
         .append("circle") // create place holder each data item and replace with rect
         .style("fill", function (d) { return vis.colorPalette(d.region); })
-        .attr("r", 3)
+        .attr("r",10)
         .attr("cx", function(d) { return vis.xScale(d.suicideRate); }) 
         .attr("cy", function(d) { return vis.yScale(d.happiness); })
+
 
 
     // Create an axis function specifying orientation (top, bottom, left, right)

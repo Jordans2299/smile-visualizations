@@ -99,8 +99,43 @@ OverviewMap.prototype.updateVis = function() {
                 // pass rate value to color function, return color based on domain and range
             })
             .on("click", function(event, d) {
-                console.log(d);
-            })
+
+                vis.svg.selectAll("path")
+                    .style("fill", function(d) {
+                        let countryName = d.properties.name;
+                        var result = vis.data.filter(country => {
+                            return country.Country == countryName
+                        })
+                        if (result.length == 1) {
+                            return vis.colorScale(result[0].Happiness_Score);
+                        } // get rate value for property matching data ID
+                        return "#808080";
+                        // pass rate value to color function, return color based on domain and range
+                    })
+
+                //svg.selectAll("#selected").text(d.properties.name);
+                d3.select(event.currentTarget)
+                    .style("fill", "green");
+                //if(set_of_nations.has(d.properties.name)){
+                //setUpCountries(d.properties.name);
+                //}
+                //console.log(d);
+            }).on("dblclick",
+                function(d) {
+                    vis.svg.selectAll("path")
+                        .style("fill", function(d) {
+                            let countryName = d.properties.name;
+                            var result = vis.data.filter(country => {
+                                return country.Country == countryName
+                            })
+                            if (result.length == 1) {
+                                return vis.colorScale(result[0].Happiness_Score);
+                            } // get rate value for property matching data ID
+                            return "#808080";
+                            // pass rate value to color function, return color based on domain and range
+                        })
+                });
+
     });
 
 }
