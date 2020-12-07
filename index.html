@@ -79,6 +79,16 @@
 
 
         <div class="tab-pane" id="explore" role="tabpanel">
+            Here is a map of the world, shown by country/region:
+            
+            <label for="world-explore">Choose what to Look At</label>
+                <select name="world-explore" id="world-explore" onchange="loadData()">
+                  <option Squared="data-country-or-region">Data by Country/Region</option>
+                  <option Squared="data-continent">Data by continent</option>
+                </select> 
+            <div id="world-map-color-coded">
+
+            </div>
             <h1>Explore Our World's Happiness</h1>
                 <label for="metrics-explore">Choose what to Look At</label>
 

@@ -68,7 +68,13 @@ function createVis() {
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
     exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
     compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
-
+    if (selectionOfWorldMap == "data-country-or-region") {
+        document.getElementById("world-map-color-coded").innerHTML = "";
+        overviewmap = new OverviewMap("world-map-color-coded", overviewMapData)
+    } else if (selectionOfWorldMap == "data-continent") {
+        document.getElementById("world-map-color-coded").innerHTML = "";
+        overviewmap = new ContinentMap("world-map-color-coded", overviewContinentData)
+    }
 
 //     let selectionOfWorldMap = document.getElementById("world-explore").value;
    

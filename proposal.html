@@ -402,6 +402,58 @@ special attention on the happiest and least happiest among us.</p>
   ahead of time and create a "generic" and highly abstract scatterplot class that can be applied to both the
   base happiness data and any auxiliary data. This will help us to create more high-performing, reusable code. The team will also more greatly scrutinize design choices.
 </p>
+<h1>Milestone 2 Process Book</h1>
+<h3>Implementation--Data Processing</h3>
+  <p>The overarching goal of an abstracted-out visualization class necessitated
+    some serious consideration of our data-loading and filtering methods. In Milestone 1,
+    we loaded multiple datasets and used JS array filtering methods to concatenate series 
+    of interest together within the individual visualization class. However, with so many
+  planned data series in the visualization, this method of loading in different datasets and considering
+relevant series based on the individual visualization object was both computationally expensive and 
+really coding-intensive. </p>
+<p>To resolve this issue, we created one dataset using a combination of built-in Excel tools and the 
+  Python pandas library. Built-in Excel functions were used in initial data processing to filter for indicators of interest, rename columns if necessary,
+  and get rid of extraneous columns. Python and the "Pandas" library was then used to merge data to the world-happiness-report-2015 dataset, which served
+  as the overall project base (see exportHelper.py); it was also used to clean the dataset from extraneous countries or other other
+  extraneous fields.
+</p>
+<p>The results of this data cleaning and merging can now be found in new-data-cleaned.csv, which is the final result. Our
+  Python cleaner is pretty extensible and can be used on other potential series.
+</p>
+<h3>Implementation--Abstracting Out Visualization</h3>
+<p>As noted before, one of the major goals that was added at the end of Milestone 1 was 
+  abstracting out our visualizations such that one visualization class could be used to 
+  create any graph of a scatterplot nature. We managed to refactor our lifeExpectancy.js file into
+  lineTemplate.js. Now, any future data series we try to add can simply be added onto the "mega" dataset
+  and shipped into the template's "data" property.</p>
+<p>The refactoring began with adding more object properties. In order to potentially graph many 
+  different things against happiness, we added an x-axis property that could be used to get the 
+  series of interest out of the mega-dataset. We also added an x-label property, because data series names
+  are not always exactly the same as pertinent axis names. With refactoring to wrangleData(), these new object properties allowed us
+to a) graph different series at will, b) scale our axes and data plotting to different series at will,
+and c) change our axis names at will. This makes our plotting very flexible. </p>
+<p>One thing we also realized when creating this abstracted-out line graph class was that changing our
+  data points from strings to doubles could be somewhat resource intensive when being done multiple times. However,
+  as noted above, the creation of a single dataset allowed us to implement our string-to-double
+  filtering such that it only has to be done once.
+</p>
+<p>We also added a region property, which has a purpose that will be expanded upon in the "Filtering by
+  Continent and Value" section.
+</p>
+<h3>Implementation--Filtering by Continent and Value</h3>
+<p>Filtering by continent and series of interest was completely refactored when lineTemplate.js was created.
+Before, when a selection change was registered, code in main.js took in the selection as a parameter and
+created the corresponding graph object. Obviously, this was pretty cumbersome, as if we had kept going 
+with individual objects for each of our series, we would have had to create a pretty long switch case. With lineTemplate.js,
+any selection change is passed to the chart object, which then internally filters its display data. This structure
+allows us to implement changing region of interest and series of interest with very little code. </p>
+
+<h3>Design Changes--Explore/Compare</h3>
+<h3>Design Changes--Overview</h3>
+<h3>Design Choice--Scrubbing v. Tooltips?</h3>
+<h3>Data Exploration Notes--Explore/Compare</h3>
+<h3>Data Exploration Notes--Overview</h3>
+<h3>Goals for Further Project Iters</h3>
 
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
