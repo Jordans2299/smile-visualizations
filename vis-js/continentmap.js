@@ -101,6 +101,7 @@ ContinentMap.prototype.updateVis = function() {
 
                 //svg.selectAll("#selected").text(d.properties.name);
                 d3.select(event.currentTarget)
+                    .transition(500)
                     .style("fill", "darkred");
                 //if(set_of_nations.has(d.properties.name)){
                 //setUpCountries(d.properties.name);

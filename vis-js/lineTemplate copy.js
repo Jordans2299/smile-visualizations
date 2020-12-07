@@ -1,12 +1,11 @@
-LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel, _region) {
+LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel) {
 
     this.parentElement = _parentElement;
     this.data = _data;
-    this.x=_x
-    this.y=_y
-    this.xlabel=_xlabel
-    this.ylabel=_ylabel
-    this.region=_region
+    this.x = _x
+    this.y = _y
+    this.xlabel = _xlabel
+    this.ylabel = _ylabel
     this.width = 700,
         this.height = 500;
     this.initVis();
@@ -66,20 +65,6 @@ LineGraphTemplate.prototype.makeDataReadable = function() {
         d["Generosity"] = +d["Generosity"];
         d["Dystopia Residual"] = +d["Dystopia Residual"];
         d["Life_expectancy "] = +d["Life_expectancy "]
-        d["Poverty_Rate"] = +d["Poverty_Rate"]
-        d["GDP_Growth_Annual"] = +d["GDP_Growth_Annual"]
-        d["DALYs (Disability-Adjusted Life Years)_AllCauses"] = +d["DALYs (Disability-Adjusted Life Years)_AllCauses"]
-        d["Physician_Presence"] = +d["Physician_Presence"]
-        d["Child_Mortality_Under_5"] = +d["Child_Mortality_Under_5"]
-        d["Undernourishment_Prevalence_percent"] = +d["Undernourishment_Prevalence_percent"]
-        d["Total_Avg_Household_Size"]= +d["Total_Avg_Household_Size"]
-        d["Unemployment_Total_Percent"] = +d["Unemployment_Total_Percent"]
-        d["Adolescent_Fertility_Rate"] = +d["Adolescent_Fertility_Rate"]
-        d["Hygiene_Mortality_Rate"] = +d["Hygiene_Mortality_Rate"]
-        d["Electricity_Access_Percent"]= +d["Electricity_Access_Percent"]
-        d["Air_Pollution_Mortality"] = +d["Air_Pollution_Mortality"]
-        d["Basic_Sanitation_Percent"] = +d["Basic_Sanitation_Percent"]
-
     });
     vis.wrangleData();
 
@@ -90,15 +75,10 @@ LineGraphTemplate.prototype.makeDataReadable = function() {
  */
 
 LineGraphTemplate.prototype.wrangleData = function() {
-    var vis= this;
-
-    let finalData = vis.data.filter(d=>d[vis.x]!=0)
-    let finalDataRegion=finalData
-    if(vis.region!="All"){
-        finalDataRegion=vis.data.filter(d=>d["Region"]==vis.region)
-    }
-
-    vis.displayData= finalDataRegion
+    var vis = this;
+    let finalData = vis.data.filter(d => d[vis.x] != 0)
+    console.log(finalData)
+    vis.displayData = finalData
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
         .domain([d3.min(vis.displayData, function(d) { return d[vis.x]; }), d3.max(vis.displayData, function(d) { return d[vis.x]; })]) // input
@@ -158,7 +138,7 @@ LineGraphTemplate.prototype.updateVis = function() {
 
 
 
-    svg.selectAll("circle")
+    let circles = svg.selectAll("circle")
         .data(vis.displayData) // parse through our data
         .enter()
         .append("circle") // create place holder each data item and replace with rect
@@ -176,7 +156,9 @@ LineGraphTemplate.prototype.updateVis = function() {
                 return vis.yScale(d[vis.y]);
             }
             return;
-        }).on('mouseover',
+        })
+        .attr("class", "non_brushed") //Brushed
+        .on('mouseover',
             (event, d) => tip_1.show(event, d))
         .on('mouseout', function(event, d) {
             tip_1.hide();
@@ -207,6 +189,55 @@ LineGraphTemplate.prototype.updateVis = function() {
             });; // use yScale to find y position
 
 
+    function highlightBrushedCircles(event) {
+
+        if (event.selection != null) {
+
+            // revert circles to initial style
+            circles.attr("class", "non_brushed");
+
+            var brush_coords = d3.brushSelection(this);
+
+            // style brushed circles
+            circles.filter(function() {
+
+                    var cx = d3.select(this).attr("cx"),
+                        cy = d3.select(this).attr("cy");
+
+                    return isBrushed(brush_coords, cx, cy);
+                })
+                .attr("class", "brushed");
+        }
+    }
+
+    function displayTable(event) {
+
+        // disregard brushes w/o selections  
+        // ref: http://bl.ocks.org/mbostock/6232537
+        if (!event.selection) return;
+
+        // programmed clearing of brush after mouse-up
+        // ref: https://github.com/d3/d3-brush/issues/10
+        d3.select(this).call(brush.move, null);
+
+        var d_brushed = d3.selectAll(".brushed").data();
+
+        // populate table if one or more elements is brushed
+        if (d_brushed.length > 0) {
+            clearTableRows();
+            d_brushed.forEach(d_row => populateTableRow(d_row))
+        } else {
+            clearTableRows();
+        }
+    }
+
+    var brush = d3.brush()
+        .on("brush", highlightBrushedCircles)
+        .on("end", displayTable);
+
+    svg.append("g")
+        .call(brush);
+
 
 
 
@@ -219,7 +250,7 @@ LineGraphTemplate.prototype.updateVis = function() {
     // Draw the axis
     svg.append("g")
         .attr("class", "axis x-axis")
-        .attr("transform", "translate(0," + (vis.height - 0.7*vis.padding) + ")")
+        .attr("transform", "translate(0," + (vis.height - 0.8 * vis.padding) + ")")
 
     .call(xAxis)
 
@@ -246,18 +277,71 @@ LineGraphTemplate.prototype.updateVis = function() {
         .text('Happiness Score')
         .attr("x", 80)
         .attr("y", 48);
+
+
+    function clearTableRows() {
+
+        hideTableColNames();
+        d3.selectAll(".row_data").remove();
+    }
+
+    function isBrushed(brush_coords, cx, cy) {
+
+        var x0 = brush_coords[0][0],
+            x1 = brush_coords[1][0],
+            y0 = brush_coords[0][1],
+            y1 = brush_coords[1][1];
+
+        return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
+    }
+
+    function hideTableColNames() {
+        d3.select("table").style("visibility", "hidden");
+    }
+
+    function showTableColNames() {
+        d3.select("table").style("visibility", "visible");
+    }
+
+    function populateTableRow(d_row) {
+
+        showTableColNames();
+        /*
+        d["Happiness Rank"] = +d["Happiness Rank"];
+                d["Happiness_Score"] = +d["Happiness_Score"];
+                d["Standard Error"] = +d["Standard Error"];
+                d["Economy (GDP per Capita)"] = +d["Economy (GDP per Capita)"];
+                d["Family"] = +d["Family"];
+                d["Health (Life Expectancy)"] = +d["Health (Life Expectancy)"];
+                d["Freedom"] = +d["Freedom"];
+                d["Trust (Government Corruption)"] = +d["Trust (Government Corruption)"];
+                d["Generosity"] = +d["Generosity"];
+                d["Dystopia Residual"] = +d["Dystopia Residual"];
+                d["Life_expectancy "] = +d["Life_expectancy "]
+        */
+        var d_row_filter = [d_row["Happiness Rank"],
+            d_row["Happiness_Score"],
+            d_row["Family"]
+        ];
+
+        d3.select("table")
+            .append("tr")
+            .attr("class", "row_data")
+            .selectAll("td")
+            .data(d_row_filter)
+            .enter()
+            .append("td")
+            .attr("align", (d, i) => i == 0 ? "left" : "right")
+            .text(d => d);
+    }
+
+
 }
 
 LineGraphTemplate.prototype.onSelectionChange = function(selection, x_label) {
     let vis = this
     vis.x = selection
     vis.xlabel = x_label
-    vis.wrangleData();
-
-}
-LineGraphTemplate.prototype.filterRegion= function(selection) {
-    let vis = this
-    vis.region=selection
     vis.wrangleData();
 
 }

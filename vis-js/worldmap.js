@@ -101,6 +101,7 @@ OverviewMap.prototype.updateVis = function() {
             .on("click", function(event, d) {
 
                 vis.svg.selectAll("path")
+                    .transition(500)
                     .style("fill", function(d) {
                         let countryName = d.properties.name;
                         var result = vis.data.filter(country => {
@@ -115,6 +116,7 @@ OverviewMap.prototype.updateVis = function() {
 
                 //svg.selectAll("#selected").text(d.properties.name);
                 d3.select(event.currentTarget)
+                    .transition(500)
                     .style("fill", "green");
                 //if(set_of_nations.has(d.properties.name)){
                 //setUpCountries(d.properties.name);
@@ -123,6 +125,7 @@ OverviewMap.prototype.updateVis = function() {
             }).on("dblclick",
                 function(d) {
                     vis.svg.selectAll("path")
+                        .transition(500)
                         .style("fill", function(d) {
                             let countryName = d.properties.name;
                             var result = vis.data.filter(country => {
