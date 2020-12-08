@@ -455,8 +455,16 @@ allows us to implement changing region of interest and series of interest with v
 </p>
 
 <h3>Design Changes--Overview--JORDAN</h3>
-<h3>Design Choice--Scrubbing v. Tooltips?</h3>
-<p>
+<h3>Design Choice--Scrubbing v. Tooltips?</h3> 
+<p> 
+    In the first sketch aforementioned, we decide to implement tooltips and scrubbing at the same time. 
+    However, since both functionalities are trying to capture the movements of mouse(specifically, the event passed as function parameters), it's impossible to do both. 
+    Therefore, we have to consider tradeoffs while making the decision: 
+    (1) What features are mandatory for the design? 
+    (2) What actions would yield details more effectively, without messing the pages up?
+    
+    After weighing the strengths of both design, we decide to move forward with tooltips, since data classification with regions are already done with color scales.
+    Moreover, tooltips are more flexible; instead of choosing an arbitary region, we can look at disconnected dots immediately with mouse movement.
 
 </p>
 <h3>Data Exploration Notes--Explore/Compare--JULIA</h3>
