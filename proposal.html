@@ -448,18 +448,38 @@ with individual objects for each of our series, we would have had to create a pr
 any selection change is passed to the chart object, which then internally filters its display data. This structure
 allows us to implement changing region of interest and series of interest with very little code. </p>
 
-<h3>Implementation--Overview--JORDAN</h3>
 <h3>Data Exploration Notes and Design Changes--Explore/Compare</h3>
 <p>Some design changes were made in the implementation of explore/compare, especially in the datasets we used.
+  For example, as noted before, there were no clear correlation between suicides and overall national happiness;
+  we can assume that not only is suicide data often poorly kept or gathered due to stigma, police botching, etc., but 
+  also that people who commit suicide are happiness "outliers" when compared to the general population
+  and their happiness level. Because of this issue, we removed suicide data from our visualization options. We are still 
+thinking about what kind of data we would replace it with.</p>
+  <p>One other thing we changed is adjustments to our environmental plots. It turns out that a combined mortality rate for
+    safe water and hygiene problems exists; this series captured the wider impact of poor municipal facilities,
+    so it replaced the safe water alone metric. We also added electricity access to our considerations, as we believe 
+    electricity access will also inform other hygiene and disease metrics by reducing indoor smoke and air pollution,
+    allowing more advanced medical facilities, and allowing greater public safety (to some extent).
+  </p>
 
 </p>
+<h3>Implementation--Overview--JORDAN</h3>
+
 
 <h3>Design Changes--Overview--JORDAN</h3>
 <h3>Design Choice--Scrubbing v. Tooltips?--ANDY</h3>
-<h3>Data Exploration Notes--Explore/Compare--JULIA</h3>
 <h3>Data Exploration Notes--Overview--JORDAN</h3>
 <h3>Evaluation</h3>
-When we evaluate the 
+<p>When we evaluate the work for how we could have done the visualization better, we find it difficult to see how we could have used another graph 
+to show the relationship between different aspects of this data. However, we have waffled back on forth on whether
+or not to have made the visualization more of an "article" with some limited interaction and more abstract plots.
+Doing this would have allowed us a more pedantic approach, that is, we could have dictated more interesting
+features or incidental correlations to our audience; our current implementation is far more open-ended
+in what the audience will notice. The audience in our current implementation will likely notice the 
+general trend of happiness and our data; however, they may or may not notice clustering or other correlatory features of our data. Whether or not
+the audience would be interested in a more pedantic approach (rather than open-ended exploration) is something we will re-evaluate after peer feedback. This 
+evaluation section will likely get a sequel in the future.</p>
+
 
 <h3>Takeaways from Peer Review</h3>
 <h3>Goals for Further Project Iters</h3>
