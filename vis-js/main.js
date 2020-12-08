@@ -68,6 +68,7 @@ function createVis() {
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
     exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
     compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
+    new CountriesHistogram("happinessHisto",allDataGDP, "Happiness_Score", 600,500);
     new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Happiness_Score", 500,250);
     new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Happiness_Score", 500,250);
     new CorrelationDisplay("three",allDataGDP,"Family","Happiness_Score", 500,250);

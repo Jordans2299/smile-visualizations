@@ -217,8 +217,6 @@ CorrelationDisplay.prototype.updateVis = function() {
     // get the x and y values for least squares
 		let xSeries = vis.data.map(function(d) { return +d[vis.x]; });
         let ySeries = vis.data.map(function(d) { return +d[vis.y] });
-        //console.log(xSeries)
-        //console.log(ySeries)
         
 	    let xScale = d3.scaleLinear()
 		.range([vis.padding, vis.width]);
@@ -255,9 +253,6 @@ CorrelationDisplay.prototype.updateVis = function() {
 			.attr("class", "trendline")
 			.attr("x1", function(d) {return vis.xScale(d[0]); })
 			.attr("y1", function(d) { 
-                console.log("y1")
-                console.log(d[1])
-                console.log(yScale(3))
                 return vis.yScale(d[1]); })
 			.attr("x2", function(d) { return vis.xScale(d[2]); })
 			.attr("y2", function(d) { return vis.yScale(d[3]); })

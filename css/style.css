@@ -269,7 +269,7 @@ h3 {
     border-radius: 10px;
     margin-left: 20px;
 }
-.box h4{
+.box h4, #histogram h4{
     font-size: 20px;
     font-weight: 800;
     margin-top: 50px;
@@ -288,6 +288,14 @@ h3 {
 .selected {
     filter: drop-shadow(0px 50px 50px rgba(191, 191, 63, 0.4));
 }
+#histogram{
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+#happinessHisto{
+}
+
 
 
 

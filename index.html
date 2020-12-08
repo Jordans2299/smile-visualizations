@@ -74,8 +74,8 @@
                 </ul>
             </div>
             <div id="histogram">
-                <h4>Happiness Distribution by continent</h4> 
-                <div id="happinessHisto"></div>
+                <h4>Distribution of Happiness Scores</h4> 
+                <svg id="happinessHisto" width="600" height="500"></svg>
             </div>
             <div id="smaller-charts">
                 <div class="box">
@@ -128,7 +128,7 @@
         <div class="tab-pane" id="explore" role="tabpanel">
            <h1 class="introduction">Explore Our World's Happiness</h1>
             
-            <!--<label for="world-explore">Choose What Part of the Map to Look At</label>
+            <!-- <label for="world-explore">Choose What Part of the Map to Look At</label>
                 <select name="world-explore" id="world-explore" onchange="loadData()">
                   <option value="data-country-or-region">Data by Country/Region</option>
                   <option value="data-continent">Data by continent</option>
@@ -300,6 +300,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="vis-js/histogram.js"></script>
     <script src="vis-js/correlationVis.js"></script>
     <script src="vis-js/lineTemplate.js"></script>
   <script src="vis-js/correlationVis.js"></script>
