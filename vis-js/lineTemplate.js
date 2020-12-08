@@ -7,7 +7,7 @@ LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel, _r
     this.xlabel=_xlabel
     this.ylabel=_ylabel
     this.region=_region
-    this.width = 700,
+    this.width = 750,
         this.height = 500;
     this.initVis();
 }
@@ -41,10 +41,10 @@ LineGraphTemplate.prototype.initVis = function() {
  * @return text HTML content for toop tip
  */
 LineGraphTemplate.prototype.tooltip_render = function(tooltip_data) {
-    var self = this;
+    var vis = this;
     var text = "<ul>";
     //tooltip_data.forEach(function(row) {
-    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + " Life expectancy" + ":\t\t" + tooltip_data.Life_expectancy + "</li><li> Family Number: " + "\t\t" + tooltip_data.Family + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
+    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + vis.xlabel+ ":\t\t" + tooltip_data[vis.x] + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
         //});
 
     return text;
@@ -101,12 +101,12 @@ LineGraphTemplate.prototype.wrangleData = function() {
     vis.displayData= finalDataRegion
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.displayData, function(d) { return d[vis.x]; }), d3.max(vis.displayData, function(d) { return d[vis.x]; })]) // input
+        .domain([d3.min(vis.displayData, function(d) { return d[vis.x]-((1/4)*d[vis.x]); }), d3.max(vis.displayData, function(d) { return d[vis.x]+((1/4)*d[vis.x]); })]) // input
         .range([vis.padding, vis.width]); // output
 
 
     vis.yScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.displayData, function(d) { return d[vis.y]; }), d3.max(vis.displayData, function(d) { return d[vis.y]; })]) // input
+        .domain([d3.min(vis.displayData, function(d) { return d[vis.y]-((1/4)*d[vis.y]); }), d3.max(vis.displayData, function(d) { return d[vis.y]+((1/4)*d[vis.y]); })]) // input
         .range([vis.height - vis.padding / 2, vis.padding]); // output
 
 
@@ -126,7 +126,7 @@ LineGraphTemplate.prototype.updateVis = function() {
 
     //this is where I should deal with all stuff.
 
-    //Convert numerical values to numbers
+        //Convert numerical values to numbers
 
     //vis.tooltip_render(vis.happinessData);
 
@@ -177,9 +177,14 @@ LineGraphTemplate.prototype.updateVis = function() {
             }
             return;
         }).on('mouseover',
-            (event, d) => tip_1.show(event, d))
-        .on('mouseout', function(event, d) {
+            function (event, d) {
+                tip_1.show(event, d);
+                d3.select(event.currentTarget).attr("class", "selected")
+            })
+        .on('mouseout', 
+        function(event, d) {
             tip_1.hide();
+            d3.select(event.currentTarget).attr("class", null)
         })
         .on("click", function(event, d) {
 

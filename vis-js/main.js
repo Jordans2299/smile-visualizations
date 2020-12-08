@@ -72,14 +72,8 @@ function createVis() {
     new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Happiness_Score", 500,250);
     new CorrelationDisplay("three",allDataGDP,"Family","Happiness_Score", 500,250);
     new CorrelationDisplay("four",allDataGDP,"Freedom","Happiness_Score", 500,250);
-    let selectionOfWorldMap = document.getElementById("world-explore").value;
-    if (selectionOfWorldMap == "data-country-or-region") {
-        document.getElementById("world-map-color-coded").innerHTML = "";
-        overviewmap = new OverviewMap("world-map-color-coded", overviewMapData)
-    } else if (selectionOfWorldMap == "data-continent") {
-        document.getElementById("world-map-color-coded").innerHTML = "";
-        overviewmap = new ContinentMap("world-map-color-coded", overviewContinentData)
-    }
+    overviewmap = new OverviewMap("world-map-color-coded", allDataGDP)
+   
 
 
 }
