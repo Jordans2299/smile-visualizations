@@ -463,10 +463,18 @@ thinking about what kind of data we would replace it with.</p>
   </p>
 
 </p>
-<h3>Implementation--Overview--JORDAN</h3>
+<h3>Implementation--Overview</h3>
+  <p> For the overview section there are 5 different visualizations. The first one is a basic histogram that
+    that shows the distribution of happiness scores for every country. The x-axis is the range of happiness scores and the
+    y-axis is the frequency of the particular score. The histogram was made using the d3.histogram method to determine  the 
+    appropriate bins for the visualization based on the happiness scores and the number of I put (which was 50). The next four visualizations are linear
+    regression graphs for the four main factors we are comparing with happiness scores, these four are economic factors,
+    Health, Environment, and Social Factors. These four graphs along with their discriptions underneath give insight into 
+    which factors have the greatest impact on a countries happiness. The visualizations are a simple scatter plot with a 
+    trend line attached. Using the least squares method the slope, y-intercept, and r-squared value were calcuated and the 
+    trend line was drawn using the slop and y-intercept to calcuate the appropriate x1,x2,y1, and y2 value.
+  </p>
 
-
-<h3>Design Changes--Overview--JORDAN</h3>
 <h3>Design Choice--Scrubbing v. Tooltips?</h3> 
 <p> 
     In the first sketch aforementioned, we decide to implement tooltips and scrubbing at the same time. 
@@ -479,7 +487,6 @@ thinking about what kind of data we would replace it with.</p>
     Moreover, tooltips are more flexible; instead of choosing an arbitary region, we can look at disconnected dots immediately with mouse movement.
 
 </p>
-<h3>Data Exploration Notes--Overview--JORDAN</h3>
 <h3>Evaluation</h3>
 <p>When we evaluate the work for how we could have done the visualization better, we find it difficult to see how we could have used another graph 
 to show the relationship between different aspects of this data. However, we have waffled back on forth on whether
