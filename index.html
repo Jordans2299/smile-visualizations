@@ -38,15 +38,24 @@
             
         </div>
         <div class="tab-pane active" id="overview" role="tabpanel">
-            <div class="title" id="smile_title">
-                <h1>SMILE.</h1>
+            <div class="title introduction" id="smile_title">
+                <h1 class="introduction">SMILE.</h1>
             </div>
-            <div class="introduction ">
-                <p>An exploration of the World Happiness Index</p>
+            <div class="introduction center">
+                <h3 class="introduction center">An exploration of the World Happiness Index</h3>
             </div>
             <div class="introduction">
                 <a href="proposal.html">View Proposal/Process Book Here</a>
             </div>
+            <div id="explanation" class="center">
+                This map shows the relative happiness around the world on a scale of 2
+                to 8 as accorded to the World Happiness Index, where 2 is very unhappy (and very blue!)
+                and 8 is very happy (or deep red).
+            </div>
+            <div id="world-map-color-coded">
+
+            </div>
+ 
             <div id="compare-factors">
                 <p>
                     The first section goes here, and may require scrolling. It will perform
@@ -56,7 +65,7 @@
                     <li>Examine the factors that the most happy and least happy countries say are the biggest
                         contributors to their happiness--this is self reported information on the Gallup World Poll
                     </li>
-                    <li>It will then examine the real correlation between happiness scores and
+                    <li>This section examines the real correlation between happiness scores and
                         metrics we studied using statistical analysis. This will allow us to see what factors
                         are objectively most important--the most common markers--and will allow us to
                         see whether or not self-reported happiness contributors seem to reflect what is actually
@@ -117,18 +126,14 @@
 
         </div>
         <div class="tab-pane" id="explore" role="tabpanel">
-           <h1>Explore Our World's Happiness</h1>
-            Here is a map of the world, shown by country/region:
+           <h1 class="introduction">Explore Our World's Happiness</h1>
             
-            <label for="world-explore">Choose What Part of the Map to Look At</label>
+            <!--<label for="world-explore">Choose What Part of the Map to Look At</label>
                 <select name="world-explore" id="world-explore" onchange="loadData()">
-                  <option Squared="data-country-or-region">Data by Country/Region</option>
-                  <option Squared="data-continent">Data by continent</option>
-                </select> 
-            <div id="world-map-color-coded">
-
-            </div>
- 
+                  <option value="data-country-or-region">Data by Country/Region</option>
+                  <option value="data-continent">Data by continent</option>
+                </select> -->
+      
                 <label for="metrics-explore">Choose what to Look At</label>
                 <select name="metrics-explore" id="metrics-explore" onchange="onSelectionChangeExplore()">
                   <option value="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus Happiness</option>
@@ -163,33 +168,22 @@
                     <option value="Southern Asia">Southern Asia</option>
                 </select>
           
-            <div id="table">
-            <table>
-            <tr>
-                <th>State</th>
-                <th>Income</th> 
-                <th>High School Graduation</th> 
-            </tr>
-            </table>
-            </div>
-          
-            This selector allows people to choose what metric they want to look at. These metrics are
-            detailed below.
+            <p class="center">This selector allows people to choose what metric they want to look at. These metrics are
+                detailed below.</p>
 
             <div id="chart-container" class="center">
                 <svg id="chart" class="center" height="500" width="700">
 
                 </svg>
             </div>
-            <p>
-                This section will allow people to explore different common metrics of happiness
+            <p class="center">
+                This section allows people to explore different common metrics of happiness
                 and quality of life to their heart's content. It is similar to the original design, but
                 does have a few differences in what charts will be present, allowing us to explore a wider variety
-                of
-                metrics. The metrics are as follows:
+                of metrics. 
             </p>
-            <strong>ECONOMY</strong>
-            <h5>Datasets:poverty-data.csv, world-happiness-report-2015.csv, economic-data-per-country.csv</h5>
+            <!--<strong>ECONOMY</strong>
+           <h5>Datasets:poverty-data.csv, world-happiness-report-2015.csv, economic-data-per-country.csv</h5>
             <ul>
                 <li>
                     <p> X GDP per capita vs Happiness</p>
@@ -264,6 +258,7 @@
                     <p>XMortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)</p>
                 </li>
             </ul>
+        -->
 
         </div>
 
@@ -308,9 +303,10 @@
     <script src="vis-js/correlationVis.js"></script>
     <script src="vis-js/lineTemplate.js"></script>
   <script src="vis-js/correlationVis.js"></script>
+  <script src="vis-js/worldmap.js"></script>
+  <script src="vis-js/continentmap.js"></script>
     <script src="vis-js/main.js"></script>
-    <script src="vis-js/worldmap.js"></script>
-    <script src="vis-js/continentmap.js"></script>
+
 </body>
 
 </html>

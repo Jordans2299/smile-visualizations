@@ -3,8 +3,7 @@ OverviewMap = function(_parentElement, _data) {
     this.parentElement = _parentElement;
     this.data = _data;
     this.width = 1000,
-        this.height = 600;
-
+    this.height = 600;
     this.initVis();
 }
 
@@ -24,6 +23,10 @@ OverviewMap.prototype.initVis = function() {
 
     vis.wrangleData();
     vis.svg = d3.select("#" + vis.parentElement)
+    .append("svg")
+    .attr("height", vis.height)
+    .attr("width", vis.width)
+    .attr("id", "map-svg")
 
     /*
         vis.svg.append("g")
