@@ -183,6 +183,21 @@ h2 {
     pointer-events: none;
 }
 
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: 200px;
+    min-height: 10px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
 .tooltip-title {
     font-size: 18px;
     font-family: "Arial Black";
@@ -249,55 +264,64 @@ h3 {
     font-size: 32px;
 }
 
+
 /* Overview Section */
-#smaller-charts{
+
+#smaller-charts {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around
 }
-.box{
+
+.box {
     padding: 10px;
 }
-.trendline{
+
+.trendline {
     stroke: blue;
     stroke-width: 2px;
 }
-.correlation-description{
+
+.correlation-description {
     padding: 10px;
     border: 1px solid black;
     border-radius: 10px;
     margin-left: 20px;
 }
-.box h4, #histogram h4{
+
+.box h4,
+#histogram h4 {
     font-size: 20px;
     font-weight: 800;
     margin-top: 50px;
 }
-.strength{
+
+.strength {
     font-weight: 700;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: green;
 }
-.strong{
+
+.strong {
     color: green;
 }
-.weak{
+
+.weak {
     color: red;
 }
+
 .selected {
     filter: drop-shadow(0px 50px 50px rgba(191, 191, 63, 0.4));
 }
-#histogram{
+
+#histogram {
     width: 700px;
     margin: 0 auto;
     margin-top: 50px;
 }
-#happinessHisto{
-}
 
-
-
+#happinessHisto {}
 
 text {
     font-family: sans-serif;
