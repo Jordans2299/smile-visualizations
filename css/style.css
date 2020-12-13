@@ -50,6 +50,15 @@ h1 {
     padding: 0px;
     margin-left: 20px;
 }
+.background {
+    background-color: white;
+    position: relative;
+}
+
+.center-block {
+    display: block;
+    margin:auto;
+}
 
 .info {
     margin-left: 20px;

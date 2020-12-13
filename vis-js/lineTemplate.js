@@ -27,8 +27,12 @@ LineGraphTemplate.prototype.initVis = function() {
     var range = ["#dfabf5", "#9d98fa", "#6094e0", "#6fd6c7", "#6fd689", "#a8d66f", "#e0c975", "#eba063", "#db564f", "#db4f9e"]
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
         .domain(domain).range(range);
+    var legendOrdinal = d3.legendColor()
+    	.scale(vis.colorPalette);
 
     vis.svg = d3.select("#" + vis.parentElement)
+    vis.svg.select(".legendOrdinal")
+      .call(legendOrdinal);
     vis.padding = 40;
     vis.makeDataReadable();
 }
@@ -72,7 +76,7 @@ LineGraphTemplate.prototype.makeDataReadable = function() {
         d["Physician_Presence"] = +d["Physician_Presence"]
         d["Child_Mortality_Under_5"] = +d["Child_Mortality_Under_5"]
         d["Undernourishment_Prevalence_percent"] = +d["Undernourishment_Prevalence_percent"]
-        d["Total_Avg_Household_Size"]= +d["Total_Avg_Household_Size"]
+        d["Avg_Household_Size"]= +d["Avg_Household_Size"]
         d["Unemployment_Total_Percent"] = +d["Unemployment_Total_Percent"]
         d["Adolescent_Fertility_Rate"] = +d["Adolescent_Fertility_Rate"]
         d["Hygiene_Mortality_Rate"] = +d["Hygiene_Mortality_Rate"]

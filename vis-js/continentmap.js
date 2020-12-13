@@ -21,15 +21,22 @@ ContinentMap.prototype.initVis = function() {
     //Global colorScale to be used consistently by all the charts
     vis.colorScale = d3.scaleThreshold()
         .domain(domain).range(range);
-
-    vis.wrangleData();
+    var newArray = domain.map((e,i) => [e,range[i]])
     vis.svg = d3.select("#" + vis.parentElement)
 
-    /*
-        vis.svg.append("g")
-            .attr("class", "legendQuantile")
-            .call(legendQuantile)
-    */
+    vis.svg.append("g")
+      .attr("class", "legendQuant")
+      .attr("transform", "translate(20,20)");
+    
+    var legend = d3.legendColor()
+        .labelFormat(d3.format(".2f"))
+        .useClass(true)
+        .scale(colorScale)
+    
+    vis.svg.select(".legendQuant")
+      .call(legend);
+
+        vis.wrangleData();
 
 }
 

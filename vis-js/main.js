@@ -15,7 +15,68 @@ var freedomData = []
 
 // Variable for the visualization instance
 // Start application by loading the data
+var domain = ["Western Europe", "Central and Eastern Europe", "North America", "Latin America and Caribbean",
+"Australia and New Zealand", "Middle East and Northern Africa", "Sub-Saharan Africa", "Southeastern Asia", "Eastern Asia",
+"Southern Asia"
+]
+var range = ["#dfabf5", "#9d98fa", "#6094e0", "#6fd6c7", "#6fd689", "#a8d66f", "#e0c975", "#eba063", "#db564f", "#db4f9e"]
+var newArray = domain.map((e,i) => [e,range[i]])
+console.log(newArray)
+var colorsvg = d3.select("#chartExploreLegend").append("svg")
+.attr("width", 350)
+.attr("height", 500);
+colorsvg.append("g")
+.attr("class", "legendOrdinal")
+.attr("transform", "translate(80,20)");
+// var colorPalette =d3.scaleOrdinal()
+// .domain(domain).range(range);
 
+
+//https://www.d3-graph-gallery.com/graph/custom_legend.html
+
+var size = 20
+colorsvg.selectAll("mydots")
+  .data(newArray)
+  .enter()
+  .append("rect")
+    .attr("x", 100)
+    .attr("y", function(d,i){ return 100 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("width", size)
+    .attr("height", size)
+    .style("fill", function(d){ return d[1]})
+
+// Add one dot in the legend for each name.
+colorsvg.selectAll("mylabels")
+  .data(newArray)
+  .enter()
+  .append("text")
+    .attr("x", 100 + size*1.2)
+    .attr("y", function(d,i){ return 100 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function(d){ return d[1]})
+    .text(function(d){ return d[0]})
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+
+
+
+
+
+// var legendOrdinal = d3.legendColor()
+// .scale(colorPalette);
+//  colorsvg.select(".legendOrdinal")
+ 
+// .data(range)
+// .enter()
+// .attr("x", 20)
+// .attr("height", 5)
+// .attr("width", 5)
+// .attr("y", function(d, i) {
+//     return i * 30
+// })
+// .attr("fill", function (d){
+//     return d;
+// })
+//.call(legendOrdinal);
 loadData();
 
 
