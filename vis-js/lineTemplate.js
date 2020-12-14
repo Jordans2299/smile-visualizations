@@ -1,12 +1,17 @@
-LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel, _region) {
+
+
+
+
+
+LineGraphTemplate = function (_parentElement, _data, _x, _y, _xlabel, _ylabel, _region) {
 
     this.parentElement = _parentElement;
     this.data = _data;
-    this.x=_x
-    this.y=_y
-    this.xlabel=_xlabel
-    this.ylabel=_ylabel
-    this.region=_region
+    this.x = _x
+    this.y = _y
+    this.xlabel = _xlabel
+    this.ylabel = _ylabel
+    this.region = _region
     this.width = 750,
         this.height = 500;
     this.initVis();
@@ -17,7 +22,9 @@ LineGraphTemplate = function(_parentElement, _data, _x, _y, _xlabel, _ylabel, _r
  *  Initialize station map
  */
 
-LineGraphTemplate.prototype.initVis = function() {
+
+
+LineGraphTemplate.prototype.initVis = function () {
     var vis = this;
 
     var domain = ["Western Europe", "Central and Eastern Europe", "North America", "Latin America and Caribbean",
@@ -28,36 +35,51 @@ LineGraphTemplate.prototype.initVis = function() {
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
         .domain(domain).range(range);
     var legendOrdinal = d3.legendColor()
-    	.scale(vis.colorPalette);
+        .scale(vis.colorPalette);
 
     vis.svg = d3.select("#" + vis.parentElement)
     vis.svg.select(".legendOrdinal")
-      .call(legendOrdinal);
+        .call(legendOrdinal);
     vis.padding = 40;
     vis.makeDataReadable();
 }
 
 
+
+
+// function idled() {
+//     idleTimeout = null;
+// }
+
+// function zoom() {
+//     var vis = this;
+//     var t = scatter.transition().duration(750);
+//     vis.svg.select("#axis--x").transition(t).call(xAxis);
+//     vis.svg.select("#axis--y").transition(t).call(yAxis);
+//     scatter.selectAll("circle").transition(t)
+//     .attr("cx", function (d) { return x(d.x); })
+//     .attr("cy", function (d) { return y(d.y); });
+// }
 /**
  * Renders the HTML content for tool tip
  *
  * @param tooltip_data information that needs to be populated in the tool tip
  * @return text HTML content for toop tip
  */
-LineGraphTemplate.prototype.tooltip_render = function(tooltip_data) {
+LineGraphTemplate.prototype.tooltip_render = function (tooltip_data) {
     var vis = this;
     var text = "<ul>";
     //tooltip_data.forEach(function(row) {
-    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + vis.xlabel+ ":\t\t" + tooltip_data[vis.x] + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
-        //});
+    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + vis.xlabel + ":\t\t" + tooltip_data[vis.x] + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
+    //});
 
     return text;
 }
 
 
-LineGraphTemplate.prototype.makeDataReadable = function() {
+LineGraphTemplate.prototype.makeDataReadable = function () {
     var vis = this;
-    vis.data.forEach(function(d) {
+    vis.data.forEach(function (d) {
         // Update the visualization
         d["Happiness Rank"] = +d["Happiness Rank"];
         d["Happiness_Score"] = +d["Happiness_Score"];
@@ -76,11 +98,11 @@ LineGraphTemplate.prototype.makeDataReadable = function() {
         d["Physician_Presence"] = +d["Physician_Presence"]
         d["Child_Mortality_Under_5"] = +d["Child_Mortality_Under_5"]
         d["Undernourishment_Prevalence_percent"] = +d["Undernourishment_Prevalence_percent"]
-        d["Avg_Household_Size"]= +d["Avg_Household_Size"]
+        d["Avg_Household_Size"] = +d["Avg_Household_Size"]
         d["Unemployment_Total_Percent"] = +d["Unemployment_Total_Percent"]
         d["Adolescent_Fertility_Rate"] = +d["Adolescent_Fertility_Rate"]
         d["Hygiene_Mortality_Rate"] = +d["Hygiene_Mortality_Rate"]
-        d["Electricity_Access_Percent"]= +d["Electricity_Access_Percent"]
+        d["Electricity_Access_Percent"] = +d["Electricity_Access_Percent"]
         d["Air_Pollution_Mortality"] = +d["Air_Pollution_Mortality"]
         d["Basic_Sanitation_Percent"] = +d["Basic_Sanitation_Percent"]
 
@@ -93,26 +115,25 @@ LineGraphTemplate.prototype.makeDataReadable = function() {
  *  Data wrangling
  */
 
-LineGraphTemplate.prototype.wrangleData = function() {
-    var vis= this;
+LineGraphTemplate.prototype.wrangleData = function () {
+    var vis = this;
 
-    let finalData = vis.data.filter(d=>d[vis.x]!=0)
-    let finalDataRegion=finalData
-    if(vis.region!="All"){
-        finalDataRegion=vis.data.filter(d=>d["Region"]==vis.region)
+    let finalData = vis.data.filter(d => d[vis.x] != 0)
+    let finalDataRegion = finalData
+    if (vis.region != "All") {
+        finalDataRegion = vis.data.filter(d => d["Region"] == vis.region)
     }
 
-    vis.displayData= finalDataRegion
+    vis.displayData = finalDataRegion
 
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.displayData, function(d) { return d[vis.x]-((1/4)*d[vis.x]); }), d3.max(vis.displayData, function(d) { return d[vis.x]+((1/4)*d[vis.x]); })]) // input
+        .domain([d3.min(vis.displayData, function (d) { return d[vis.x] - ((1 / 2) * d[vis.x]); }), d3.max(vis.displayData, function (d) { return d[vis.x] + ((1 / 2) * d[vis.x]); })]) // input
         .range([vis.padding, vis.width]); // output
 
 
     vis.yScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.displayData, function(d) { return d[vis.y]-((1/4)*d[vis.y]); }), d3.max(vis.displayData, function(d) { return d[vis.y]+((1/4)*d[vis.y]); })]) // input
+        .domain([d3.min(vis.displayData, function (d) { return d[vis.y] - ((1 / 4) * d[vis.y]); }), d3.max(vis.displayData, function (d) { return d[vis.y] + ((1 / 4) * d[vis.y]); })]) // input
         .range([vis.height - vis.padding / 2, vis.padding]); // output
-
 
     vis.updateVis();
 
@@ -123,25 +144,15 @@ LineGraphTemplate.prototype.wrangleData = function() {
  *  The drawing function
  */
 
-LineGraphTemplate.prototype.updateVis = function() {
-
+LineGraphTemplate.prototype.updateVis = function () {
     var vis = this;
-    // Analyze the dataset in the web console
-
-    //this is where I should deal with all stuff.
-
-        //Convert numerical values to numbers
-
-    //vis.tooltip_render(vis.happinessData);
-
-    let padding = 20;
     svg = vis.svg
 
     tip_1 = d3.tip().attr('class', 'd3-tip')
         .direction('se')
-        .offset(function() {
+        .offset(function () {
             return [0, 0];
-        }).html(function(event, d, state) {
+        }).html(function (event, d, state) {
 
 
             //console.log("LLLLL");
@@ -157,25 +168,24 @@ LineGraphTemplate.prototype.updateVis = function() {
 
     svg.selectAll("*").remove();
 
-
     self.svg.call(tip_1);
 
 
-
-    svg.selectAll("circle")
+    vis.svg.selectAll("circle")
         .data(vis.displayData) // parse through our data
         .enter()
         .append("circle") // create place holder each data item and replace with rect
-        .style("fill", function(d) { return vis.colorPalette(d.Region); })
+        .style("fill", function (d) { return vis.colorPalette(d.Region); })
         .attr("r", 3)
-        .attr("cx", function(d) {
+        .attr("class", "dot")
+        .attr("cx", function (d) {
             if (d[vis.x] != null) {
                 console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]) + " " + vis.x)
                 return vis.xScale(d[vis.x]);
             }
             return;
         }) // use xScale to find x position 
-        .attr("cy", function(d) {
+        .attr("cy", function (d) {
             if (d[vis.y] != null) {
                 return vis.yScale(d[vis.y]);
             }
@@ -183,17 +193,18 @@ LineGraphTemplate.prototype.updateVis = function() {
         }).on('mouseover',
             function (event, d) {
                 tip_1.show(event, d);
+                console.log(d)
                 d3.select(event.currentTarget).attr("class", "selected")
             })
-        .on('mouseout', 
-        function(event, d) {
-            tip_1.hide();
-            d3.select(event.currentTarget).attr("class", null)
-        })
-        .on("click", function(event, d) {
+        .on('mouseout',
+            function (event, d) {
+                tip_1.hide();
+                d3.select(event.currentTarget).attr("class", null)
+            })
+        .on("click", function (event, d) {
 
             vis.svg.selectAll("circle")
-                .style("fill", function(d) {
+                .style("fill", function (d) {
                     return vis.colorPalette(d.Region);
                 }).attr("r", 3);
 
@@ -207,9 +218,9 @@ LineGraphTemplate.prototype.updateVis = function() {
             //}
             //console.log(d);
         }).on("dblclick",
-            function(d) {
+            function (d) {
                 vis.svg.selectAll("path")
-                    .style("fill", function(d) {
+                    .style("fill", function (d) {
                         return vis.colorPalette(d.Region);
                     }).attr("r", 3);
 
@@ -220,53 +231,107 @@ LineGraphTemplate.prototype.updateVis = function() {
 
 
     // Create an axis function specifying orientation (top, bottom, left, right)
-    let xAxis = d3.axisBottom();
+    vis.xAxis = d3.axisBottom();
 
     // Pass in the scale function
-    xAxis.scale(vis.xScale)
+    vis.xAxis.scale(vis.xScale)
 
     // Draw the axis
-    svg.append("g")
+    vis.xGroup = vis.svg.append("g")
         .attr("class", "axis x-axis")
-        .attr("transform", "translate(0," + (vis.height - 0.7*vis.padding) + ")")
+        .attr("transform", "translate(0," + (vis.height - 0.6 * vis.padding) + ")")
 
-    .call(xAxis)
+        .call(vis.xAxis)
 
-    .append('text')
+        .append('text')
         .attr("fill", "black")
         .text(vis.xlabel)
-        .attr("x", 630)
+        .attr("x", 590)
         .attr("y", 0)
 
 
-    let yAxis = d3.axisLeft();
+    vis.yAxis = d3.axisLeft();
 
     // Pass in the scale function
-    yAxis.scale(vis.yScale);
+    vis.yAxis.scale(vis.yScale);
 
     // Draw the axis
-    svg.append("g")
+    vis.yGroup = vis.svg.append("g")
         .attr("class", "axis y-axis")
         .attr("transform", "translate(" + (vis.padding) + ",0)")
-        .call(yAxis)
-
-    .append('text')
+        .call(vis.yAxis)
+        .append('text')
         .attr("fill", "black")
         .text('Happiness Score')
         .attr("x", 80)
         .attr("y", 48);
+
+    //     vis.clip = vis.svg.append("defs").append("clipPath")
+    //     .attr("id", "clip")
+    //     .append("svg:rect")
+    //     .attr("width", vis.width - 70)
+    //     .attr("height", vis.height - vis.padding*2)
+    //     .attr("x", 0)
+    //     .attr("y", 0);
+    //     vis.scatter = vis.svg.append('g')
+    //     .attr("clip-path", "url(#clip)")
+    //     .lower()
+    
+
+    // vis.brush = d3.brushX()                 // Add the brush feature using the d3.brush function
+    //     .extent([[0, 0], [vis.width, vis.height]]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+    //     .on("end", (event, d) => vis.brushChart(event))
+
+    // vis.scatter
+    //     .append("g")
+    //     .attr("class", "brush")
+    //     .call(vis.brush);
+
+    // vis.idleTimeout;
+
+
+
 }
 
-LineGraphTemplate.prototype.onSelectionChange = function(selection, x_label) {
+// LineGraphTemplate.prototype.brushChart = function (event) {
+//     let vis = this
+//     extent = event.selection
+//     console.log("hello???")
+//     // If no selection, back to initial coordinate. Otherwise, update X axis domain
+//     if (!extent) {
+//         if (!vis.idleTimeout) return vis.idleTimeout = setTimeout(vis.idleTimeout = null, 350); 
+//         vis.xScale.domain([d3.min(vis.displayData, function (d) { return d[vis.x] - ((1 / 2) * d[vis.x]); }), d3.max(vis.displayData, function (d) { return d[vis.x] + ((1 / 2) * d[vis.x]); })])
+//     } else {
+//         vis.xScale.domain([vis.xScale.invert(extent[0]), vis.xScale.invert(extent[1])])
+//         vis.scatter.select(".brush").call(vis.brush.move, null) 
+//     }
+
+//     // Update axis and circle position
+//     vis.xGroup.transition().duration(1000).call(d3.axisBottom(vis.xScale))
+//     vis.svg
+//         .selectAll("circle")
+//         .transition().duration(1000)
+//         .attr("cx", function (d) { return vis.xScale(d[vis.x]); })
+//         .attr("cy", function (d) { return vis.yScale(d[vis.y]); })
+
+// }
+
+
+
+
+
+
+
+LineGraphTemplate.prototype.onSelectionChange = function (selection, x_label) {
     let vis = this
     vis.x = selection
     vis.xlabel = x_label
     vis.wrangleData();
 
 }
-LineGraphTemplate.prototype.filterRegion= function(selection) {
+LineGraphTemplate.prototype.filterRegion = function (selection) {
     let vis = this
-    vis.region=selection
+    vis.region = selection
     vis.wrangleData();
 
 }

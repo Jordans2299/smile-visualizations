@@ -12,6 +12,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"
         integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ=="
         crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3-color.v2.min.js"></script>
+    <script src="https://d3js.org/d3-dispatch.v2.min.js"></script>
+    <script src="https://d3js.org/d3-ease.v2.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v2.min.js"></script>
+    <script src="https://d3js.org/d3-selection.v2.min.js"></script>
+    <script src="https://d3js.org/d3-timer.v2.min.js"></script>
+    <script src="https://d3js.org/d3-transition.v2.min.js"></script>
+    <script src="https://d3js.org/d3-drag.v2.min.js"></script>
+    <script src="https://d3js.org/d3-zoom.v2.min.js"></script>
 
     <script type="text/javascript" src="bower_components/d3-tip/index.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
@@ -23,18 +32,18 @@
 </head>
 
 <body>
-        <ul class="nav nav-tabs fixed-top navbar-light bg-light" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#explore" role="tab">Explore Our World</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#correlations" role="tab">Learn from the Happiest and the
+    <ul class="nav nav-tabs fixed-top navbar-light bg-light" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#explore" role="tab">Explore Our World</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#correlations" role="tab">Learn from the Happiest and the
                 Not</a>
-            </li>
-        </ul>
+        </li>
+    </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -140,8 +149,6 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="w-50 mx-auto">
-
-
 
                         <strong class="center center-block">Choose what to Look At</strong>
                         <select name="metrics-explore" class="center center-block" id="metrics-explore"
@@ -327,50 +334,83 @@
                     to allow people to compare certain commonly cited metrics between the top 15 most Happiest
                     countries and the top 15 least happiest countries.
                 </p>
-                <label for="metrics-compare">Choose what to Look At</label>
-                <select name="metrics-compare" id="metrics-compare" onchange="onSelectionChangeCompare()">
-                    <option value="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy versus
-                        Happiness</option>
-                    <option value="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus Happiness</option>
-                    <option value="Poverty_Rate" data-ylabel="Poverty Headcount Ratio (percent of population)"> Poverty
-                        Headcount versus Happiness</option>
-                    <option value="GDP_Growth_Annual" data-ylabel="Annual GDP Growth (%)"> Annual GDP Growth versus
-                        Happiness</option>
-                    <option value="DALYs (Disability-Adjusted Life Years)_AllCauses"
-                        data-ylabel="Disability Adjusted Life Years (Annual, all causes)"> DALYS (2015) versus Happiness
-                    </option>
-                    <option value="Physician_Presence" data-ylabel="Physicians per 1,000 People">Physicans per 1,000
-                        People versus Happiness</option>
-                    <option value="Child_Mortality_Under_5"
-                        data-ylabel="Child Mortality Rate (under 5) per 1,000 Births">Child Mortality for Under-Fives
-                        (per 1,000 births)</option>
-                    <option value="Undernourishment_Prevalence_percent"
-                        data-ylabel="Undernourishment Prevalence (percent)">Undernourishment Prevalence versus Happiness
-                    </option>
-                    <option value="Avg_Household_Size" data-ylabel="Average Household Size">Average Household Size
-                        versus Happiness</option>
-                    <!--<option value="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>-->
-                    <option value="Unemployment_Total_Percent" data-ylabel="Total Unemployment (Percent)">Total
-                        Unemployment vs. Happiness</option>
-                    <option value="Adolescent_Fertility_Rate"
-                        data-ylabel="Number of Births per 1,000 Girls (age 15-19)">Adolescent Fertility Rate vs.
-                        Happiness</option>
-                    <option value="Hygiene_Mortality_Rate"
-                        data-ylabel="Mortality rate attributed to unsafe water, unsafe sanitation and lack of hygiene (per 100,000 population)">
-                        Mortality Rate due to Lack of Hygiene per 100,000 People</option>
-                    <option value="Electricity_Access_Percent" data-ylabel="Access to Electricity (%)">Electricity
-                        Access vs. Happiness</option>
-                    <option value="Air_Pollution_Mortality"
-                        data-ylabel="Mortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)">
-                        Air Pollution Mortality vs. Happiness</option>
-                    <option value="Basic_Sanitation_Percent" data-ylabel="Population Using Basic Sanitation (%)">Basic
-                        Sanitation Use Rate vs. Happiness</option>
-                </select>
-            </div>
-            <div id="chart-compare-container" class="center">
-                <svg id="chart-compare" class="center" height="500" width="700">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="w-50 mx-auto">
+                            <label for="metrics-compare">Choose what to Look At</label>
+                            <select name="metrics-compare" id="metrics-compare" onchange="onSelectionChangeCompare()">
+                                <option value="Life_expectancy " data-ylabel="Life Expectancy(years)">Life Expectancy
+                                    versus
+                                    Happiness</option>
+                                <option value="Economy (GDP per Capita)" data-ylabel="GDP per Capita">GDP versus
+                                    Happiness</option>
+                                <option value="Poverty_Rate"
+                                    data-ylabel="Poverty Headcount Ratio (percent of population)"> Poverty
+                                    Headcount versus Happiness</option>
+                                <option value="GDP_Growth_Annual" data-ylabel="Annual GDP Growth (%)"> Annual GDP Growth
+                                    versus
+                                    Happiness</option>
+                                <option value="DALYs (Disability-Adjusted Life Years)_AllCauses"
+                                    data-ylabel="Disability Adjusted Life Years (Annual, all causes)"> DALYS (2015)
+                                    versus Happiness
+                                </option>
+                                <option value="Physician_Presence" data-ylabel="Physicians per 1,000 People">Physicans
+                                    per 1,000
+                                    People versus Happiness</option>
+                                <option value="Child_Mortality_Under_5"
+                                    data-ylabel="Child Mortality Rate (under 5) per 1,000 Births">Child Mortality for
+                                    Under-Fives
+                                    (per 1,000 births)</option>
+                                <option value="Undernourishment_Prevalence_percent"
+                                    data-ylabel="Undernourishment Prevalence (percent)">Undernourishment Prevalence
+                                    versus Happiness
+                                </option>
+                                <option value="Avg_Household_Size" data-ylabel="Average Household Size">Average
+                                    Household Size
+                                    versus Happiness</option>
+                                <!--<option value="suicide-rate" data-ylabel="Suicide rate (per 100,000 people)">Suicide Rate</option>-->
+                                <option value="Unemployment_Total_Percent" data-ylabel="Total Unemployment (Percent)">
+                                    Total
+                                    Unemployment vs. Happiness</option>
+                                <option value="Adolescent_Fertility_Rate"
+                                    data-ylabel="Number of Births per 1,000 Girls (age 15-19)">Adolescent Fertility Rate
+                                    vs.
+                                    Happiness</option>
+                                <option value="Hygiene_Mortality_Rate"
+                                    data-ylabel="Mortality rate attributed to unsafe water, unsafe sanitation and lack of hygiene (per 100,000 population)">
+                                    Mortality Rate due to Lack of Hygiene per 100,000 People</option>
+                                <option value="Electricity_Access_Percent" data-ylabel="Access to Electricity (%)">
+                                    Electricity
+                                    Access vs. Happiness</option>
+                                <option value="Air_Pollution_Mortality"
+                                    data-ylabel="Mortality rate attributed to household and ambient air pollution, age-standardized (per 100,000 population)">
+                                    Air Pollution Mortality vs. Happiness</option>
+                                <option value="Basic_Sanitation_Percent"
+                                    data-ylabel="Population Using Basic Sanitation (%)">Basic
+                                    Sanitation Use Rate vs. Happiness</option>
+                            </select>
+                        </div>
+                    </div>
 
-                </svg>
+
+
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 offset-md-4">
+                            <div id="chartCompareLegend" class="center">
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-auto">
+                          
+                                <div id="chart-compare-container" class="center">
+                                    <svg id="chart-compare" class="center" height="500" width="700">
+                                    </svg>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
