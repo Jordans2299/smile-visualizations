@@ -293,7 +293,7 @@ LineGraphTemplate.prototype.updateVis = function () {
     //console.log("this is the length of the data: "+vis.data.length)
 
     //only draw trend line if there is a sufficient amount of data points
-    if(vis.data.length > 50){
+    if(vis.displayData.length > 50){
         
         // get the x and y values for least squares
 		let xSeries = vis.data.map(function(d) { 
@@ -338,7 +338,7 @@ LineGraphTemplate.prototype.updateVis = function () {
         trendline.enter()
             .append("line")
             .attr("class", "trendline")
-            .attr("x1", function(d) {return 38; })
+            .attr("x1", function(d) {return 40; })
             .attr("y1", function(d) { 
                 return vis.yScale(+d[1]); })
             .attr("x2", function(d) { return vis.xScale(d[2]); })
