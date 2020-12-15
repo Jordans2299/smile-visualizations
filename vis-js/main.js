@@ -83,6 +83,35 @@ colorsvgCompare.selectAll("mylabels")
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
 
+var colorCorrelations = d3.select("#smaller-charts-div").append("svg").attr("id","smaller-charts-legend")
+.attr("width", 300)
+.attr("height", 280);
+
+colorsvgCompare.append("g")
+    .attr("class", "legendOrdinal")
+    .attr("transform", "translate(80,20)");
+
+colorCorrelations.selectAll("mydots")
+    .data(newArray)
+    .enter()
+    .append("rect")
+    .attr("x", 100)
+    .attr("y", function (d, i) { return 20+ i * (size + 5) }) 
+    .attr("width", size)
+    .attr("height", size)
+    .style("fill", function (d) { return d[1] })
+
+colorCorrelations.selectAll("mylabels")
+    .data(newArray)
+    .enter()
+    .append("text")
+    .attr("x", 100 + size * 1.2)
+    .attr("y", function (d, i) { return 20+ i * (size + 5) + (size / 2) }) 
+    .style("fill", function (d) { return d[1] })
+    .text(function (d) { return d[0] })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+
 loadData();
 
 
@@ -145,10 +174,10 @@ function createVis() {
     new CountriesHistogram("8",allDataGDP, "Happiness_Score", 300,200);
     new CountriesHistogram("9",allDataGDP, "Happiness_Score", 300,200);
     new CountriesHistogram("10",allDataGDP, "Happiness_Score", 300,200);
-    new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Happiness_Score", 400,300);
-    new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Happiness_Score", 400,300);
-    new CorrelationDisplay("three",allDataGDP,"Family","Happiness_Score", 400,300);
-    new CorrelationDisplay("four",allDataGDP,"Freedom","Happiness_Score", 400,300);
+    new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Economy Score","Happiness_Score", 380,300);
+    new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Health Score","Happiness_Score", 380,300);
+    new CorrelationDisplay("three",allDataGDP,"Family","Environment Score","Happiness_Score", 380,300);
+    new CorrelationDisplay("four",allDataGDP,"Freedom","Social Score","Happiness_Score", 380,300);
     overviewmap = new OverviewMap("world-map-color-coded", allDataGDP)
 
 

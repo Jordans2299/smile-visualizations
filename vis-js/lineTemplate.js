@@ -338,7 +338,7 @@ LineGraphTemplate.prototype.updateVis = function () {
         trendline.enter()
             .append("line")
             .attr("class", "trendline")
-            .attr("x1", function(d) {return 40; })
+            .attr("x1", 40)
             .attr("y1", function(d) { 
                 return vis.yScale(+d[1]); })
             .attr("x2", function(d) { return vis.xScale(d[2]); })

@@ -331,7 +331,7 @@ h3 {
     color: red;
 }
 .slight{
-    color: rgb(230, 197, 13)
+    color: rgb(196, 172, 37)
 }
 
 .selected {
@@ -354,6 +354,14 @@ h3 {
     margin-top: 40px;
     font-size: 20px;
     font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+}
+#smaller-charts-div{
+
+}
+#smaller-charts-legend{
+    margin: 0 auto;
 }
 
 text {
