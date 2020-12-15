@@ -70,7 +70,7 @@ LineGraphTemplate.prototype.tooltip_render = function (tooltip_data) {
     var vis = this;
     var text = "<ul>";
     //tooltip_data.forEach(function(row) {
-    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + vis.xlabel + ":\t\t" + tooltip_data[vis.x] + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
+    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + vis.xlabel + ":\t\t" + tooltip_data[vis.x] + "</li>"+"<li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
     //});
 
     return text;
@@ -180,7 +180,7 @@ LineGraphTemplate.prototype.updateVis = function () {
         .attr("class", "dot")
         .attr("cx", function (d) {
             if (d[vis.x] != null) {
-                console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]) + " " + vis.x)
+                //console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]) + " " + vis.x)
                 return vis.xScale(d[vis.x]);
             }
             return;
@@ -290,6 +290,63 @@ LineGraphTemplate.prototype.updateVis = function () {
     // vis.idleTimeout;
 
 
+    //console.log("this is the length of the data: "+vis.data.length)
+
+    //only draw trend line if there is a sufficient amount of data points
+    if(vis.data.length > 50){
+        
+        // get the x and y values for least squares
+		let xSeries = vis.data.map(function(d) { 
+            if(isNaN(d[vis.x])){
+                return 0;
+            }
+            return +d[vis.x]; });
+        let ySeries = vis.data.map(function(d) { return +d[vis.y] });
+
+        console.log("xseries: ")
+        console.log(xSeries)
+        
+	    let xScale = d3.scaleLinear()
+		.range([vis.padding, vis.width]);
+		
+	    let yScale = d3.scaleLinear()
+        .range([vis.height-vis.padding, vis.padding]);
+        
+        let leastSquaresCoeff = leastSquares(xSeries, ySeries);
+
+
+        let slope = leastSquaresCoeff[0]
+        let intercept = leastSquaresCoeff[1]
+        let rSquared = leastSquaresCoeff[2]
+    
+        //apply the reults of the least squares regression
+        // console.log("Min: "+d3.min(xSeries, function(d) { return d}))
+        // console.log("Min Scaled: "+vis.xScale(d3.min(xSeries, function(d) { return d})))
+        let x1 = 0
+		let y1 = intercept;
+		let x2 = d3.max(xSeries, function(d) { return d})
+        let y2 = slope * x2+ intercept;
+
+        console.log("slope "+slope)
+        console.log("intercept"+ intercept)
+        let trendData = [[x1,y1,x2,y2]];
+        
+
+        var trendline = svg.selectAll(".trendline")
+        .data(trendData);
+        
+        trendline.enter()
+            .append("line")
+            .attr("class", "trendline")
+            .attr("x1", function(d) {return 38; })
+            .attr("y1", function(d) { 
+                return vis.yScale(+d[1]); })
+            .attr("x2", function(d) { return vis.xScale(d[2]); })
+            .attr("y2", function(d) { return vis.yScale(d[3]); })
+            .attr("stroke", "black")
+            .attr("stroke-width", 1);
+    }
+        
 
 }
 
@@ -334,4 +391,27 @@ LineGraphTemplate.prototype.filterRegion = function (selection) {
     vis.region = selection
     vis.wrangleData();
 
+}
+
+//function from http://bl.ocks.org/benvandyke/8459843
+function leastSquares(xSeries, ySeries) {
+    var reduceSumFunc = function(prev, cur) { return prev + cur; };
+    
+    var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
+    var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
+
+    var ssXX = xSeries.map(function(d) { return Math.pow(d - xBar, 2); })
+        .reduce(reduceSumFunc);
+    
+    var ssYY = ySeries.map(function(d) { return Math.pow(d - yBar, 2); })
+        .reduce(reduceSumFunc);
+        
+    var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
+        .reduce(reduceSumFunc);
+        
+    var slope = ssXY / ssXX;
+    var intercept = yBar - (xBar * slope);
+    var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
+    
+    return [slope, intercept, rSquare];
 }

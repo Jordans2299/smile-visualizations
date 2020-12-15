@@ -135,11 +135,20 @@ function createVis() {
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
     exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
     compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
-    new CountriesHistogram("happinessHisto", allDataGDP, "Happiness_Score", 600, 500);
-    new CorrelationDisplay("one", allDataGDP, "Economy (GDP per Capita)", "Happiness_Score", 500, 250);
-    new CorrelationDisplay("two", allDataGDP, "Health (Life Expectancy)", "Happiness_Score", 500, 250);
-    new CorrelationDisplay("three", allDataGDP, "Family", "Happiness_Score", 500, 250);
-    new CorrelationDisplay("four", allDataGDP, "Freedom", "Happiness_Score", 500, 250);
+    new CountriesHistogram("1",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("2",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("3",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("4",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("5",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("6",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("7",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("8",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("9",allDataGDP, "Happiness_Score", 300,200);
+    new CountriesHistogram("10",allDataGDP, "Happiness_Score", 300,200);
+    new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Happiness_Score", 400,300);
+    new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Happiness_Score", 400,300);
+    new CorrelationDisplay("three",allDataGDP,"Family","Happiness_Score", 400,300);
+    new CorrelationDisplay("four",allDataGDP,"Freedom","Happiness_Score", 400,300);
     overviewmap = new OverviewMap("world-map-color-coded", allDataGDP)
 
 

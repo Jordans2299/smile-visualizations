@@ -21,7 +21,7 @@ CountriesHistogram.prototype.initVis = function() {
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
         .domain(domain).range(range);
 
-    vis.svg = d3.select("#" + vis.parentElement)
+    vis.svg = d3.select("#happinessHisto" + vis.parentElement)
     vis.padding = 40;
     vis.makeDataReadable();
 }
@@ -72,7 +72,7 @@ CountriesHistogram.prototype.wrangleData = function() {
     let vis= this;
     
     vis.xScale = d3.scaleLinear() // scaleLinear is used for linear data
-        .domain([d3.min(vis.data, function(d) { return d[vis.x]-.01; }), d3.max(vis.data, function(d) { return d[vis.x]+.01; })]) // input
+        .domain([0, d3.max(vis.data, function(d) { return d[vis.x]+.01; })]) // input
         .range([vis.padding, vis.width]); // output
 
     vis.yScale = d3.scaleLinear() // scaleLinear is used for linear data
@@ -91,7 +91,16 @@ CountriesHistogram.prototype.wrangleData = function() {
 CountriesHistogram.prototype.updateVis = function() {
     let vis = this;
     let svg = vis.svg
-    let data = vis.data
+    
+    let regionsList = ["Western Europe", "Central and Eastern Europe", "North America", "Latin America and Caribbean",
+    "Australia and New Zealand", "Middle East and Northern Africa", "Sub-Saharan Africa", "Southeastern Asia", "Eastern Asia",
+    "Southern Asia"]
+
+    let dataGroupedByRegion =  d3.group(vis.data, d => d.Region)
+    console.log(regionsList[+vis.parentElement - 1])
+    console.log(dataGroupedByRegion.get(regionsList[+vis.parentElement - 1]))
+    let data = dataGroupedByRegion.get(regionsList[+vis.parentElement - 1])
+
 
 
  let margin = {top: 10, right: 30, bottom: 30, left: 40}
@@ -100,7 +109,7 @@ CountriesHistogram.prototype.updateVis = function() {
 
      // X axis: scale and draw:
 let x = d3.scaleLinear()
-  .domain([d3.min(data, function(d) { return +d[vis.xLabel]}), d3.max(data, function(d) { return +d[vis.xLabel] })])
+  .domain([0, 8]) //d3.max(data, function(d) { return +d[vis.xLabel] })
   .range([margin.left,width]);
 
 svg.append("g")
@@ -109,12 +118,11 @@ svg.append("g")
 
 let histogram = d3.histogram()
   .value(function(d) { return d[vis.xLabel]; })   // I need to give the vector of value
-  .domain(x.domain())  // then the domain of the graphic
-  .thresholds(x.ticks(50)); // then the numbers of bins
+  .domain([d3.min(data, function(d) { return +d[vis.xLabel] }),d3.max(data, function(d) { return +d[vis.xLabel] })])  // then the domain of the graphic
+//   .thresholds(x.ticks(10)); // then the numbers of bins
 
 // And apply this function to data to get the bins
 var bins = histogram(vis.data);
-console.log(bins)
 
 // Y axis: scale and draw:
 var y = d3.scaleLinear()
@@ -122,6 +130,7 @@ var y = d3.scaleLinear()
   y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
 svg.append("g")
 .attr("transform", "translate("+margin.left+",0)")
+
   .call(d3.axisLeft(y));
 
   svg.selectAll("rect")
@@ -130,9 +139,18 @@ svg.append("g")
   .append("rect")
     .attr("x", 1)
     .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
-    .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
+    .attr("width", function(d) { 
+        console.log()
+        if(x(d.x1) - x(d.x0)<1){
+            return 1
+        }
+        return x(d.x1) - x(d.x0) ; })
     .attr("height", function(d) { return height - y(d.length); })
-    .style("fill",function(d){ return vis.colorPalette(d.Region)} )
+    .style("fill",vis.colorPalette(regionsList[+vis.parentElement - 1]))
+
+let happyHisto = document.getElementById("histHeading"+vis.parentElement)
+happyHisto.innerHTML = regionsList[+vis.parentElement - 1]
+
 
 // append the bar rectangles to the svg elements
 // Use D3's nest function to group the data by borough

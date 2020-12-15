@@ -32,7 +32,7 @@
 </head>
 
 <body>
-    <ul class="nav nav-tabs fixed-top navbar-light bg-light" role="tablist">
+    <ul class="nav nav-tabs fixed-top navbar-light bg-light" id="top-nav" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
         </li>
@@ -46,7 +46,7 @@
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content" id="page-content">
         <div class="tab-pane" id="proposal" role="tabpanel">
 
         </div>
@@ -86,14 +86,53 @@
                     </li>
                 </ul>
             </div>
-            <div id="histogram">
-                <h4>Distribution of Happiness Scores</h4>
-                <svg id="happinessHisto" width="600" height="500"></svg>
+            <h4 id="histoBodyHeader">Distribution of Happiness Scores for Every Region</h4>
+            <div id="histograms">
+                <div class="histoBlock">
+                    <h6 id="histHeading1"> </h6>
+                    <svg id="happinessHisto1" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading2"> </h6>
+                    <svg id="happinessHisto2" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading3"> </h6>
+                    <svg id="happinessHisto3" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading4"> </h6>
+                    <svg id="happinessHisto4" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading5"> </h6>
+                    <svg id="happinessHisto5" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading6"> </h6>
+                    <svg id="happinessHisto6" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading7"> </h6>
+                    <svg id="happinessHisto7" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading8"> </h6>
+                    <svg id="happinessHisto8" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading9"> </h6>
+                    <svg id="happinessHisto9" width="300" height="200"></svg>
+                </div>
+                <div class="histoBlock">
+                    <h6 id="histHeading10"> </h6>
+                    <svg id="happinessHisto10" width="300" height="200"></svg>
+                </div>
             </div>
             <div id="smaller-charts">
                 <div class="box">
                     <h4>Happiness Relationship with Economic Factors</h4>
-                    <svg id="one" class="correlation-graph" width=500 height=270>
+                    <svg id="one" class="correlation-graph" width=400 height=300>
                     </svg>
                     <div class="correlation-description">
                         <p id="strength-one" class="strength "></p>
@@ -104,7 +143,7 @@
                 </div>
                 <div class="box">
                     <h4>Happiness Relationship with Health Factors</h4>
-                    <svg id="two" class="correlation-graph" width=500 height=270>
+                    <svg id="two" class="correlation-graph" width=400 height=300>
                     </svg>
                     <div class="correlation-description">
                         <p id="strength-two" class="strength "></p>
@@ -115,7 +154,7 @@
                 </div>
                 <div class="box">
                     <h4>Happiness Relationship with Environmental Factors</h4>
-                    <svg id="three" class="correlation-graph" width=500 height=270>
+                    <svg id="three" class="correlation-graph" width=400 height=300>
                     </svg>
                     <div class="correlation-description">
                         <p id="strength-three" class="strength "></p>
@@ -126,7 +165,7 @@
                 </div>
                 <div class="box">
                     <h4>Happiness Relationship with Social Factors</h4>
-                    <svg id="four" class="correlation-graph" width=500 height=270>
+                    <svg id="four" class="correlation-graph" width=400 height=300>
                     </svg>
                     <div class="correlation-description">
                         <p id="strength-four" class="strength "></p>
@@ -398,15 +437,15 @@
                     <div class="row justify-content-center">
                         <div class="col-md-4 offset-md-4">
                             <div id="chartCompareLegend" class="center">
-                                
+
                             </div>
                         </div>
                         <div class="col-md-auto">
-                          
-                                <div id="chart-compare-container" class="center">
-                                    <svg id="chart-compare" class="center" height="500" width="700">
-                                    </svg>
-                                </div>
+
+                            <div id="chart-compare-container" class="center">
+                                <svg id="chart-compare" class="center" height="500" width="700">
+                                </svg>
+                            </div>
 
                         </div>
                     </div>

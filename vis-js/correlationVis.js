@@ -38,15 +38,17 @@ CorrelationDisplay.prototype.initVis = function() {
  * @param tooltip_data information that needs to be populated in the tool tip
  * @return text HTML content for toop tip
  */
-CorrelationDisplay.prototype.tooltip_render = function(tooltip_data) {
-    var self = this;
-    var text = "<ul>";
-    //tooltip_data.forEach(function(row) {
-    text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + " Life expectancy" + ":\t\t" + tooltip_data.Life_expectancy + "</li><li> Family Number: " + "\t\t" + tooltip_data.Family + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
-        //});
+// CorrelationDisplay.prototype.tooltip_renderer = function(tooltip_data) {
+//     var vis = this;
+//     console.log("tool tip")
+//     console.log(tooltip_data)
+//     var text = "<ul>";
+//     //tooltip_data.forEach(function(row) {
+//     text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + vis.xlabel+ ":\t\t" + tooltip_data[vis.x] + "</li><li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
+//         //});
 
-    return text;
-}
+//     return text;
+// }
 
 
 CorrelationDisplay.prototype.makeDataReadable=function() {
@@ -237,13 +239,21 @@ CorrelationDisplay.prototype.updateVis = function() {
 		let y1 = intercept;
 		let x2 = d3.max(xSeries, function(d) { return d})
         let y2 = slope * x2+ intercept;
-        let trendData = [[x1,y1,x2,y2]];
+       
 
         let minY = d3.min(ySeries, function(d) { return d})
         let maxY = d3.max(ySeries, function(d){ return d})
 
+        if(y1<minY){
+            y1 = minY
+            x1 = (y1-intercept)/slope
+        }
+
+        let trendData = [[x1,y1,x2,y2]];
         xScale.domain([x1, x2]);
         yScale.domain([y1, y2]);
+        
+        //y= mx+b
 
 		var trendline = svg.selectAll(".trendline")
 			.data(trendData);
@@ -253,7 +263,9 @@ CorrelationDisplay.prototype.updateVis = function() {
 			.attr("class", "trendline")
 			.attr("x1", function(d) {return vis.xScale(d[0]); })
 			.attr("y1", function(d) { 
-                return vis.yScale(d[1]); })
+                console.log("y1 :"+d[1])
+                return vis.yScale(d[1]); 
+            })
 			.attr("x2", function(d) { return vis.xScale(d[2]); })
 			.attr("y2", function(d) { return vis.yScale(d[3]); })
 			.attr("stroke", "black")
