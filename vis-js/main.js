@@ -28,7 +28,7 @@ new TypeIt("#typed-introduction", {
 }).go();
 
 const sound = new Howl({
-    src: ['./../sound/the_sea_dragon_comes_aigei_com.mp3']
+    src: ['smile/sound/the_sea_dragon_comes_aigei_com.mp3']
 });
 
 // Play the sound.
