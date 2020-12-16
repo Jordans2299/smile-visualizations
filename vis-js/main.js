@@ -13,6 +13,26 @@ let compareChart;
 let overviewmap;
 var freedomData = []
 
+//TypeIt 
+new TypeIt("#typed-introduction", {
+    strings: ["\"Happiness is when what you think, what you say, and what you do are in harmony.\" -- Confucius",
+        "The pursuit of happiness has been widely recognized as part of our lifetime goal.",
+        "Even though we probably can't quantify happiness, we can still feel its existence.",
+        "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness."
+    ],
+    speed: 50,
+    loop: false
+}).go();
+
+setTimeout(function() {
+    document.getElementById("button-for-introduction").innerHTML = "<button id=\"analysis-page\">Go to the analysis </button>"
+    document.getElementById("analysis-page").addEventListener("click", function() {
+        document.getElementById("explanation-prep").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
+    });
+}, 23000);
+
+
+
 // Variable for the visualization instance
 // Start application by loading the data
 var domain = ["Western Europe", "Central and Eastern Europe", "North America", "Latin America and Caribbean",
@@ -45,10 +65,10 @@ colorsvgExplore.selectAll("mydots")
     .enter()
     .append("rect")
     .attr("x", 100)
-    .attr("y", function (d, i) { return 100 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("y", function(d, i) { return 100 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("width", size)
     .attr("height", size)
-    .style("fill", function (d) { return d[1] })
+    .style("fill", function(d) { return d[1] })
 
 // Add one dot in the legend for each name.
 colorsvgExplore.selectAll("mylabels")
@@ -56,9 +76,9 @@ colorsvgExplore.selectAll("mylabels")
     .enter()
     .append("text")
     .attr("x", 100 + size * 1.2)
-    .attr("y", function (d, i) { return 100 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
-    .style("fill", function (d) { return d[1] })
-    .text(function (d) { return d[0] })
+    .attr("y", function(d, i) { return 100 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function(d) { return d[1] })
+    .text(function(d) { return d[0] })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
 colorsvgCompare.selectAll("mydots")
@@ -66,10 +86,10 @@ colorsvgCompare.selectAll("mydots")
     .enter()
     .append("rect")
     .attr("x", 100)
-    .attr("y", function (d, i) { return 100 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("y", function(d, i) { return 100 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("width", size)
     .attr("height", size)
-    .style("fill", function (d) { return d[1] })
+    .style("fill", function(d) { return d[1] })
 
 // Add one dot in the legend for each name.
 colorsvgCompare.selectAll("mylabels")
@@ -77,15 +97,15 @@ colorsvgCompare.selectAll("mylabels")
     .enter()
     .append("text")
     .attr("x", 100 + size * 1.2)
-    .attr("y", function (d, i) { return 100 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
-    .style("fill", function (d) { return d[1] })
-    .text(function (d) { return d[0] })
+    .attr("y", function(d, i) { return 100 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function(d) { return d[1] })
+    .text(function(d) { return d[0] })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
 
-var colorCorrelations = d3.select("#smaller-charts-div").append("svg").attr("id","smaller-charts-legend")
-.attr("width", 300)
-.attr("height", 280);
+var colorCorrelations = d3.select("#smaller-charts-div").append("svg").attr("id", "smaller-charts-legend")
+    .attr("width", 300)
+    .attr("height", 280);
 
 colorsvgCompare.append("g")
     .attr("class", "legendOrdinal")
@@ -96,19 +116,19 @@ colorCorrelations.selectAll("mydots")
     .enter()
     .append("rect")
     .attr("x", 100)
-    .attr("y", function (d, i) { return 20+ i * (size + 5) }) 
+    .attr("y", function(d, i) { return 20 + i * (size + 5) })
     .attr("width", size)
     .attr("height", size)
-    .style("fill", function (d) { return d[1] })
+    .style("fill", function(d) { return d[1] })
 
 colorCorrelations.selectAll("mylabels")
     .data(newArray)
     .enter()
     .append("text")
     .attr("x", 100 + size * 1.2)
-    .attr("y", function (d, i) { return 20+ i * (size + 5) + (size / 2) }) 
-    .style("fill", function (d) { return d[1] })
-    .text(function (d) { return d[0] })
+    .attr("y", function(d, i) { return 20 + i * (size + 5) + (size / 2) })
+    .style("fill", function(d) { return d[1] })
+    .text(function(d) { return d[0] })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
 
@@ -123,13 +143,13 @@ function loadData() {
 
     var promises = [];
 
-    files.forEach(function (url) {
+    files.forEach(function(url) {
         promises.push(d3.csv(url))
     });
-    Promise.all(promises).then(function (values) {
+    Promise.all(promises).then(function(values) {
 
         allDataGDP = values[0]
-        //console.log(longeVityData)
+            //console.log(longeVityData)
         happyDataGDP = values[0].slice(0, 15)
         sadDataGDP = values[0].slice(140)
         compareDataGDP = happyDataGDP.concat(sadDataGDP)
@@ -139,11 +159,13 @@ function loadData() {
         createVis();
     });
 }
+
 function filterContinentExplore() {
     let regionSelection = document.getElementById("continent-explore").value
     exploreChart.filterRegion(regionSelection)
 
 }
+
 function onSelectionChangeExplore() {
     console.log("Hello????")
     let selectionAll = document.getElementById("metrics-explore").value;
@@ -164,20 +186,20 @@ function createVis() {
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
     exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
     compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
-    new CountriesHistogram("1",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("2",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("3",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("4",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("5",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("6",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("7",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("8",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("9",allDataGDP, "Happiness_Score", 300,200);
-    new CountriesHistogram("10",allDataGDP, "Happiness_Score", 300,200);
-    new CorrelationDisplay("one",allDataGDP,"Economy (GDP per Capita)","Economy Score","Happiness_Score", 380,300);
-    new CorrelationDisplay("two",allDataGDP,"Health (Life Expectancy)","Health Score","Happiness_Score", 380,300);
-    new CorrelationDisplay("three",allDataGDP,"Family","Environment Score","Happiness_Score", 380,300);
-    new CorrelationDisplay("four",allDataGDP,"Freedom","Social Score","Happiness_Score", 380,300);
+    new CountriesHistogram("1", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("2", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("3", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("4", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("5", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("6", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("7", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("8", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("9", allDataGDP, "Happiness_Score", 300, 200);
+    new CountriesHistogram("10", allDataGDP, "Happiness_Score", 300, 200);
+    new CorrelationDisplay("one", allDataGDP, "Economy (GDP per Capita)", "Economy Score", "Happiness_Score", 380, 300);
+    new CorrelationDisplay("two", allDataGDP, "Health (Life Expectancy)", "Health Score", "Happiness_Score", 380, 300);
+    new CorrelationDisplay("three", allDataGDP, "Family", "Environment Score", "Happiness_Score", 380, 300);
+    new CorrelationDisplay("four", allDataGDP, "Freedom", "Social Score", "Happiness_Score", 380, 300);
     overviewmap = new OverviewMap("world-map-color-coded", allDataGDP)
 
 

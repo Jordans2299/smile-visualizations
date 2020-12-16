@@ -21,6 +21,9 @@
     <script src="https://d3js.org/d3-transition.v2.min.js"></script>
     <script src="https://d3js.org/d3-drag.v2.min.js"></script>
     <script src="https://d3js.org/d3-zoom.v2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
+    <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <script type="text/javascript" src="bower_components/d3-tip/index.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
@@ -47,20 +50,33 @@
 
     <!-- Tab panes -->
     <div class="tab-content" id="page-content">
+
+        <div class="tab-pane active" id="overview" role="tabpanel">
+            <div id="intro-page-new">
+                <div class="title introduction" id="smile_title">
+                    <h1 class="introduction">SMILE.</h1>
+                </div>
         <div class="tab-pane" id="proposal" role="tabpanel">
 
         </div>
-        <div class="tab-pane active" id="overview" role="tabpanel">
-            <div class="title introduction" id="smile_title">
-                <h1 class="introduction">SMILE.</h1>
+                <div class="introduction center">
+                    <h5 class="introduction center">An exploration of the World Happiness Index</h5>
+                </div>
+
+                <div class="introduction">
+                    <a href="proposal.html">View Proposal/Process Book Here</a>
+                </div>
+                <div class="center" id="typed-introduction">
+                
+                </div>
+                <div class="center" id="button-for-introduction" v-html="html">
+                
+                </div>
             </div>
-            <div class="introduction center">
-                <h3 class="introduction center">An exploration of the World Happiness Index</h3>
+            <div id="explanation-prep">
             </div>
-            <div class="introduction">
-                <a href="proposal.html">View Proposal/Process Book Here</a>
-            </div>
-            <div id="explanation" class="center">
+            <div class="introduction-main center"><h1> &nbsp;</h1></div>
+            <div id="explanation" class="introduction-main center">
                 This map shows the relative happiness around the world on a scale of 2
                 to 8 as accorded to the World Happiness Index, where 2 is very unhappy (and very blue!)
                 and 8 is very happy (or deep red).
@@ -69,7 +85,7 @@
 
             </div>
 
-            <div id="compare-factors">
+            <div id="compare-factors" class="introduction-main">
                 <p>
                     The first section goes here, and may require scrolling. It will perform
                     statistical analysis on the factors of happiness. It will do the following
@@ -249,7 +265,7 @@
                             <option value="Southern Asia">Southern Asia</option>
                         </select>
 
-                        <p class="center">This selector allows people to choose what metric they want to look at. These
+                        <p class="introduction-main center">This selector allows people to choose what metric they want to look at. These
                             metrics are
                             detailed below.</p>
                     </div>
@@ -274,7 +290,7 @@
 
                             </svg>
                         </div>
-                        <p class="center">
+                        <p class="introduction-main center">
                             This section allows people to explore different common metrics of happiness
                             and quality of life to their heart's content. It is similar to the original design, but
                             does have a few differences in what charts will be present, allowing us to explore a wider
@@ -367,7 +383,7 @@
 
         </div>
 
-        <div class="tab-pane" id="correlations" role="tabpanel">
+        <div class="introduction-main tab-pane" id="correlations" role="tabpanel">
             <h1>Learn from the Happiest and the Not Happiest</h1>
             <div>
                 <p> This page features two different parts--the first reuses code from "explore"

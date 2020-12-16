@@ -14,16 +14,18 @@ h1 {
 .center {
     text-align: center;
 }
-#top-nav{
+
+#top-nav {
     position: fixed;
     background: white;
     width: 100%;
     z-index: 100;
     margin-bottom: 30px;
-  }
-#page-content{
-position: relative;
-top: 60px;
+}
+
+#page-content {
+    position: relative;
+    top: 60px;
 }
 
 h1 .divider {
@@ -61,6 +63,7 @@ h1 {
     padding: 0px;
     margin-left: 20px;
 }
+
 .background {
     background-color: white;
     position: relative;
@@ -68,7 +71,7 @@ h1 {
 
 .center-block {
     display: block;
-    margin:auto;
+    margin: auto;
 }
 
 .info {
@@ -330,7 +333,8 @@ h3 {
 .weak {
     color: red;
 }
-.slight{
+
+.slight {
     color: rgb(196, 172, 37)
 }
 
@@ -344,23 +348,24 @@ h3 {
     margin-top: 50px;
 }
 
-#histograms{
+#histograms {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-#histoBodyHeader{
+
+#histoBodyHeader {
     margin-top: 40px;
     font-size: 20px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 30px;
 }
-#smaller-charts-div{
 
-}
-#smaller-charts-legend{
+#smaller-charts-div {}
+
+#smaller-charts-legend {
     margin: 0 auto;
 }
 
@@ -392,4 +397,21 @@ tr:nth-child(even) {
 .non_brushed {
     fill: #404040;
     opacity: 0.5;
+}
+
+#intro-page-new {
+    height: 100vh;
+    background-image: url("../img/yellow-sunflower-field.jpg");
+}
+
+#typed-introduction {
+    font-size: 20px;
+}
+
+.introduction-center {
+    font-size: 18px;
+}
+
+.introduction-main {
+    font-size: 16px;
 }
