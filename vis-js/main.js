@@ -13,34 +13,37 @@ let compareChart;
 let overviewmap;
 var freedomData = []
 
+
+
 //TypeIt 
 new TypeIt("#typed-introduction", {
     strings: ["\"Happiness is when what you think, what you say, and what you do are in harmony.\" -- Confucius",
         "The pursuit of happiness has been widely recognized as part of our lifetime goal.",
         "Even though we probably can't quantify happiness, we can still feel its existence.",
-        "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness."
+        "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness.",
+        "In several minutes, you will understand which regions are the happiest, and what factors can make people happy."
     ],
-    speed: 50,
+    speed: 25,
     loop: false
 }).go();
 
 const sound = new Howl({
-    src: ['../sound/typing-aigei-com.mp3']
+    src: ['../sound/the_sea_dragon_comes_aigei_com.mp3']
 });
 
 // Play the sound.
 sound.play();
 
 // Change global volume.
-Howler.volume(0.1);
+Howler.volume(0.025);
 
 setTimeout(function() {
     document.getElementById("button-for-introduction").innerHTML = "<button class=\"btn btn-success\" id=\"analysis-page\">Go to the analysis </button>"
     document.getElementById("analysis-page").addEventListener("click", function() {
         document.getElementById("explanation-prep").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
     });
-    sound.stop();
-}, 23000);
+    //sound.stop();
+}, 16000);
 
 
 

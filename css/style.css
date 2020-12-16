@@ -406,6 +406,7 @@ tr:nth-child(even) {
 
 #typed-introduction {
     font-size: 20px;
+    font: Roboto;
 }
 
 .introduction-center {
@@ -414,4 +415,8 @@ tr:nth-child(even) {
 
 .introduction-main {
     font-size: 16px;
+}
+
+.jumbotron-fluid {
+    opacity: 0.95;
 }
