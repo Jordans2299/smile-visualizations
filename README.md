@@ -13,3 +13,5 @@ http://bl.ocks.org/feyderm/6bdbc74236c27a843db633981ad22c1b
 https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
 https://typeitjs.com/
+
+https://github.com/goldfire/howler.js
