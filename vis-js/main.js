@@ -24,12 +24,26 @@ new TypeIt("#typed-introduction", {
     loop: false
 }).go();
 
+const sound = new Howl({
+    src: ['../sound/typing-aigei-com.mp3']
+});
+
+// Play the sound.
+sound.play();
+
+// Change global volume.
+Howler.volume(0.1);
+
 setTimeout(function() {
-    document.getElementById("button-for-introduction").innerHTML = "<button id=\"analysis-page\">Go to the analysis </button>"
+    document.getElementById("button-for-introduction").innerHTML = "<button class=\"btn btn-success\" id=\"analysis-page\">Go to the analysis </button>"
     document.getElementById("analysis-page").addEventListener("click", function() {
         document.getElementById("explanation-prep").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
     });
+    sound.stop();
 }, 23000);
+
+
+
 
 
 
