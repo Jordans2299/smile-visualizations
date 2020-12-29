@@ -4,7 +4,6 @@
 
 
 LineGraphTemplate = function (_parentElement, _data, _x, _y, _xlabel, _ylabel, _region) {
-
     this.parentElement = _parentElement;
     this.data = _data;
     this.x = _x
@@ -13,7 +12,7 @@ LineGraphTemplate = function (_parentElement, _data, _x, _y, _xlabel, _ylabel, _
     this.ylabel = _ylabel
     this.region = _region
     this.width = 750,
-        this.height = 500;
+    this.height = 500;
     this.initVis();
 }
 
@@ -346,8 +345,6 @@ LineGraphTemplate.prototype.updateVis = function () {
             .attr("stroke", "black")
             .attr("stroke-width", 1);
     }
-        
-
 }
 
 // LineGraphTemplate.prototype.brushChart = function (event) {

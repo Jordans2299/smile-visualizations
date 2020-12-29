@@ -120,35 +120,83 @@ colorsvgCompare.selectAll("mylabels")
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
 
-var colorCorrelations = d3.select("#smaller-charts-div").append("svg").attr("id", "smaller-charts-legend")
-    .attr("width", 300)
-    .attr("height", 280);
+// var colorCorrelations = d3.select("#smaller-charts-div").append("svg").attr("id", "smaller-charts-legend")
+//     .attr("width", 300)
+//     .attr("height", 280);
 
-colorsvgCompare.append("g")
-    .attr("class", "legendOrdinal")
-    .attr("transform", "translate(80,20)");
+// colorCorrelations.append("g")
+//     .attr("class", "legendOrdinal")
+//     .attr("transform", "translate(80,20)");
 
-colorCorrelations.selectAll("mydots")
-    .data(newArray)
-    .enter()
-    .append("rect")
-    .attr("x", 100)
-    .attr("y", function(d, i) { return 20 + i * (size + 5) })
-    .attr("width", size)
-    .attr("height", size)
-    .style("fill", function(d) { return d[1] })
+// colorCorrelations.selectAll("mydots")
+//     .data(newArray)
+//     .enter()
+//     .append("rect")
+//     .attr("x", 100)
+//     .attr("y", function(d, i) { return 20 + i * (size + 5) })
+//     .attr("width", size)
+//     .attr("height", size)
+//     .style("fill", function(d) { return d[1] })
 
-colorCorrelations.selectAll("mylabels")
-    .data(newArray)
-    .enter()
-    .append("text")
-    .attr("x", 100 + size * 1.2)
-    .attr("y", function(d, i) { return 20 + i * (size + 5) + (size / 2) })
-    .style("fill", function(d) { return d[1] })
-    .text(function(d) { return d[0] })
-    .attr("text-anchor", "left")
-    .style("alignment-baseline", "middle")
+// colorCorrelations.selectAll("mylabels")
+//     .data(newArray)
+//     .enter()
+//     .append("text")
+//     .attr("x", 100 + size * 1.2)
+//     .attr("y", function(d, i) { return 20 + i * (size + 5) + (size / 2) })
+//     .style("fill", function(d) { return d[1] })
+//     .text(function(d) { return d[0] })
+//     .attr("text-anchor", "left")
+//     .style("alignment-baseline", "middle")
 
+/////////D3 Horizonal Lengend 1///////////////////////////
+var width =800;
+var height = 80;
+var svgLegned4 = d3.select("#smaller-charts-div").append("svg")
+.attr("width", width)
+.attr("height", height - 50)
+
+var dataL = 0;
+var offset = 80;
+var n = newArray.length/2;
+var itemWidth =200;
+var itemHeight = 18;
+
+var legend4 = svgLegned4.selectAll('.legends4')
+.data(newArray)
+.enter().append('g')
+.attr("class", "legends4")
+.attr("transform", function(d,i) { 
+    return "translate(" + i%n * itemWidth + "," + Math.floor(i/n) * itemHeight + ")"; 
+})
+// .attr("transform", function (d, i) {
+//  if (i === 0) {
+//     dataL = d.length + offset 
+//     return "translate(0,0)"
+// } else { 
+//  var newdataL = dataL
+//  dataL +=  d.length + offset
+//  return "translate(" + (newdataL) + ",0)"
+// }
+// })
+
+legend4.append('rect')
+.attr("x", 0)
+.attr("y", 0)
+.attr("width", 10)
+.attr("height", 10)
+.style("fill", function(d) { return d[1] })
+
+legend4.append('text')
+.attr("x", 20)
+.attr("y", 10)
+//.attr("dy", ".35em")
+.text(function(d) { return d[0] })
+.attr("class", "textselected")
+.style("text-anchor", "start")
+.style("font-size", 12)
+console.log("newArray: ")
+console.log(newArray)
 loadData();
 
 

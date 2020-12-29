@@ -317,7 +317,7 @@ h3 {
 #histogram h4 {
     font-size: 15px;
     font-weight: 800;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .strength {
@@ -363,7 +363,10 @@ h3 {
     margin-bottom: 30px;
 }
 
-#smaller-charts-div {}
+#smaller-charts-div {
+    margin: 0 auto;
+    width: 800px;
+}
 
 #smaller-charts-legend {
     margin: 0 auto;
@@ -420,3 +423,18 @@ tr:nth-child(even) {
 .jumbotron-fluid {
     opacity: 0.95;
 }
+
+select {
+
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    padding: 0.4em 0.5em;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #FFF;
+    background-image: linear-gradient(to top, #e5e2e2, rgb(250, 246, 246) 33%);
+  }
+  option{
+      text-align: center;
+  }
