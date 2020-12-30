@@ -39,12 +39,15 @@ h1 .sub-headline {
 
 .introduction {
     font-size: 30px;
-    font-family: 'Poiret One', cursive;
     text-align: center;
 }
 
 #world-map-color-coded {
     text-align: center;
+}
+
+select {
+    font-size: 16px;
 }
 
 #jordansVis {
@@ -425,7 +428,6 @@ tr:nth-child(even) {
 }
 
 select {
-
     border: 1px solid var(--select-border);
     border-radius: 0.25em;
     padding: 0.4em 0.5em;
@@ -434,7 +436,8 @@ select {
     line-height: 1.1;
     background-color: #FFF;
     background-image: linear-gradient(to top, #e5e2e2, rgb(250, 246, 246) 33%);
-  }
-  option{
-      text-align: center;
-  }
+}
+
+option {
+    text-align: center;
+}
