@@ -17,3 +17,5 @@ https://typeitjs.com/
 https://github.com/goldfire/howler.js
 
 https://stackoverflow.com/questions/24761965/change-html-dropdown-option-font-size
+
+https://www.w3schools.com/howto/howto_css_image_sticky.asp

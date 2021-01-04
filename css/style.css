@@ -441,3 +441,8 @@ select {
 option {
     text-align: center;
 }
+
+img.sticky {
+    position: sticky;
+    top: 0;
+}
