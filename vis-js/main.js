@@ -12,6 +12,7 @@ let exploreChart;
 let compareChart;
 let overviewmap;
 var freedomData = []
+let overviewMapArticle;
 
 // Variable for the visualization instance
 // Start application by loading the data
@@ -86,6 +87,7 @@ colorsvgCompare.selectAll("mylabels")
 loadData();
 
 
+
 function loadData() {
 
     var files = ["data/new_data_cleaned.csv", "data/continents.json"];
@@ -108,6 +110,7 @@ function loadData() {
         overviewContinentData = values[1];
         //console.log(allDataGDP)
         createVis();
+        createHappiestandUnhappiest();
     });
 }
 function filterContinentExplore() {
@@ -116,7 +119,6 @@ function filterContinentExplore() {
 
 }
 function onSelectionChangeExplore() {
-    console.log("Hello????")
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].textContent;
     exploreChart.onSelectionChange(selectionAll, xLabel)
@@ -127,6 +129,12 @@ function onSelectionChangeCompare() {
     let selectionCompare = document.getElementById("metrics-compare").value;
     let xLabel = document.getElementById("metrics-compare").selectedOptions[0].attributes[1].textContent;
     compareChart.onSelectionChange(selectionCompare, xLabel)
+
+}
+
+function createHappiestandUnhappiest() {
+    overviewMapArticle = new ArticleOverviewMap("happiest-map", "world-map-description-paragraph", compareDataGDP)
+
 
 }
 
