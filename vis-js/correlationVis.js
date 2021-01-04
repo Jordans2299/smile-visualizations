@@ -1,9 +1,10 @@
-CorrelationDisplay = function(_parentElement, _data, _x, _y, width, height) {
+CorrelationDisplay = function(_parentElement, _data, _x,_xLabel, _y, width, height) {
 
     this.parentElement = _parentElement;
     this.data = _data;
     this.x=_x
     this.y=_y
+    this.xLabel = _xLabel
     // this.xlabel=_xlabel
     // this.ylabel=_ylabel
     this.width = width,
@@ -193,7 +194,7 @@ CorrelationDisplay.prototype.updateVis = function() {
 
     .append('text')
         .attr("fill", "black")
-        .text(vis.x)
+        .text(vis.xLabel)
         .attr("x", vis.width-70)
         .attr("y", 0)
 
@@ -280,6 +281,10 @@ CorrelationDisplay.prototype.updateVis = function() {
         if(vis.corrCoeff>.7){
             message = "Strong Correlation";
             strength = "strong";
+        }
+        else if(vis.corrCoeff>.4){
+            message = "Slight Correlation"
+            strength = "slight"
         }
         else{
             message = "Weak Correlation";

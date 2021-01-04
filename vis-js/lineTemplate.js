@@ -4,7 +4,6 @@
 
 
 LineGraphTemplate = function (_parentElement, _data, _x, _y, _xlabel, _ylabel, _region) {
-
     this.parentElement = _parentElement;
     this.data = _data;
     this.x = _x
@@ -13,7 +12,7 @@ LineGraphTemplate = function (_parentElement, _data, _x, _y, _xlabel, _ylabel, _
     this.ylabel = _ylabel
     this.region = _region
     this.width = 750,
-        this.height = 500;
+    this.height = 500;
     this.initVis();
 }
 
@@ -293,7 +292,7 @@ LineGraphTemplate.prototype.updateVis = function () {
     //console.log("this is the length of the data: "+vis.data.length)
 
     //only draw trend line if there is a sufficient amount of data points
-    if(vis.data.length > 50){
+    if(vis.displayData.length > 50){
         
         // get the x and y values for least squares
 		let xSeries = vis.data.map(function(d) { 
@@ -338,7 +337,7 @@ LineGraphTemplate.prototype.updateVis = function () {
         trendline.enter()
             .append("line")
             .attr("class", "trendline")
-            .attr("x1", function(d) {return 38; })
+            .attr("x1", 40)
             .attr("y1", function(d) { 
                 return vis.yScale(+d[1]); })
             .attr("x2", function(d) { return vis.xScale(d[2]); })
@@ -346,8 +345,6 @@ LineGraphTemplate.prototype.updateVis = function () {
             .attr("stroke", "black")
             .attr("stroke-width", 1);
     }
-        
-
 }
 
 // LineGraphTemplate.prototype.brushChart = function (event) {
