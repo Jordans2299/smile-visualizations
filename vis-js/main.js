@@ -250,7 +250,9 @@ function onSelectionChangeCompare() {
 
 function createHappiestandUnhappiest() {
     overviewMapArticle = new ArticleOverviewMap("happiest-map", "world-map-description-paragraph", compareDataGDP)
-
+    compareChart = new LineGraphTemplate("happiest-gdp-graph", compareDataGDP, "Economy (GDP per Capita)", "Happiness_Score", "GDP Per Capita (dollars)", "Happiness Score", "All")
+    new LineGraphTemplate("unemployment-graph", compareDataGDP, "Unemployment_Total_Percent", "Happiness_Score", "Unemployment (percent of population)", "Happiness Score", "All")
+    new LineGraphTemplate("growth-graph", compareDataGDP, "GDP_Growth_Annual", "Happiness_Score", "Annual GDP Growth (percent)", "Happiness Score", "All")
 
 }
 

@@ -36,19 +36,19 @@ ArticleOverviewMap.prototype.initVis = function() {
       .attr("class", "legendQuant")
       .attr("transform", "translate(0,400)");
 
-    let title = vis.svg.append("g")
-    .attr("transform", "translate(0,395)")
+    // let title = vis.svg.append("g")
+    // .attr("transform", "translate(0,395)")
 
-    title.append("text")
-    .text("Happiness Index Legend")
+    // title.append("text")
+    // .text("Happiness Index Legend")
     
-    var legend = d3.legendColor()
-        .labelFormat(d3.format(".2f"))
-        .useClass(false)
-        .scale(vis.colorScale)
+    // var legend = d3.legendColor()
+    //     .labelFormat(d3.format(".2f"))
+    //     .useClass(false)
+    //     .scale(vis.colorScale)
     
-    legendQuant
-      .call(legend);
+    // legendQuant
+    //   .call(legend);
 
 
 
