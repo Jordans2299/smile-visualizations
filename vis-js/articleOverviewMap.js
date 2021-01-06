@@ -269,5 +269,5 @@ ArticleOverviewMap.prototype.updateDonut = function(d) {
         {index: 3, industry: "Manufacturing", value: d["Manufacturing_Value_Percent"]}
 
     ]
-    vis.donut = new DonutGraph("economy-breakdown", d.Country, data)
+    vis.donut = new DonutGraph("economy-breakdown", "breakdown-legend", d.Country, data)
 }

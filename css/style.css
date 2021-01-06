@@ -13,6 +13,9 @@ h1,h2,h3,h4,h5,h6,p,strong {
 .page-title {
     font-size: 10em
 }
+.align-text-left {
+    text-align: left;
+}
 
 
 .center {

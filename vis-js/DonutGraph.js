@@ -1,6 +1,7 @@
-DonutGraph = function (_parentElement, _country, _data) {
+DonutGraph = function (_parentElement, _labelParent, _country, _data) {
 
     this.parentElement = _parentElement;
+    this.labelParent = _labelParent
     this.country = _country;
     this.data = _data
     this.width = 400,
@@ -16,8 +17,33 @@ DonutGraph = function (_parentElement, _country, _data) {
 DonutGraph.prototype.initVis = function () {
     var vis = this;
     vis.svg = d3.select("#" + vis.parentElement)
+    vis.labelsvg = d3.select("#" +vis.labelParent)
     var domain = ["Agriculture, Forestry, Fishing", "Services", "Industry", "Manufacturing"]
-    var range = ["#dfabf5", "#9d98fa", "#6094e0", "#6fd6c7"]
+    var range = ["#79d96b", "#5dc8e5", "#db5de5", "#e5a35d"]
+    var newArray = domain.map((e, i) => [e, range[i]])
+    var size = 20
+    vis.labelsvg.selectAll("mydots")
+    .data(newArray)
+    .enter()
+    .append("rect")
+    .attr("x", -10)
+    .attr("y", function(d, i) { return 150 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("width", size)
+    .attr("height", size)
+    .style("fill", function(d) { return d[1] })
+
+// Add one dot in the legend for each name.
+    vis.labelsvg.selectAll("mylabels")
+    .data(newArray)
+    .enter()
+    .append("text")
+    .attr("x", (size * 1.2)-10)
+    .attr("y", function(d, i) { return 150 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function(d) { return d[1] })
+    .text(function(d) { return d[0] })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+
     vis.colorPalette = vis.colorScale = d3.scaleOrdinal()
         .domain(domain).range(range);
 
