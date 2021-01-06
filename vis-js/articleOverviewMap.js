@@ -1,7 +1,8 @@
-ArticleOverviewMap = function(_parentElement, _textElement, _data) {
+ArticleOverviewMap = function(_parentElement, _textElement, _data, _accompaniment) {
 
     this.parentElement = _parentElement;
     this.textElement = _textElement;
+    this.accompaniment=_accompaniment
     this.data = _data;
     this.width = 800,
     this.height = 400;
@@ -81,6 +82,10 @@ ArticleOverviewMap.prototype.wrangleData = function() {
         d["Trust (Government Corruption)"] = +d["Trust (Government Corruption)"];
         d["Generosity"] = +d["Generosity"];
         d["Dystopia Residual"] = +d["Dystopia Residual"];
+        d["Agriculture_Fishing_Forestry_Value__Percent"] = +d["Agriculture_Fishing_Forestry_Value__Percent"]
+        d["Services_Value_Percent"] = +d["Services_Value_Percent"]
+        d["Industry_Value_Percent"] = +d["Industry_Value_Percent"]
+        d["Manufacturing_Value_Percent"] = +d["Manufacturing_Value_Percent"]
     })
     // Update the visualization
     vis.updateVis();
@@ -156,7 +161,12 @@ ArticleOverviewMap.prototype.updateVis = function() {
                         })
                         if (result.length == 1) {
                             nameaa = result[0].Happiness_Score;
+                            if (vis.accompaniment=="statswheel") {
                             vis.updateStatsWheel(result[0])
+                            }
+                            else {
+                                vis.updateDonut(result[0])
+                            }
                         }
 
 
@@ -236,6 +246,7 @@ ArticleOverviewMap.prototype.updateStatsWheel = function(d) {
         {id: 6, index: 5, metric: "Generosity", item:generosity, cx:297, cy:222},
         {id: 7, index: 6, metric: "Dystopia Residual", item: dystopia, cx:278, cy:138}
     ]
+    //Coordinate help from https://www.mathopenref.com/coordpolycalc.html
     var links = [
         {index: 0, x1:"200", x2:"122", y1:"100", y2: "138"},
         {index:1, x1:"122", x2:"103", y1:"138", y2: "222"},
@@ -248,4 +259,15 @@ ArticleOverviewMap.prototype.updateStatsWheel = function(d) {
     ]
     vis.statsWheel = new StatsWheel("happiest_anatomy_analysis", country, nodes, links)
 
+}
+ArticleOverviewMap.prototype.updateDonut = function(d) {
+    var vis = this;
+    var data = [
+        {index: 0, industry:"Agriculture, Forestry, Fishing", value: d["Agriculture_Fishing_Forestry_Value__Percent"]},
+        {index: 1, industry: "Services", value: d["Services_Value_Percent"]},
+        {index: 2, industry: "Industry", value: d["Industry_Value_Percent"] },
+        {index: 3, industry: "Manufacturing", value: d["Manufacturing_Value_Percent"]}
+
+    ]
+    vis.donut = new DonutGraph("economy-breakdown", d.Country, data)
 }

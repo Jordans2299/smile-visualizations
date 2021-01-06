@@ -25,7 +25,7 @@ def cleanFile(file, metricToDropEmpty):
     d.to_csv('new_data_cleaned.csv', header=True)
 
 
-joinFiles("new_data.csv", "inflation-data-2015.csv", "Country", 2015)
+joinFiles("new_data.csv", "economic-data-addendum.csv", "Country", 2015)
 cleanFile("new_data.csv", "Happiness_Score")
 year_labels = []
 for i in range(1960, 2014):

@@ -6,7 +6,8 @@ h1,h2,h3,h4,h5,h6,p,strong {
     font-family: Arial, sans-serif;
 }
 .section-title {
-    font-size: 5em;
+    margin-top:1em;
+    font-size: 7em;
 }
 
 .page-title {
@@ -17,7 +18,9 @@ h1,h2,h3,h4,h5,h6,p,strong {
 .center {
     text-align: center;
 }
-
+#electricity-container {
+    max-height: 45em;
+}
 #top-nav {
     position: fixed;
     background: white;

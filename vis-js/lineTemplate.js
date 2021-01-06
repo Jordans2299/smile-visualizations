@@ -104,6 +104,7 @@ LineGraphTemplate.prototype.makeDataReadable = function () {
         d["Electricity_Access_Percent"] = +d["Electricity_Access_Percent"]
         d["Air_Pollution_Mortality"] = +d["Air_Pollution_Mortality"]
         d["Basic_Sanitation_Percent"] = +d["Basic_Sanitation_Percent"]
+        d["Inflation_Consumer_Percent"] = +d["Inflation_Consumer_Percent"]
 
     });
     vis.wrangleData();

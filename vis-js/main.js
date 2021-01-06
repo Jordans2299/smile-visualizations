@@ -249,18 +249,28 @@ function onSelectionChangeCompare() {
 }
 
 function createHappiestandUnhappiest() {
-    overviewMapArticle = new ArticleOverviewMap("happiest-map", "world-map-description-paragraph", compareDataGDP)
+    overviewMapArticle = new ArticleOverviewMap("happiest-map", "world-map-description-paragraph", compareDataGDP, "statswheel")
+    new ArticleOverviewMap("economy-map", "world-map-description-paragraph", compareDataGDP, "donut")
     compareChart = new LineGraphTemplate("happiest-gdp-graph", compareDataGDP, "Economy (GDP per Capita)", "Happiness_Score", "GDP Per Capita (dollars)", "Happiness Score", "All")
     new LineGraphTemplate("unemployment-graph", compareDataGDP, "Unemployment_Total_Percent", "Happiness_Score", "Unemployment (percent of population)", "Happiness Score", "All")
     new LineGraphTemplate("growth-graph", compareDataGDP, "GDP_Growth_Annual", "Happiness_Score", "Annual GDP Growth (percent)", "Happiness Score", "All")
-
+    new LineGraphTemplate("inflation-graph", compareDataGDP, "Inflation_Consumer_Percent", "Happiness_Score", "Annual Consumer Goods Inflation (percent)", "Happiness Score", "All")
+    new LineGraphTemplate("happiest-longevity-graph", compareDataGDP, "Life_expectancy ", "Happiness_Score", "Life Expectancy (years)", "Happiness Score", "All")
+    new LineGraphTemplate("physician-presence-graph", compareDataGDP, "Physician_Presence", "Happiness_Score", "Physicians per 1,000 People", "Happiness Score", "All")
+    new LineGraphTemplate("hygiene-mortality-svg", compareDataGDP, "Hygiene_Mortality_Rate", "Happiness_Score", "Low Hygiene Mortality Rate per 100,000 People", "Happiness Score", "All")
+    new LineGraphTemplate("dalys-graph", compareDataGDP, "DALYs (Disability-Adjusted Life Years)_AllCauses", "Happiness_Score", "Total Annual DALYS (All Causes)", "Happiness Score", "All")
+    new LineGraphTemplate("undernourishment-graph", compareDataGDP, "Undernourishment_Prevalence_percent", "Happiness_Score", "Undernourishment Prevalence (% of Population)", "Happiness Score", "All")
+    new LineGraphTemplate("household-size-graph", compareDataGDP, "Avg_Household_Size","Happiness_Score", "Average Household Size (people/house)", "Happiness Score", "All" )
+    new LineGraphTemplate("adolescent-fertility-graph", compareDataGDP, "Adolescent_Fertility_Rate","Happiness_Score", "Births per 1,000 Girls, ages 15-19 ", "Happiness Score", "All"  )
+    new LineGraphTemplate("electricity-access-graph", compareDataGDP, "Electricity_Access_Percent","Happiness_Score", "Electricity Access (% of Population)", "Happiness Score", "All"  )
+    new LineGraphTemplate("air-pollution-graph", compareDataGDP, "Air_Pollution_Mortality","Happiness_Score", "Deaths Attributed to Air Pollution (per 100,000 people) ", "Happiness Score", "All"  )
 }
 
 function createVis() {
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
     exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
-    compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
+    //compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
     new CountriesHistogram("1", allDataGDP, "Happiness_Score", 300, 200);
     new CountriesHistogram("2", allDataGDP, "Happiness_Score", 300, 200);
     new CountriesHistogram("3", allDataGDP, "Happiness_Score", 300, 200);
