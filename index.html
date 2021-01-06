@@ -57,10 +57,10 @@
     <div class="tab-content" id="page-content">
 
         <div class="tab-pane active" id="overview" role="tabpanel">
-            
-            
-            <div id="intro-page-new">
-                <div class="title introduction" id="smile_title">
+
+
+            <div>
+                <div class="title introduction">
                     <h1 class="introduction">SMILE.</h1>
                 </div>
                 <div class="tab-pane" id="proposal" role="tabpanel">
@@ -74,25 +74,27 @@
                     <a href="proposal.html">View Proposal/Process Book Here</a>
                 </div>
 
-                <div class="center jumbotron-fluid" id="typed-introduction">
+                <!-- <div class="center jumbotron-fluid" id="typed-introduction">
 
-                </div>
+                </div> -->
                 <!-- <div class="center" id="button-for-introduction" v-html="html">
 
                 </div> -->
             </div>
-            <div id="explanation-prep">
-            </div>
-            
-            <div class="introduction-main center">
+            <!-- <div id="explanation-prep">
+            </div> -->
+
+            <!-- <div class="introduction-main center">
                 <h1> &nbsp;</h1>
-            </div>
+            </div> -->
             <div id="explanation" class="introduction-main center">
                 This map shows the relative happiness around the world on a scale of 2
                 to 8 as accorded to the World Happiness Index, where 2 is very unhappy (and very blue!)
                 and 8 is very happy (or deep red).
             </div>
-            <img class="sticky" src="img/scroll_down.png" style="border-radius:12px;height:73px; width:100px; top: 500px; left: 1163px;opacity:0.6;" alt="Scrolled"/>
+            <!-- <img class="sticky" src="img/scroll_down.png"
+                style="border-radius:12px;height:73px; width:100px; top: 500px; left: 1163px;opacity:0.6;"
+                alt="Scrolled" /> -->
 
             <div id="world-map-color-coded">
 
@@ -400,100 +402,108 @@
         </div>
 
         <div class="tab-pane" id="correlations" role="tabpanel">
-            <h1>The Happiest and Least Happiest</h1>
-            <div class="container-fluid">
-                <p>Since 2012, a collection of schools and nonprofits have asked people in 156 countries how happy
-                    they are. The resulting Annual World Happiness Report, combined with survey data from the Gallup
-                    Poll,
-                    has attracted attention as something that can possibly give us insight into the factors governing
-                    human happiness.
-                    The following article will focus on specific countries in the World Happiness Report--the 15
-                    happiest
-                    and least happiest countries--and analyze why those countries' citizens are either over the moon
-                    or too blue.
-                </p>
-            </div>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col center" id="world-map-color-coded-happiest">
+            <section class="section center">
+                <h1 class="page-title">The Happiest and Least Happiest</h1>
+                <div class="custom-row center">
+                    <p class="fade-in article-text">Since 2012, a collection of schools and nonprofits have asked people
+                        in 156 countries how happy
+                        they are. The resulting Annual World Happiness Report, combined with survey data from the Gallup
+                        Poll,
+                        has received praise for its insight into the capricious factors of human happiness.
+                        The following interactive page will focus on specific countries in the World Happiness
+                        Report--the 15
+                        happiest and least happiest countries--and analyze why those countries' citizens are either over
+                        the moon
+                        or too blue.
+                    </p>
 
-                    </div>
-                    <div class="col">
-                        <div id="world-map-description" class="center-block">
-                            <p id="world-map-country-region">
-
-                            </p>
-                            <p id="world-map-country-pop">
-
-                            </p>
-                            <p id="world-map-description-paragraph">
-
-                            </p>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </section>
+            <section class="section">
+                <h2 class="section-title center">
+                    THE Anatomy
+                </h2>
+                <p class="center">The Gallup World Poll doesn't just collect results on people's happiness--it also
+                    collects data on the factors that contribute most to that happiness. These factors include the
+                    following:
+                <ul>
+                    <li>
 
 
-            <h2>
-                THE ANATOMY OF HAPPINESS
-            </h2>
-            <p>The Gallup World Poll doesn't just collect results on people's happiness--it also collects data
-                on the factors that contribute most to that happiness. These factors include the following:
-            <ul>
-                <li>
+                    </li>
+                    <li>
 
-                </li>
-                <li>
+                    </li>
+                    <li>
 
-                </li>
-                <li>
+                    </li>
+                    <li>
 
-                </li>
-                <li>
+                    </li>
+                    <li>
 
-                </li>
-                <li>
+                    </li>
+                </ul>
+                <p>Analyzing this data reveals that
+                    the factors making up happiness are different for the most and least happiest, revealing
+                    important differences on the anatomy of happiness. Click on a colored country in the map to reveal
+                    the relative importance of each factor. </p>
+                <div class="container-fluid">
+                    <div class="custom-row">
+                        <div class="custom-col">
+                            <div id="happiest-map">
 
-                </li>
-            </ul>
-            <p>Analyzing this data reveals that
-                the factors making up happiness are different for the most and least happiest, revealing
-                important differences on the anatomy of happiness.</p>
-            <div id="stats-map">
-                <!--
-                    Map that users can mouse over to change description box
-                -->
-            </div>
-            <h3>
-                THE ANATOMY OF THE HAPPIEST
-            </h3>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div id="happiest-map">
-
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <svg id="happiest_anatomy_analysis" width=400 height=400>
+                        <div class="custom-col flex-center">
+                                    <p id="country-text" class="article-text"></p>
+                                    <svg id="happiest_anatomy_analysis" class="display-block" width=400 height=400>
 
-                        </svg>
+                                    </svg>
+                                </div>
                     </div>
-                </div>
-            </div>
-            <h2>
-                THE ECONOMY
-            </h2>
-            <h2>
-                HEALTH AND WELLNESS
-            </h2>
-            <h2>
-                SOCIETY
-            </h2>
-            <h2>
-                THE ENVIRONMENT
-            </h2>
+                    <div class="custom-row center">
+                        <p class="article-text">
+                            The above map reveals an interesting pattern--on average, happier countries' health and
+                            economy
+                            make far larger
+                            contributions to their score than their family and generosity do. On the other hand, the
+                            least
+                            happiest countries' scores tend to receive larger contributions from freedom and generosity
+                            indices.
+                            This would seem to indicate that the economy and health systems in the happiest countries
+                            is either more available and/or has better outcomes, making it a greater contribution to their score.
+                             In countries with weaker health systems and weaker economies, people seem to derive more of their happiness from 
+                             their communities.
+                        </p>
+                    </div>
+            </section>
+            <section class="section">
+                <h2 class='section-title center'>
+                    THE ECONOMY
+                </h2>
+
+            </section>
+            <section class="section">
+                <h2 class="section-title center">
+                    HEALTH AND WELLNESS
+                </h2>
+            </section>
+            <section class="section">
+                <h2 class="section-title center">
+                    SOCIETY
+                </h2>
+
+            </section>
+            <section class="section">
+                <h2 class="section-title center">
+                    THE ENVIRONMENT
+                </h2>
+
+
+            </section>
+
+
 
             <div class="row justify-content-center">
                 <div class="col-md-4 offset-md-4">

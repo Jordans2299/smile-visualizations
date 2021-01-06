@@ -220,23 +220,30 @@ ArticleOverviewMap.prototype.updateStatsWheel = function(d) {
     var vis = this
     var country= d.Country
     console.log("economy: " + d["Economy (GDP per Capita)"])
+    let economy = d["Economy (GDP per Capita)"]
+    let family = d["family"]
+    let health = d["Health (Life Expectancy)"]
+    let freedom = d["Freedom"]
+    let trust = d["Trust (Government Corruption)"]
+    let generosity = d["Generosity"]
+    let dystopia = d["Dystopia Residual"]
     var nodes = [
-        {id: 1, index: 0, metric: "economy", item: d["Economy (GDP per Capita)"]},
-        {id: 2, index: 1, metric: "family", item:d["family"]},
-        {id: 3, index:2, metric: "health", item:d["Health (Life Expectancy)"]},
-        {id: 4, index:3, metric: "freedom", item:d["Freedom"]},
-        {id: 5, index: 4, metric: "trust", item:d["Trust (Government Corruption)"]},
-        {id: 6, index: 5, metric: "generosity", item:d["Generosity"]},
-        {id: 7, index: 6, metric: "dystopia", item:d["Dystopia Residual"]}
+        {id: 1, index: 0, metric: "Economy", item: economy , cx:200, cy:100},
+        {id: 2, index: 1, metric: "Family", item:family, cx:122, cy:138},
+        {id: 3, index:2, metric: "Health", item:health, cx: 103, cy: 222},
+        {id: 4, index:3, metric: "Freedom", item:freedom, cx: 157, cy: 290},
+        {id: 5, index: 4, metric: "Trust", item:trust , cx: 243, cy: 290},
+        {id: 6, index: 5, metric: "Generosity", item:generosity, cx:297, cy:222},
+        {id: 7, index: 6, metric: "Dystopia Residual", item: dystopia, cx:278, cy:138}
     ]
     var links = [
-        {index: 0, source: nodes[0], target: nodes[1]},
-        {index:1, source: nodes[1], target: nodes[2]},
-        {index:2, source: nodes[2], target: nodes[3]},
-        {index: 3, source: nodes[3], target: nodes[4]},
-        {index: 4, source: nodes[4], target: nodes[5]},
-        {index: 5, source: nodes[5], target: nodes[6]},
-        {index: 6, source: nodes[6], target: nodes[0]}
+        {index: 0, x1:"200", x2:"122", y1:"100", y2: "138"},
+        {index:1, x1:"122", x2:"103", y1:"138", y2: "222"},
+        {index:2, x1:"103", x2:"157", y1:"222", y2: "290"},
+        {index: 3, x1:"157", x2:"243", y1:"290", y2: "290"},
+        {index: 4, x1:"243", x2:"297", y1:"290", y2: "222"},
+        {index: 5, x1:"297", x2:"278", y1:"222", y2: "138"},
+        {index: 6, x1:"278", x2:"200", y1:"138", y2: "100"}
 
     ]
     vis.statsWheel = new StatsWheel("happiest_anatomy_analysis", country, nodes, links)
