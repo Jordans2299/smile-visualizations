@@ -45,20 +45,6 @@ LineGraphTemplate.prototype.initVis = function () {
 
 
 
-
-// function idled() {
-//     idleTimeout = null;
-// }
-
-// function zoom() {
-//     var vis = this;
-//     var t = scatter.transition().duration(750);
-//     vis.svg.select("#axis--x").transition(t).call(xAxis);
-//     vis.svg.select("#axis--y").transition(t).call(yAxis);
-//     scatter.selectAll("circle").transition(t)
-//     .attr("cx", function (d) { return x(d.x); })
-//     .attr("cy", function (d) { return y(d.y); });
-// }
 /**
  * Renders the HTML content for tool tip
  *

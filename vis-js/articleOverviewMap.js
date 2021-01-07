@@ -32,32 +32,6 @@ ArticleOverviewMap.prototype.initVis = function() {
 
     vis.colorScale = d3.scaleThreshold()
         .domain(domain).range(range);
-    var newArray = domain.map((e,i) => [e,range[i]])
-    let legendQuant = vis.svg.append("g")
-      .attr("class", "legendQuant")
-      .attr("transform", "translate(0,400)");
-
-    // let title = vis.svg.append("g")
-    // .attr("transform", "translate(0,395)")
-
-    // title.append("text")
-    // .text("Happiness Index Legend")
-    
-    // var legend = d3.legendColor()
-    //     .labelFormat(d3.format(".2f"))
-    //     .useClass(false)
-    //     .scale(vis.colorScale)
-    
-    // legendQuant
-    //   .call(legend);
-
-
-
-    /*
-        vis.svg.append("g")
-            .attr("class", "legendQuantile")
-            .call(legendQuantile)
-    */
 
 }
 

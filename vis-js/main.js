@@ -14,36 +14,6 @@ let overviewmap;
 var freedomData = []
 let overviewMapArticle;
 
-
-
-// //TypeIt 
-// new TypeIt("#typed-introduction", {
-//     strings: ["\"Happiness is when what you think, what you say, and what you do are in harmony.\" -- Confucius",
-//         "The pursuit of happiness has been widely recognized as part of our lifetime goal.",
-//         "Even though we probably can't quantify happiness, we can still feel its existence.",
-//         "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness.",
-//         "In several minutes, you will understand which regions are the happiest, and what factors can make people happy."
-//     ],
-//     speed: 25,
-//     loop: false
-// }).go();
-
-
-// setTimeout(function() {
-//     document.getElementById("button-for-introduction").innerHTML = "<button class=\"btn btn-success\" id=\"analysis-page\">Go to the analysis </button>"
-//     document.getElementById("analysis-page").addEventListener("click", function() {
-//         document.getElementById("explanation-prep").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
-//     });
-//     //sound.stop();
-// }, 16000);
-
-
-
-
-
-
-// Variable for the visualization instance
-// Start application by loading the data
 var domain = ["Western Europe", "Central and Eastern Europe", "North America", "Latin America and Caribbean",
     "Australia and New Zealand", "Middle East and Northern Africa", "Sub-Saharan Africa", "Southeastern Asia", "Eastern Asia",
     "Southern Asia"
@@ -111,35 +81,6 @@ colorsvgCompare.selectAll("mylabels")
     .text(function(d) { return d[0] })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
-
-// var colorCorrelations = d3.select("#smaller-charts-div").append("svg").attr("id", "smaller-charts-legend")
-//     .attr("width", 300)
-//     .attr("height", 280);
-
-// colorCorrelations.append("g")
-//     .attr("class", "legendOrdinal")
-//     .attr("transform", "translate(80,20)");
-
-// colorCorrelations.selectAll("mydots")
-//     .data(newArray)
-//     .enter()
-//     .append("rect")
-//     .attr("x", 100)
-//     .attr("y", function(d, i) { return 20 + i * (size + 5) })
-//     .attr("width", size)
-//     .attr("height", size)
-//     .style("fill", function(d) { return d[1] })
-
-// colorCorrelations.selectAll("mylabels")
-//     .data(newArray)
-//     .enter()
-//     .append("text")
-//     .attr("x", 100 + size * 1.2)
-//     .attr("y", function(d, i) { return 20 + i * (size + 5) + (size / 2) })
-//     .style("fill", function(d) { return d[1] })
-//     .text(function(d) { return d[0] })
-//     .attr("text-anchor", "left")
-//     .style("alignment-baseline", "middle")
 
 /////////D3 Horizonal Lengend 1///////////////////////////
 var width = 800;

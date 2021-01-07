@@ -515,42 +515,85 @@ it would be fantastic if our data points had transitions that either caused them
 <h1>Milestone 3 Process Book</h1>
 <h3>Design Mockups for Happiest/Least Happiest</h3>
 <p>
-  We received a lot of feedback that suggested that we should take a more "sto"
+  We received a lot of feedback that suggested that we should take a more "storytelling" approach
+  to this project. With this in mind, we decided to redesign happiest/least happiest
+  a bit to provide more structure and insight to the data. With the amount of data we wanted to explore,
+  we opted to go for a more didactic "article" or "analysis" approach that we had putted around 
+  as a potential idea with a more storytelling approach. Taking one of our original ideas--Design 3--for a more 'article-based' style of analysis,
+  we began putting together a design that would deliver more directed analysis and would allow 
+  people to scroll (something they love to do)! 
+</p>
+However, upon creating a quick mock-up,
+  we quickly realized that the repetitive structure and lack of depth 
+  would necessitate more designs. One thing we wanted to do was to use more of our data 
+  from our original dataset--the World Happiness Index Poll itself. This dataset included
+  several factors that contributed to happiness, but unfortunately, we struggled to figure out how
+  to compare these variables on a visualization in a visually interesting and informative way.
+<p>
+ <img src="img/Happy-compare-design.png" alt='Some charts'>
+  <p>
+    We eventually decided to go for a simplification of the radar chart in order 
+    to prevent a confusing color overlap. Our first idea for displaying this simplified radar chart 
+    with its respective country was to initialize it on a map:</p>
+    <img src="img/map-factors-design.png" alt="map design with gallup variables">
+
+
+<p>
+    Unfortunately, this design quickly broke down due to its complexity and 
+  detail in a small space. Our major problem was that since the happiest and least happiest
+  countries were in the same areas, our map would have to be exceedingly large 
+  for the design to be visually parsable. We decided to not scrap the map entirely--instead,
+  we decided to place the variable comparison in a neighbor visualization. The map could be
+  used to reiterate points of interest and allow user exploration of each country.
+  </p>
+
+<p>
+  After implementing this, we realized that we could use a similar format to 
+  provide some more economic analysis, which we thought was focused on somewhat inconclusive factors
+  in Milestone 2. Thus, we implemented a simple pie chart--a classic breakdown for things with sectors--
+  to describe the economic makeup of each country. Overall, we were happy that implementing 
+  new visualizations in our happiest/least happiest really helped to offer more avenues for analysis.
+  
+</p>
+
+
 </p>
 <h3>Implementation--Donut</h3>
+<p>
+  To show the breakdown of economic sectors, we decided to incorporate the design with interactive map 
+  with a donut-like structure that would allow us to do an analysis we thought might yield some 
+  interesting results with respect to happiness. The donut itself was implemented with
+  a basic d3 pie chart, accompanied by some minor tooltip functionality. The more interesting
+  part of the functionality was passing data from the map to a new visualization donut.  In order to do this,
+  we had the economic breakdown map pass certain variables
+  to an instance of the donut in their mouseover event. The donut would then be dynamically construct
+based on the factors passed.
+</p>
 
-<h3>Implementation--Compare Variables Chart</h3>
+<h3>Implementation--Compare Happiness Variables Septagon</h3>
+The implementation of this--while seemingly simple--went through a few different iterations to be fully
+workable. We first tried implementing the Happiness Comparison with a force chart. Unforunately,
+the force chart output was very small compared to the visualized svg space. Furthermore, while the force chart
+maintained its shape at small link distances, attempts to make the links and nodes larger to fill said 
+space resulted in the force-graph spaghettifying. After this, we looked into a d3 septagon shape, but no 
+such thing exists. After a while, we had to go for a good ol' hard-coded septagon, unfortunately. Using 
+an online coordinator, we created lines and node locations. The radius of each node was calculated
+as a fraction of the total variable sum (or total happiness score). As with the donut, 
+we used an onMouseOver function on the map to pass certain country variables to 
+a new instance of the StatsWheel object.
 
-<h3>Implementation--Tooltip Fixes</h3>
 
-
-<h3>Data Exploration Notes</h3>
-<p>Some design changes were made in the implementation of explore/compare, especially in the datasets we used.
-  For example, as noted before, there were no clear correlation between suicides and overall national happiness;
-  we can assume that not only is suicide data often poorly kept or gathered due to stigma, police botching, etc., but 
-  also that people who commit suicide are happiness "outliers" when compared to the general population
-  and their happiness level. Because of this issue, we removed suicide data from our visualization options. We are still 
-thinking about what kind of data we would replace it with.</p>
-  <p>One other thing we changed is adjustments to our environmental plots. It turns out that a combined mortality rate for
-    safe water and hygiene problems exists; this series captured the wider impact of poor municipal facilities,
-    so it replaced the safe water alone metric. We also added electricity access to our considerations, as we believe 
-    electricity access will also inform other hygiene and disease metrics by reducing indoor smoke and air pollution,
-    allowing more advanced medical facilities, and allowing greater public safety (to some extent).
-  </p>
-<h3>Minor Additions to Explore</h3>
-<p></p>
 
 
 <h3>Evaluation</h3>
-<p>When we evaluate the work for how we could have done the visualization better, we find it difficult to see how we could have used another graph 
-to show the relationship between different aspects of this data. However, we have waffled back on forth on whether
-or not to have made the visualization more of an "article" with some limited interaction and more abstract plots.
-Doing this would have allowed us a more pedantic approach, that is, we could have dictated more interesting
-features or incidental correlations to our audience; our current implementation is far more open-ended
-in what the audience will notice. The audience in our current implementation will likely notice the 
-general trend of happiness and our data; however, they may or may not notice clustering or other correlatory features of our data. Whether or not
-the audience would be interested in a more pedantic approach (rather than open-ended exploration) is something we will re-evaluate after peer feedback. This 
-evaluation section will likely get a sequel in the future.</p>
+<p>When we evaluate the work for how we could have done the visualization better, we wonder if we 
+  maybe should have focused on fewer happiness variables. Because we tried to answer some really, really big questions,
+  the design both grew in complexity and repetitiveness over its implementation. If we were to do it again,
+  we would (as the peer feedback suggested) immediately focus on a storytelling approach. We would have also
+  limited our analysis factors much more--possibly down to only the data from the original survey itself, of which
+  we would have made many more different visualizations. Doing this
+  would have possibly allowed for a more directed and concise approach to the major questions of human happiness.
+</p>
 
 
 
