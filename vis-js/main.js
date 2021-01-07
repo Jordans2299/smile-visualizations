@@ -16,17 +16,17 @@ let overviewMapArticle;
 
 
 
-//TypeIt 
-new TypeIt("#typed-introduction", {
-    strings: ["\"Happiness is when what you think, what you say, and what you do are in harmony.\" -- Confucius",
-        "The pursuit of happiness has been widely recognized as part of our lifetime goal.",
-        "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness.",
-        "In several minutes, you will understand which regions are the happiest, and what factors can make people happy.",
-        "Scroll down for more details."
-    ],
-    speed: 25,
-    loop: false
-}).go();
+// //TypeIt 
+// new TypeIt("#typed-introduction", {
+//     strings: ["\"Happiness is when what you think, what you say, and what you do are in harmony.\" -- Confucius",
+//         "The pursuit of happiness has been widely recognized as part of our lifetime goal.",
+//         "Even though we probably can't quantify happiness, we can still feel its existence.",
+//         "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness.",
+//         "In several minutes, you will understand which regions are the happiest, and what factors can make people happy."
+//     ],
+//     speed: 25,
+//     loop: false
+// }).go();
 
 
 // setTimeout(function() {
