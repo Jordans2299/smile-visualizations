@@ -68,6 +68,10 @@ LineGraphTemplate.prototype.initVis = function () {
 LineGraphTemplate.prototype.tooltip_render = function (tooltip_data) {
     var vis = this;
     var text = "<ul>";
+    console.log("tooltip data:")
+    console.log(tooltip_data)
+    console.log(vis.x)
+    console.log(vis.xlabel)
     //tooltip_data.forEach(function(row) {
     text += "<li>" + "<h3>" + " " + "\t\t" + tooltip_data.Country + "</h3>" + "</li>" + "<li>" + vis.xlabel + ":\t\t" + tooltip_data[vis.x] + "</li>"+"<li>Region" + ":\t\t" + tooltip_data.Region + "" + "</li>"
     //});
@@ -105,6 +109,11 @@ LineGraphTemplate.prototype.makeDataReadable = function () {
         d["Air_Pollution_Mortality"] = +d["Air_Pollution_Mortality"]
         d["Basic_Sanitation_Percent"] = +d["Basic_Sanitation_Percent"]
         d["Inflation_Consumer_Percent"] = +d["Inflation_Consumer_Percent"]
+        d["Exports of goods and services (% of GDP)"] = +d["Exports of goods and services (% of GDP)"]
+        d["Adjusted savings: natural resources depletion (% of GNI)"] = +d["Adjusted savings: natural resources depletion (% of GNI)"]
+        d["Adjusted savings: education expenditure (% of GNI)"] = +d["Adjusted savings: education expenditure (% of GNI)"]
+        d["Adjusted savings: carbon dioxide damage (% of GNI)"] = +d["Adjusted savings: carbon dioxide damage (% of GNI)"]
+
 
     });
     vis.wrangleData();
@@ -148,27 +157,11 @@ LineGraphTemplate.prototype.updateVis = function () {
     var vis = this;
     svg = vis.svg
 
-    tip_1 = d3.tip().attr('class', 'd3-tip')
-        .direction('se')
-        .offset(function () {
-            return [0, 0];
-        }).html(function (event, d, state) {
-
-
-            //console.log("LLLLL");
-            ////console.log(tooltip_data.result);
-            /*
-            if (tooltip_data.result[0].nominee === "") {
-                tooltip_data.result.splice(0, 1);
-            }
-            //console.log("LLLLL");
-            */
-            return vis.tooltip_render(d);
-        });
-
     svg.selectAll("*").remove();
+    vis.div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
 
-    self.svg.call(tip_1);
 
 
     vis.svg.selectAll("circle")
@@ -180,7 +173,7 @@ LineGraphTemplate.prototype.updateVis = function () {
         .attr("class", "dot")
         .attr("cx", function (d) {
             if (d[vis.x] != null) {
-                //console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]) + " " + vis.x)
+                console.log(d.Country + " " + d[vis.x] + " " + vis.xScale(d[vis.x]) + " " + vis.x)
                 return vis.xScale(d[vis.x]);
             }
             return;
@@ -190,17 +183,25 @@ LineGraphTemplate.prototype.updateVis = function () {
                 return vis.yScale(d[vis.y]);
             }
             return;
-        }).on('mouseover',
+        })
+        //Help with tooltips that wouldn't interfere with each other on 
+        //least happiest from https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
+        .on('mouseover',
             function (event, d) {
-                tip_1.show(event, d);
-                console.log(d)
+                vis.div	
+                .style("opacity", .9);		
+                vis.div.html("<h3>" + " " + "\t\t" + d.Country + "</h3>" + "<ul>" + "<li>" + vis.xlabel + ":\t\t" + d[vis.x] + "</li>"+"<li>Region" + ":\t\t" + d.Region + "" + "</li>" )	
+                .style("left", (event.pageX) + "px")		
+                .style("top", (event.pageY - 15) + "px");	
                 d3.select(event.currentTarget).attr("class", "selected")
             })
         .on('mouseout',
             function (event, d) {
-                tip_1.hide();
+                vis.div	
+                .style("opacity", 0);	
                 d3.select(event.currentTarget).attr("class", null)
             })
+            //End of help from tooltip citation above
         .on("click", function (event, d) {
 
             vis.svg.selectAll("circle")
@@ -266,31 +267,6 @@ LineGraphTemplate.prototype.updateVis = function () {
         .attr("x", 80)
         .attr("y", 48);
 
-    //     vis.clip = vis.svg.append("defs").append("clipPath")
-    //     .attr("id", "clip")
-    //     .append("svg:rect")
-    //     .attr("width", vis.width - 70)
-    //     .attr("height", vis.height - vis.padding*2)
-    //     .attr("x", 0)
-    //     .attr("y", 0);
-    //     vis.scatter = vis.svg.append('g')
-    //     .attr("clip-path", "url(#clip)")
-    //     .lower()
-    
-
-    // vis.brush = d3.brushX()                 // Add the brush feature using the d3.brush function
-    //     .extent([[0, 0], [vis.width, vis.height]]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-    //     .on("end", (event, d) => vis.brushChart(event))
-
-    // vis.scatter
-    //     .append("g")
-    //     .attr("class", "brush")
-    //     .call(vis.brush);
-
-    // vis.idleTimeout;
-
-
-    //console.log("this is the length of the data: "+vis.data.length)
 
     //only draw trend line if there is a sufficient amount of data points
     if(vis.displayData.length > 50){
@@ -347,32 +323,6 @@ LineGraphTemplate.prototype.updateVis = function () {
             .attr("stroke-width", 1);
     }
 }
-
-// LineGraphTemplate.prototype.brushChart = function (event) {
-//     let vis = this
-//     extent = event.selection
-//     console.log("hello???")
-//     // If no selection, back to initial coordinate. Otherwise, update X axis domain
-//     if (!extent) {
-//         if (!vis.idleTimeout) return vis.idleTimeout = setTimeout(vis.idleTimeout = null, 350); 
-//         vis.xScale.domain([d3.min(vis.displayData, function (d) { return d[vis.x] - ((1 / 2) * d[vis.x]); }), d3.max(vis.displayData, function (d) { return d[vis.x] + ((1 / 2) * d[vis.x]); })])
-//     } else {
-//         vis.xScale.domain([vis.xScale.invert(extent[0]), vis.xScale.invert(extent[1])])
-//         vis.scatter.select(".brush").call(vis.brush.move, null) 
-//     }
-
-//     // Update axis and circle position
-//     vis.xGroup.transition().duration(1000).call(d3.axisBottom(vis.xScale))
-//     vis.svg
-//         .selectAll("circle")
-//         .transition().duration(1000)
-//         .attr("cx", function (d) { return vis.xScale(d[vis.x]); })
-//         .attr("cy", function (d) { return vis.yScale(d[vis.y]); })
-
-// }
-
-
-
 
 
 

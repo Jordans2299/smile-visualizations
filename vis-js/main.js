@@ -264,6 +264,10 @@ function createHappiestandUnhappiest() {
     new LineGraphTemplate("adolescent-fertility-graph", compareDataGDP, "Adolescent_Fertility_Rate","Happiness_Score", "Births per 1,000 Girls, ages 15-19 ", "Happiness Score", "All"  )
     new LineGraphTemplate("electricity-access-graph", compareDataGDP, "Electricity_Access_Percent","Happiness_Score", "Electricity Access (% of Population)", "Happiness Score", "All"  )
     new LineGraphTemplate("air-pollution-graph", compareDataGDP, "Air_Pollution_Mortality","Happiness_Score", "Deaths Attributed to Air Pollution (per 100,000 people) ", "Happiness Score", "All"  )
+    new LineGraphTemplate("carbon-dioxide-dmg-graph", compareDataGDP, "Adjusted savings: carbon dioxide damage (% of GNI)","Happiness_Score", "Carbon dioxide damage (% of GNI)", "Happiness Score", "All" )
+    new LineGraphTemplate("education-expenditure-graph", compareDataGDP, "Adjusted savings: education expenditure (% of GNI)", "Happiness_Score", "Education Expenditure (% of GNI)", "Happiness Score", "All" )
+    new LineGraphTemplate("resource-depletion-graph", compareDataGDP, "Adjusted savings: natural resources depletion (% of GNI)", "Happiness_Score", "Natural Resource Depletion (% of GNI)", "Happiness Score", "All" )
+    new LineGraphTemplate("export-percent-graph", compareDataGDP, "Exports of goods and services (% of GDP)", "Happiness_Score", "Exports of goods and services (% of GDP)", "Happiness Score", "All" )
 }
 
 function createVis() {

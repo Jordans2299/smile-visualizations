@@ -260,6 +260,20 @@
                             <option value="Basic_Sanitation_Percent"
                                 data-ylabel="Population Using Basic Sanitation (%)">Basic Sanitation Use Rate vs.
                                 Happiness</option>
+                                <option value="Adjusted savings: carbon dioxide damage (% of GNI)"
+                                data-ylabel="Carbon Dioxide Damage (% of GNI)">Carbon Dioxide
+                            Damage (% of GNI)</option>
+                            <option value="Adjusted savings: education expenditure (% of GNI)"
+                            data-ylabel="Education Expenditure (% of GNI)">Education Expenditure
+                        (% of GNI)</option>
+                        <option value="Adjusted savings: natural resources depletion (% of GNI)"
+                        data-ylabel="Natural Resources Depletion (% of GNI)">Natural Resources
+                    Depletion (% of GNI)</option>
+                    <option value="Exports of goods and services (% of GDP)"
+                    data-ylabel="Exports of goods and services (% of GDP)">Goods/Services Percent of GDP
+                </option>
+
+
                         </select>
                         <br>
                         <strong style="font-size:18px;" class="center center-block">Filter by Region</strong>
@@ -494,6 +508,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="container-fluid small-margin">
+                    <h3 class="section-subtitle center"> Export Percent...Matters a Little</h3>
+                    <div class="custom-row padded center-block analysis-container">
+                        <div class="custom-col dark-gray-bg flex-center">
+                            <h4 class="section-subtitle light"> </h4>
+                            <div class="article-text-div">
+                                <p class="article-text light">
+                                 From the accompanying graph, we can see that countries
+                                 with more exports as a percent of GDP may be slightly happier.
+                                 However, the level of overlap between most and least happiest
+                                 may indicate that this is not a major correalting factor; the slight
+                                 difference may only indicate a slight overall difference in economic robustness.
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="custom-col flex-center light">
+                            <svg id="export-percent-graph" width=750 height=750>
+
+                            </svg>
+                        </div>
+                    </div>
                 <div class="container-fluid small-margin">
                     <h3 class="section-subtitle center"> Inflation Doesn't Matter That Much</h3>
                     <div class="custom-row padded center-block analysis-container">
@@ -735,6 +771,27 @@
                     </div>
                 </div>
                 <div class="container-fluid small-margin">
+                    <h3 class="section-subtitle center"> Education Expenditure Matters Somewhat</h3>
+                    <div class="custom-row padded center-block analysis-container">
+                        <div class="custom-col dark-gray-bg flex-center">
+                            <div class="article-text-div">
+                                <p class="article-text light">
+                                   Education expenditure generally improves the quality of education to 
+                                   a great extent: students can get more materials and opportunities,
+                                   top-paying schools can attract more teaching talent, and
+                                   a greater diversity of educational endeavors can be supported.
+                                   
+            
+                                </p>
+                            </div>
+                        </div>
+                        <div class="custom-col flex-center light">
+                            <svg id="education-expenditure-graph" width=750 height=750>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid small-margin">
                     <h3 class="section-subtitle center"> Adolescent Fertility Negatively Correlates</h3>
                     <div class="custom-row padded center-block analysis-container">
                         <div class="custom-col dark-gray-bg flex-center">
@@ -836,6 +893,62 @@
                         </div>
                         <div class="custom-col flex-center light">
                             <svg id="air-pollution-graph" width=750 height=750>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid small-margin">
+                    <h3 class="section-subtitle center"> Carbon Dioxide</h3>
+                    <div class="custom-row padded center-block analysis-container">
+                        <div class="custom-col dark-gray-bg flex-center">
+
+                            <div class="article-text-div">
+                                <p class="article-text light">
+                                    Air pollution, whether inside or outside the home,
+                                    is correlated with negative health outcomes.
+                                    In fact, air pollution has been shown in a <a href="https://news.uchicago.edu/story/air-pollution-reduces-global-life-expectancy-nearly-two-yearsrecent">landmark study by the University of Chicago </a>
+                                    to reduce global life expectancy by almost
+                                    two years (University of Chicago). Air pollution definitely 
+                                    affects mood--the misery of being cooped up inside,
+                                    suffering from stinging eyes and lungs, or feeling short of breath
+                                    is enough to make any person feel blue. With this in mind, 
+                                    air pollution is very strongly correlated with happiness. Less happy countries,
+                                    which often are quickly industrializing and/or cannot as easily control
+                                    pollution output, thus have much more air pollution.
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="custom-col flex-center light">
+                            <svg id="carbon-dioxide-dmg-graph" width=750 height=750>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid small-margin">
+                    <h3 class="section-subtitle center"> Resource Depletion</h3>
+                    <div class="custom-row padded center-block analysis-container">
+                        <div class="custom-col dark-gray-bg flex-center">
+
+                            <div class="article-text-div">
+                                <p class="article-text light">
+                                    Air pollution, whether inside or outside the home,
+                                    is correlated with negative health outcomes.
+                                    In fact, air pollution has been shown in a <a href="https://news.uchicago.edu/story/air-pollution-reduces-global-life-expectancy-nearly-two-yearsrecent">landmark study by the University of Chicago </a>
+                                    to reduce global life expectancy by almost
+                                    two years (University of Chicago). Air pollution definitely 
+                                    affects mood--the misery of being cooped up inside,
+                                    suffering from stinging eyes and lungs, or feeling short of breath
+                                    is enough to make any person feel blue. With this in mind, 
+                                    air pollution is very strongly correlated with happiness. Less happy countries,
+                                    which often are quickly industrializing and/or cannot as easily control
+                                    pollution output, thus have much more air pollution.
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="custom-col flex-center light">
+                            <svg id="resource-depletion-graph" width=750 height=750>
                             </svg>
                         </div>
                     </div>
