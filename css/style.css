@@ -7,11 +7,11 @@ h1,h2,h3,h4,h5,h6,p,strong {
 }
 .section-title {
     margin-top:1em;
-    font-size: 7em;
+    font-size: 3em;
 }
 
 .page-title {
-    font-size: 10em
+    font-size: 6em
 }
 .align-text-left {
     text-align: left;
@@ -30,6 +30,7 @@ h1,h2,h3,h4,h5,h6,p,strong {
     width: 100%;
     z-index: 100;
     margin-bottom: 30px;
+    top:0;
 }
 
 #page-content {
@@ -347,7 +348,7 @@ h3 {
     margin-top: 30px;
 }
 .section-subtitle {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 .strength {
     font-weight: 700;
