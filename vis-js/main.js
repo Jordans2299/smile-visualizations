@@ -16,27 +16,18 @@ let overviewMapArticle;
 
 
 
-// //TypeIt 
-// new TypeIt("#typed-introduction", {
-//     strings: ["\"Happiness is when what you think, what you say, and what you do are in harmony.\" -- Confucius",
-//         "The pursuit of happiness has been widely recognized as part of our lifetime goal.",
-//         "Even though we probably can't quantify happiness, we can still feel its existence.",
-//         "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness.",
-//         "In several minutes, you will understand which regions are the happiest, and what factors can make people happy."
-//     ],
-//     speed: 25,
-//     loop: false
-// }).go();
+//TypeIt 
+new TypeIt("#typed-introduction", {
+    strings: ["\"Happiness is when what you think, what you say, and what you do are in harmony.\" -- Confucius",
+        "The pursuit of happiness has been widely recognized as part of our lifetime goal.",
+        "By visualizing data from multiple sources, we hope to provide you with important information about the origins of happiness.",
+        "In several minutes, you will understand which regions are the happiest, and what factors can make people happy.",
+        "Scroll down for more details."
+    ],
+    speed: 25,
+    loop: false
+}).go();
 
-// const sound = new Howl({
-//     src: ['./sound/the_sea_dragon_comes_aigei_com.mp3']
-// });
-
-// // Play the sound.
-// sound.play();
-
-// // Change global volume.
-// Howler.volume(0.025);
 
 // setTimeout(function() {
 //     document.getElementById("button-for-introduction").innerHTML = "<button class=\"btn btn-success\" id=\"analysis-page\">Go to the analysis </button>"
@@ -151,51 +142,51 @@ colorsvgCompare.selectAll("mylabels")
 //     .style("alignment-baseline", "middle")
 
 /////////D3 Horizonal Lengend 1///////////////////////////
-var width =800;
+var width = 800;
 var height = 80;
 var svgLegned4 = d3.select("#smaller-charts-div").append("svg")
-.attr("width", width)
-.attr("height", height - 50)
+    .attr("width", width)
+    .attr("height", height - 50)
 
 var dataL = 0;
 var offset = 80;
-var n = newArray.length/2;
-var itemWidth =200;
+var n = newArray.length / 2;
+var itemWidth = 200;
 var itemHeight = 18;
 
 var legend4 = svgLegned4.selectAll('.legends4')
-.data(newArray)
-.enter().append('g')
-.attr("class", "legends4")
-.attr("transform", function(d,i) { 
-    return "translate(" + i%n * itemWidth + "," + Math.floor(i/n) * itemHeight + ")"; 
-})
-// .attr("transform", function (d, i) {
-//  if (i === 0) {
-//     dataL = d.length + offset 
-//     return "translate(0,0)"
-// } else { 
-//  var newdataL = dataL
-//  dataL +=  d.length + offset
-//  return "translate(" + (newdataL) + ",0)"
-// }
-// })
+    .data(newArray)
+    .enter().append('g')
+    .attr("class", "legends4")
+    .attr("transform", function(d, i) {
+        return "translate(" + i % n * itemWidth + "," + Math.floor(i / n) * itemHeight + ")";
+    })
+    // .attr("transform", function (d, i) {
+    //  if (i === 0) {
+    //     dataL = d.length + offset 
+    //     return "translate(0,0)"
+    // } else { 
+    //  var newdataL = dataL
+    //  dataL +=  d.length + offset
+    //  return "translate(" + (newdataL) + ",0)"
+    // }
+    // })
 
 legend4.append('rect')
-.attr("x", 0)
-.attr("y", 0)
-.attr("width", 10)
-.attr("height", 10)
-.style("fill", function(d) { return d[1] })
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", 10)
+    .attr("height", 10)
+    .style("fill", function(d) { return d[1] })
 
 legend4.append('text')
-.attr("x", 20)
-.attr("y", 10)
-//.attr("dy", ".35em")
-.text(function(d) { return d[0] })
-.attr("class", "textselected")
-.style("text-anchor", "start")
-.style("font-size", 12)
+    .attr("x", 20)
+    .attr("y", 10)
+    //.attr("dy", ".35em")
+    .text(function(d) { return d[0] })
+    .attr("class", "textselected")
+    .style("text-anchor", "start")
+    .style("font-size", 12)
 console.log("newArray: ")
 console.log(newArray)
 loadData();
@@ -260,21 +251,21 @@ function createHappiestandUnhappiest() {
     new LineGraphTemplate("hygiene-mortality-svg", compareDataGDP, "Hygiene_Mortality_Rate", "Happiness_Score", "Low Hygiene Mortality Rate per 100,000 People", "Happiness Score", "All")
     new LineGraphTemplate("dalys-graph", compareDataGDP, "DALYs (Disability-Adjusted Life Years)_AllCauses", "Happiness_Score", "Total Annual DALYS (All Causes)", "Happiness Score", "All")
     new LineGraphTemplate("undernourishment-graph", compareDataGDP, "Undernourishment_Prevalence_percent", "Happiness_Score", "Undernourishment Prevalence (% of Population)", "Happiness Score", "All")
-    new LineGraphTemplate("household-size-graph", compareDataGDP, "Avg_Household_Size","Happiness_Score", "Average Household Size (people/house)", "Happiness Score", "All" )
-    new LineGraphTemplate("adolescent-fertility-graph", compareDataGDP, "Adolescent_Fertility_Rate","Happiness_Score", "Births per 1,000 Girls, ages 15-19 ", "Happiness Score", "All"  )
-    new LineGraphTemplate("electricity-access-graph", compareDataGDP, "Electricity_Access_Percent","Happiness_Score", "Electricity Access (% of Population)", "Happiness Score", "All"  )
-    new LineGraphTemplate("air-pollution-graph", compareDataGDP, "Air_Pollution_Mortality","Happiness_Score", "Deaths Attributed to Air Pollution (per 100,000 people) ", "Happiness Score", "All"  )
-    new LineGraphTemplate("carbon-dioxide-dmg-graph", compareDataGDP, "Adjusted savings: carbon dioxide damage (% of GNI)","Happiness_Score", "Carbon dioxide damage (% of GNI)", "Happiness Score", "All" )
-    new LineGraphTemplate("education-expenditure-graph", compareDataGDP, "Adjusted savings: education expenditure (% of GNI)", "Happiness_Score", "Education Expenditure (% of GNI)", "Happiness Score", "All" )
-    new LineGraphTemplate("resource-depletion-graph", compareDataGDP, "Adjusted savings: natural resources depletion (% of GNI)", "Happiness_Score", "Natural Resource Depletion (% of GNI)", "Happiness Score", "All" )
-    new LineGraphTemplate("export-percent-graph", compareDataGDP, "Exports of goods and services (% of GDP)", "Happiness_Score", "Exports of goods and services (% of GDP)", "Happiness Score", "All" )
+    new LineGraphTemplate("household-size-graph", compareDataGDP, "Avg_Household_Size", "Happiness_Score", "Average Household Size (people/house)", "Happiness Score", "All")
+    new LineGraphTemplate("adolescent-fertility-graph", compareDataGDP, "Adolescent_Fertility_Rate", "Happiness_Score", "Births per 1,000 Girls, ages 15-19 ", "Happiness Score", "All")
+    new LineGraphTemplate("electricity-access-graph", compareDataGDP, "Electricity_Access_Percent", "Happiness_Score", "Electricity Access (% of Population)", "Happiness Score", "All")
+    new LineGraphTemplate("air-pollution-graph", compareDataGDP, "Air_Pollution_Mortality", "Happiness_Score", "Deaths Attributed to Air Pollution (per 100,000 people) ", "Happiness Score", "All")
+    new LineGraphTemplate("carbon-dioxide-dmg-graph", compareDataGDP, "Adjusted savings: carbon dioxide damage (% of GNI)", "Happiness_Score", "Carbon dioxide damage (% of GNI)", "Happiness Score", "All")
+    new LineGraphTemplate("education-expenditure-graph", compareDataGDP, "Adjusted savings: education expenditure (% of GNI)", "Happiness_Score", "Education Expenditure (% of GNI)", "Happiness Score", "All")
+    new LineGraphTemplate("resource-depletion-graph", compareDataGDP, "Adjusted savings: natural resources depletion (% of GNI)", "Happiness_Score", "Natural Resource Depletion (% of GNI)", "Happiness Score", "All")
+    new LineGraphTemplate("export-percent-graph", compareDataGDP, "Exports of goods and services (% of GDP)", "Happiness_Score", "Exports of goods and services (% of GDP)", "Happiness Score", "All")
 }
 
 function createVis() {
     let selectionAll = document.getElementById("metrics-explore").value;
     let xLabel = document.getElementById("metrics-explore").selectedOptions[0].attributes[1].nodeValue;
     exploreChart = new LineGraphTemplate("chart", allDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
-    //compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
+        //compareChart = new LineGraphTemplate("chart-compare", compareDataGDP, selectionAll, "Happiness_Score", xLabel, "Happiness Score", "All")
     new CountriesHistogram("1", allDataGDP, "Happiness_Score", 300, 200);
     new CountriesHistogram("2", allDataGDP, "Happiness_Score", 300, 200);
     new CountriesHistogram("3", allDataGDP, "Happiness_Score", 300, 200);
